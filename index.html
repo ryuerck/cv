@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ryu Erck — Product Marketing & Community</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0a0a0c;
+      --surface:   #111115;
+      --surface2:  #17171d;
+      --border:    rgba(255,255,255,0.07);
+      --accent:    #4a7cf7;
+      --accent2:   #2554d4;
+      --text:      #e8e8f0;
+      --muted:     #6b6b80;
+      --mono:      'DM Mono', monospace;
+      --sans:      'Syne', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      overflow-x: hidden;
+    }
+
+    /* ── Noise overlay ─────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9997;
+      opacity: 0.4;
+    }
+
+    /* ── Nav ───────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 24px 48px;
+      background: linear-gradient(to bottom, rgba(10,10,12,0.95), transparent);
+      backdrop-filter: blur(12px);
+    }
+    .nav-logo {
+      font-size: 13px; letter-spacing: 0.15em; text-transform: uppercase;
+      font-family: var(--mono); color: var(--accent); text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+      transition: color 0.2s;
+      font-family: var(--mono);
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── Sections ──────────────────────────────────── */
+    section { padding: 120px 48px; max-width: 1200px; margin: 0 auto; }
+
+    /* ── Hero ──────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding-top: 160px; padding-bottom: 80px;
+      position: relative;
+    }
+    .hero-eyebrow {
+      font-family: var(--mono); font-size: 12px; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 28px;
+      display: flex; align-items: center; gap: 12px;
+      opacity: 0; animation: fadeUp 0.8s 0.1s ease forwards;
+    }
+    .hero-eyebrow::before {
+      content: ''; display: block; width: 32px; height: 1px; background: var(--accent);
+    }
+    h1 {
+      font-size: clamp(52px, 9vw, 110px);
+      font-weight: 800;
+      line-height: 0.92;
+      letter-spacing: -0.03em;
+      margin-bottom: 32px;
+      opacity: 0; animation: fadeUp 0.9s 0.25s ease forwards;
+    }
+    h1 em {
+      font-style: normal;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(255,255,255,0.25);
+    }
+    .hero-desc {
+      max-width: 480px;
+      font-size: 16px; line-height: 1.7;
+      color: var(--muted);
+      margin-bottom: 48px;
+      opacity: 0; animation: fadeUp 0.9s 0.4s ease forwards;
+    }
+    .hero-ctas {
+      display: flex; gap: 16px; align-items: center;
+      opacity: 0; animation: fadeUp 0.9s 0.55s ease forwards;
+    }
+    .btn-primary {
+      background: var(--accent); color: #fff;
+      font-family: var(--mono); font-size: 12px; letter-spacing: 0.15em;
+      text-transform: uppercase; font-weight: 500;
+      padding: 14px 28px; text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s;
+      display: inline-block;
+    }
+    .btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
+    .btn-ghost {
+      font-family: var(--mono); font-size: 12px; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--muted);
+      text-decoration: none; padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .btn-ghost:hover { color: var(--text); border-color: var(--text); }
+
+    .hero-scroll {
+      position: absolute; bottom: 48px; left: 48px;
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em;
+      color: var(--muted); text-transform: uppercase;
+      display: flex; align-items: center; gap: 10px;
+      opacity: 0; animation: fadeUp 1s 0.8s ease forwards;
+    }
+    .scroll-line {
+      width: 1px; height: 48px; background: var(--border);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%,100% { opacity: 0.3; } 50% { opacity: 1; }
+    }
+
+    .hero-num {
+      position: absolute; right: -10px; top: 50%;
+      transform: translateY(-50%);
+      font-size: clamp(180px, 25vw, 320px);
+      font-weight: 800; letter-spacing: -0.05em;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(255,255,255,0.03);
+      pointer-events: none; user-select: none;
+      line-height: 1;
+    }
+
+    /* ── Section headers ───────────────────────────── */
+    .section-header {
+      display: flex; align-items: baseline; gap: 20px;
+      margin-bottom: 64px;
+    }
+    .section-tag {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--accent);
+    }
+    .section-line {
+      flex: 1; height: 1px; background: var(--border);
+    }
+    .section-title {
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 700; letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    .section-title em {
+      font-style: normal; color: var(--muted);
+    }
+
+    /* ── Projects ──────────────────────────────────── */
+    #projects { padding-top: 80px; }
+    .filter-bar {
+      display: flex; gap: 8px; margin-bottom: 48px; flex-wrap: wrap;
+    }
+    .filter-btn {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em;
+      text-transform: uppercase; padding: 8px 18px;
+      background: transparent; border: 1px solid var(--border);
+      color: var(--muted); cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--accent); color: #fff;
+      border-color: var(--accent);
+    }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      position: relative;
+      transition: border-color 0.3s, transform 0.3s;
+      cursor: pointer;
+    }
+    .card:hover { border-color: rgba(74,124,247,0.4); transform: translateY(-4px); }
+    .card:nth-child(1) { grid-column: span 7; }
+    .card:nth-child(2) { grid-column: span 5; }
+    .card:nth-child(3) { grid-column: span 4; }
+    .card:nth-child(4) { grid-column: span 4; }
+    .card:nth-child(5) { grid-column: span 4; }
+    .card:nth-child(6) { grid-column: span 12; }
+
+    .card-thumb {
+      width: 100%; aspect-ratio: 16/9;
+      background: var(--surface2);
+      position: relative; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .card:nth-child(1) .card-thumb { aspect-ratio: 16/7; }
+    .card:nth-child(6) .card-thumb { aspect-ratio: 21/6; }
+
+    .card-thumb-bg {
+      position: absolute; inset: 0;
+      transition: transform 0.6s cubic-bezier(0.23,1,0.32,1);
+    }
+    .card:hover .card-thumb-bg { transform: scale(1.04); }
+
+    .card:nth-child(1) .card-thumb-bg { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%); }
+    .card:nth-child(2) .card-thumb-bg { background: linear-gradient(135deg, #1a0a0a 0%, #2d1515 50%, #4a1c1c 100%); }
+    .card:nth-child(3) .card-thumb-bg { background: linear-gradient(135deg, #0a1a0a 0%, #0d2b0d 60%, #1a4a1a 100%); }
+    .card:nth-child(4) .card-thumb-bg { background: linear-gradient(135deg, #1a1a0a 0%, #2d2d0d 50%, #4a4a0a 100%); }
+    .card:nth-child(5) .card-thumb-bg { background: linear-gradient(135deg, #0a0a1a 0%, #12123a 50%, #1e1e5a 100%); }
+    .card:nth-child(6) .card-thumb-bg { background: linear-gradient(135deg, #1a0a14 0%, #2d1022 50%, #4a1535 100%); }
+
+    .card-shape {
+      position: absolute; opacity: 0.15;
+      transition: opacity 0.3s;
+    }
+    .card:hover .card-shape { opacity: 0.25; }
+
+    .card-label {
+      position: absolute; top: 16px; left: 16px;
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.15em;
+      text-transform: uppercase; padding: 4px 10px;
+      background: rgba(0,0,0,0.6); color: var(--accent);
+      border: 1px solid rgba(74,124,247,0.25);
+    }
+
+    .card-body { padding: 24px; }
+    .card-tags {
+      display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px;
+    }
+    .tag {
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em;
+      color: var(--muted); padding: 3px 8px;
+      border: 1px solid var(--border);
+    }
+    .card-title {
+      font-size: 18px; font-weight: 600; letter-spacing: -0.01em;
+      margin-bottom: 8px; line-height: 1.3;
+    }
+    .card-desc {
+      font-size: 13px; line-height: 1.6; color: var(--muted);
+      margin-bottom: 20px;
+    }
+    .card-footer {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .card-links { display: flex; gap: 12px; }
+    .card-link {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted); text-decoration: none;
+      display: flex; align-items: center; gap: 6px;
+      transition: color 0.2s;
+    }
+    .card-link:hover { color: var(--accent); }
+    .card-link svg { width: 12px; height: 12px; }
+    .card-arrow {
+      width: 32px; height: 32px; border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted); text-decoration: none;
+      transition: all 0.2s;
+    }
+    .card-arrow:hover { background: var(--accent); color: #0a0a0c; border-color: var(--accent); }
+
+    /* ── Skills ────────────────────────────────────── */
+    #skills { background: transparent; }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .skill-group {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 28px;
+      transition: border-color 0.3s, transform 0.2s;
+      cursor: pointer;
+    }
+    .skill-group:hover { border-color: rgba(74,124,247,0.4); transform: translateY(-3px); }
+    .skill-group-title {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 20px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .skill-group-title::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+    .skill-list {
+      display: flex; flex-wrap: wrap; gap: 8px;
+    }
+    .skill-pill {
+      font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em;
+      color: var(--text); padding: 6px 14px;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .skill-group:hover .skill-pill { border-color: rgba(74,124,247,0.25); }
+    .skill-pill:hover { border-color: var(--accent) !important; color: var(--accent); }
+
+    /* ── Experience ────────────────────────────────── */
+    #experience { }
+    .timeline { display: flex; flex-direction: column; gap: 0; }
+    .timeline-item {
+      display: grid; grid-template-columns: 200px 1px 1fr;
+      gap: 0 32px;
+      padding-bottom: 56px;
+      position: relative;
+    }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-date {
+      font-family: var(--mono); font-size: 12px; color: var(--muted);
+      text-align: right; padding-top: 4px; letter-spacing: 0.05em;
+    }
+    .timeline-line {
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .timeline-dot {
+      width: 9px; height: 9px;
+      border: 1px solid var(--accent);
+      border-radius: 50%;
+      background: var(--bg);
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+    .timeline-bar {
+      flex: 1; width: 1px; background: var(--border);
+    }
+    .timeline-item:last-child .timeline-bar { display: none; }
+    .timeline-content { padding-bottom: 4px; }
+    .timeline-role {
+      font-size: 20px; font-weight: 600; letter-spacing: -0.01em;
+      margin-bottom: 4px;
+    }
+    .timeline-company {
+      font-family: var(--mono); font-size: 12px; color: var(--accent);
+      margin-bottom: 14px; letter-spacing: 0.05em;
+    }
+    .timeline-desc {
+      font-size: 14px; line-height: 1.7; color: var(--muted);
+      max-width: 560px;
+    }
+    .timeline-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 14px; }
+
+    /* ── Contact ───────────────────────────────────── */
+    #contact {
+      text-align: center;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      max-width: 100%;
+      padding: 120px 48px;
+    }
+    .contact-inner { max-width: 640px; margin: 0 auto; }
+    .contact-pre {
+      font-family: var(--mono); font-size: 12px; color: var(--accent);
+      letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 20px;
+    }
+    .contact-title {
+      font-size: clamp(36px, 6vw, 72px); font-weight: 800;
+      letter-spacing: -0.03em; line-height: 1; margin-bottom: 24px;
+    }
+    .contact-title em { font-style: normal; color: var(--muted); }
+    .contact-desc {
+      font-size: 15px; line-height: 1.7; color: var(--muted); margin-bottom: 48px;
+    }
+    .contact-links {
+      display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+    }
+    .contact-link {
+      font-family: var(--mono); font-size: 12px; letter-spacing: 0.12em;
+      text-transform: uppercase; padding: 14px 28px;
+      border: 1px solid var(--border); color: var(--text);
+      text-decoration: none; transition: all 0.2s;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .contact-link:hover {
+      background: var(--accent); color: #0a0a0c;
+      border-color: var(--accent);
+    }
+    .contact-link.primary {
+      background: var(--accent); color: #0a0a0c; border-color: var(--accent);
+    }
+    .contact-link.primary:hover { opacity: 0.85; }
+
+    /* ── Footer ────────────────────────────────────── */
+    footer {
+      padding: 32px 48px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-top: 1px solid var(--border);
+    }
+    .footer-copy {
+      font-family: var(--mono); font-size: 11px; color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+    .footer-right {
+      font-family: var(--mono); font-size: 11px; color: var(--muted);
+      display: flex; gap: 24px;
+    }
+    .footer-right a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-right a:hover { color: var(--accent); }
+
+    /* ── Animations ────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      opacity: 0; transform: translateY(32px);
+      transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.23,1,0.32,1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ── Responsive ────────────────────────────────── */
+    @media (max-width: 900px) {
+      nav { padding: 20px 24px; }
+      .nav-links { gap: 20px; }
+      section { padding: 80px 24px; }
+      #hero { padding-left: 24px; padding-right: 24px; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .card:nth-child(n) { grid-column: span 1; }
+      .timeline-item { grid-template-columns: 1fr; gap: 8px; }
+      .timeline-date { text-align: left; }
+      .timeline-line { display: none; }
+      footer { flex-direction: column; gap: 16px; text-align: center; }
+      .hero-num { display: none; }
+      .hero-scroll { display: none; }
+    }
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      h1 { font-size: 48px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav>
+  <a href="#hero" class="nav-logo">R.Erck</a>
+  <ul class="nav-links">
+    <li><a href="#projects">Work</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<section id="hero">
+  <div class="hero-eyebrow">Product Marketing &amp; Community Manager</div>
+  <h1>Ryu<br>Erck</h1>
+  <p class="hero-desc">I live and breathe gaming — blending storytelling and strategy to build communities that don't just play, they stay. Marketing is my game, and engagement is my high score.</p>
+  <div class="hero-ctas">
+    <a href="#projects" class="btn-primary">View Work</a>
+    <a href="#contact" class="btn-ghost">Get In Touch →</a>
+  </div>
+  <div class="hero-num" aria-hidden="true">26</div>
+  <div class="hero-scroll" aria-hidden="true">
+    <div class="scroll-line"></div>
+    Scroll
+  </div>
+</section>
+
+<!-- Projects -->
+<section id="projects">
+  <div class="section-header reveal">
+    <span class="section-tag">01 / Work</span>
+    <div class="section-line"></div>
+  </div>
+  <h2 class="section-title reveal" style="margin-bottom:40px;">Selected <em>Projects</em></h2>
+
+  <div class="filter-bar reveal reveal-delay-1">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="gtm">Go-To-Market</button>
+    <button class="filter-btn" data-filter="community">Community</button>
+    <button class="filter-btn" data-filter="social">Social</button>
+    <button class="filter-btn" data-filter="brand">Brand</button>
+  </div>
+
+  <div class="projects-grid">
+
+    <div class="card reveal" data-category="community gtm">
+      <div class="card-thumb">
+        <div class="card-thumb-bg"></div>
+        <svg class="card-shape" width="300" height="200" viewBox="0 0 300 200">
+          <circle cx="150" cy="100" r="80" fill="none" stroke="white" stroke-width="1"/>
+          <circle cx="150" cy="100" r="120" fill="none" stroke="white" stroke-width="0.5"/>
+          <line x1="0" y1="100" x2="300" y2="100" stroke="white" stroke-width="0.5"/>
+          <line x1="150" y1="0" x2="150" y2="200" stroke="white" stroke-width="0.5"/>
+        </svg>
+        <div class="card-label">Community Event</div>
+      </div>
+      <div class="card-body">
+        <div class="card-tags">
+          <span class="tag">Community</span><span class="tag">Event</span><span class="tag">Rec Room</span>
+        </div>
+        <div class="card-title">Rec Con — Online Gaming Convention</div>
+        <p class="card-desc">Created and led Rec Con, an online convention that brought together 120K+ players to celebrate Rec Room's milestones. Coordinated programming, partners, and live-ops from scratch.</p>
+        <div class="card-footer" style="justify-content:flex-end;">
+          <span class="card-open-hint">Open ↗</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card reveal reveal-delay-1" data-category="gtm brand">
+      <div class="card-thumb">
+        <div class="card-thumb-bg"></div>
+        <svg class="card-shape" width="200" height="200" viewBox="0 0 200 200">
+          <rect x="40" y="40" width="120" height="120" fill="none" stroke="white" stroke-width="1" transform="rotate(15 100 100)"/>
+          <rect x="60" y="60" width="80" height="80" fill="none" stroke="white" stroke-width="0.5" transform="rotate(30 100 100)"/>
+        </svg>
+        <div class="card-label">Go-To-Market</div>
+      </div>
+      <div class="card-body">
+        <div class="card-tags">
+          <span class="tag">GTM</span><span class="tag">Nilo</span>
+        </div>
+        <div class="card-title">Nilo Open Beta Launch</div>
+        <p class="card-desc">Took Nilo from zero to 20K+ users in 6 months with a team of 3 and zero ad spend. Built end-to-end systems for product education, live-ops, referrals, and go-to-market execution.</p>
+        <div class="card-footer" style="justify-content:flex-end;">
+          <span class="card-open-hint">Open ↗</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card reveal" data-category="gtm brand">
+      <div class="card-thumb">
+        <div class="card-thumb-bg"></div>
+        <svg class="card-shape" width="160" height="160" viewBox="0 0 160 160">
+          <polygon points="80,10 150,150 10,150" fill="none" stroke="white" stroke-width="1"/>
+        </svg>
+        <div class="card-label">Brand Partnership</div>
+      </div>
+      <div class="card-body">
+        <div class="card-tags"><span class="tag">Brand</span><span class="tag">GTM</span></div>
+        <div class="card-title">NBA &amp; NFL x Rec Room</div>
+        <p class="card-desc">Led go-to-market for major brand partnerships with NBA, NFL, Mattel, Puma, TMNT, and more — bridging gaming culture with mainstream IP activations.</p>
+        <div class="card-footer" style="justify-content:flex-end;">
+          <span class="card-open-hint">Open ↗</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card reveal reveal-delay-1" data-category="social community">
+      <div class="card-thumb">
+        <div class="card-thumb-bg"></div>
+        <svg class="card-shape" width="160" height="160" viewBox="0 0 160 160">
+          <circle cx="80" cy="80" r="60" fill="none" stroke="white" stroke-width="1"/>
+          <circle cx="80" cy="80" r="30" fill="none" stroke="white" stroke-width="0.5"/>
+          <circle cx="80" cy="80" r="8" fill="white" opacity="0.3"/>
+        </svg>
+        <div class="card-label">Social Growth</div>
+      </div>
+      <div class="card-body">
+        <div class="card-tags"><span class="tag">Social</span><span class="tag">TikTok</span><span class="tag">YouTube</span></div>
+        <div class="card-title">1M TikTok &amp; 300K YouTube</div>
+        <p class="card-desc">Grew Rec Room's TikTok to 1M followers and YouTube to 300K with multi-million monthly views. Hired and mentored a team of content creators to sustain and scale output.</p>
+        <div class="card-footer" style="justify-content:flex-end;">
+          <span class="card-open-hint">Open ↗</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card reveal reveal-delay-2" data-category="gtm brand">
+      <div class="card-thumb">
+        <div class="card-thumb-bg"></div>
+        <svg class="card-shape" width="160" height="160" viewBox="0 0 160 160">
+          <line x1="20" y1="80" x2="140" y2="80" stroke="white" stroke-width="1"/>
+          <line x1="80" y1="20" x2="80" y2="140" stroke="white" stroke-width="1"/>
+          <circle cx="80" cy="80" r="40" fill="none" stroke="white" stroke-width="0.5" stroke-dasharray="4 4"/>
+        </svg>
+        <div class="card-label">Platform Launch</div>
+      </div>
+      <div class="card-body">
+        <div class="card-tags"><span class="tag">GTM</span><span class="tag">Platform</span></div>
+        <div class="card-title">Xbox, iOS &amp; Nintendo Switch Launches</div>
+        <p class="card-desc">Directed go-to-market for Rec Room's launches on Xbox, iOS, Android, and Nintendo Switch — driving adoption of 150K+ new users through integrated campaigns.</p>
+        <div class="card-footer" style="justify-content:flex-end;">
+          <span class="card-open-hint">Open ↗</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card reveal" data-category="community gtm social">
+      <div class="card-thumb">
+        <div class="card-thumb-bg"></div>
+        <svg class="card-shape" width="600" height="200" viewBox="0 0 600 200">
+          <path d="M0,100 Q150,20 300,100 Q450,180 600,100" fill="none" stroke="white" stroke-width="1"/>
+          <path d="M0,100 Q150,60 300,100 Q450,140 600,100" fill="none" stroke="white" stroke-width="0.5"/>
+        </svg>
+        <div class="card-label">Original Title</div>
+      </div>
+      <div class="card-body">
+        <div class="card-tags">
+          <span class="tag">Community</span><span class="tag">GTM</span><span class="tag">Social</span><span class="tag">Brand</span>
+        </div>
+        <div class="card-title">Rec Room Originals — Showdown &amp; Make It To Midnight</div>
+        <p class="card-desc">Shaped the identity and launch strategy for Rec Room Original titles including Showdown, Make It To Midnight, My Little Monster, and Run The Block — spanning in-game events, social campaigns, and creator programs.</p>
+        <div class="card-footer" style="justify-content:flex-end;">
+          <span class="card-open-hint">Open ↗</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Skills -->
+<section id="skills">
+  <div class="section-header reveal">
+    <span class="section-tag">02 / Skills</span>
+    <div class="section-line"></div>
+  </div>
+  <h2 class="section-title reveal" style="margin-bottom:48px;">Tools &amp; <em>Craft</em></h2>
+
+  <div class="skills-grid">
+
+    <div class="skill-group reveal">
+      <div class="skill-group-title">AI Tools</div>
+      <div class="skill-list">
+        <span class="skill-pill">Claude / Anthropic</span>
+        <span class="skill-pill">OpenAI GPT</span>
+        <span class="skill-pill">Gemini</span>
+        <span class="skill-pill">Relay</span>
+        <span class="skill-pill">CapCut AI</span>
+        <span class="skill-pill">Nano Banana</span>
+      </div>
+    </div>
+
+    <div class="skill-group reveal reveal-delay-1">
+      <div class="skill-group-title">Product Marketing</div>
+      <div class="skill-list">
+        <span class="skill-pill">Go-To-Market Strategy</span>
+        <span class="skill-pill">Marketing Campaigns</span>
+        <span class="skill-pill">Positioning &amp; Messaging</span>
+        <span class="skill-pill">Live-Ops</span>
+        <span class="skill-pill">Referral Programs</span>
+        <span class="skill-pill">OKR / KPI Alignment</span>
+      </div>
+    </div>
+
+    <div class="skill-group reveal reveal-delay-2">
+      <div class="skill-group-title">Community &amp; Content</div>
+      <div class="skill-list">
+        <span class="skill-pill">Community Management</span>
+        <span class="skill-pill">Social Media Strategy</span>
+        <span class="skill-pill">Content Marketing</span>
+        <span class="skill-pill">Copywriting</span>
+        <span class="skill-pill">Live Events</span>
+        <span class="skill-pill">Customer Support</span>
+      </div>
+    </div>
+
+    <div class="skill-group reveal reveal-delay-3">
+      <div class="skill-group-title">Tools &amp; Platforms</div>
+      <div class="skill-list">
+        <span class="skill-pill">Adobe Creative Suite</span>
+        <span class="skill-pill">Blender &amp; Unity</span>
+        <span class="skill-pill">Sprout Social</span>
+        <span class="skill-pill">Squarespace</span>
+        <span class="skill-pill">Discord &amp; Reddit</span>
+        <span class="skill-pill">Google Suite</span>
+        <span class="skill-pill">YouTube Studio</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Experience -->
+<section id="experience">
+  <div class="section-header reveal">
+    <span class="section-tag">03 / Experience</span>
+    <div class="section-line"></div>
+  </div>
+  <h2 class="section-title reveal" style="margin-bottom:64px;">Where I've <em>Been</em></h2>
+
+  <div class="timeline">
+
+    <div class="timeline-item reveal">
+      <div class="timeline-date">2025 — Present</div>
+      <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-bar"></div></div>
+      <div class="timeline-content">
+        <div class="timeline-role">Product Marketing Lead</div>
+        <div class="timeline-company">Nilo</div>
+        <p class="timeline-desc">Took Nilo from zero to 20K+ users in 6 months with a team of 3 and no ad spend. Built end-to-end systems covering product education, moderation, live-ops, referrals, and GTM execution. Produced marketing materials driving 3.1M views and 9.5K organic users during closed beta. Prototyped marketing systems using AI-assisted development workflows.</p>
+        <div class="timeline-tags">
+          <span class="tag">GTM</span>
+          <span class="tag">Live-Ops</span>
+          <span class="tag">AI Tools</span>
+          <span class="tag">Community</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item reveal reveal-delay-1">
+      <div class="timeline-date">2021 — 2025</div>
+      <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-bar"></div></div>
+      <div class="timeline-content">
+        <div class="timeline-role">Product Marketing Manager</div>
+        <div class="timeline-company">Rec Room</div>
+        <p class="timeline-desc">Directed go-to-market for major product updates and platform launches (Xbox, iOS, Android, Nintendo Switch), driving 150K+ new users through campaigns. Partnered with C-suite, engineering, and design on brand strategy and OKRs — contributing to +16% CCU. Led and mentored a team of 9 marketing specialists. Oversaw brand partnerships with NBA, NFL, Mattel, Puma, TMNT, and more.</p>
+        <div class="timeline-tags">
+          <span class="tag">GTM</span>
+          <span class="tag">Brand Partnerships</span>
+          <span class="tag">Team Leadership</span>
+          <span class="tag">Positioning</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item reveal reveal-delay-2">
+      <div class="timeline-date">2021</div>
+      <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-bar"></div></div>
+      <div class="timeline-content">
+        <div class="timeline-role">Social Media Manager</div>
+        <div class="timeline-company">Rec Room</div>
+        <p class="timeline-desc">Grew TikTok to 1M and YouTube to 300K followers with multi-million monthly views. Launched in-game and social-driven events contributing to 22%+ revenue growth. Hired, managed, and mentored a team of content creators.</p>
+        <div class="timeline-tags">
+          <span class="tag">TikTok</span>
+          <span class="tag">YouTube</span>
+          <span class="tag">Content</span>
+          <span class="tag">Events</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item reveal reveal-delay-3">
+      <div class="timeline-date">2019 — 2021</div>
+      <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-bar"></div></div>
+      <div class="timeline-content">
+        <div class="timeline-role">Community Support Specialist</div>
+        <div class="timeline-company">Rec Room</div>
+        <p class="timeline-desc">Started as a player, joined the team, and created Rec Con — an online convention bringing 120K+ players together. Communicated player feedback to improve features, provided support across platforms, and built self-service resources including FAQs and knowledge base articles.</p>
+        <div class="timeline-tags">
+          <span class="tag">Community</span>
+          <span class="tag">Support</span>
+          <span class="tag">Events</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="contact-pre reveal">Let's work together</div>
+    <h2 class="contact-title reveal">Say <em>Hello.</em></h2>
+    <p class="contact-desc reveal">I'm always open to new opportunities in product marketing, community building, and gaming. Whether you have a brief, a role, or just an idea — let's connect.</p>
+    <div class="contact-links reveal">
+      <a href="mailto:ryuerck@gmail.com" class="contact-link primary">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        ryuerck@gmail.com
+      </a>
+      <a href="https://github.com/ryuerck" target="_blank" class="contact-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+        GitHub
+      </a>
+      <a href="https://www.linkedin.com/in/ryuerck" target="_blank" class="contact-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <span class="footer-copy">© 2026 Ryu Erck — Product Marketing &amp; Community</span>
+  <div class="footer-right">
+    <a href="#hero">Back to top ↑</a>
+    <a href="https://github.com/ryuerck/cv" target="_blank">Source</a>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => io.observe(el));
+
+  // Project filter
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.card[data-category]');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      cards.forEach(card => {
+        const cats = card.dataset.category || '';
+        const show = filter === 'all' || cats.includes(filter);
+        card.style.opacity = show ? '1' : '0.2';
+        card.style.pointerEvents = show ? '' : 'none';
+      });
+    });
+  });
+
+  // Nav shrink on scroll
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    nav.style.padding = window.scrollY > 60 ? '14px 48px' : '24px 48px';
+  });
+</script>
+</body>
+</html>
