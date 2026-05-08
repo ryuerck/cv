@@ -73,6 +73,40 @@
     }
     .nav-links a:hover { color: var(--text); }
 
+    .hamburger {
+      display: none; background: none; border: none;
+      cursor: pointer; padding: 8px; z-index: 200;
+      flex-direction: column; gap: 5px;
+    }
+    .hamburger span {
+      display: block; width: 22px; height: 2px;
+      background: var(--text); transition: all 0.3s;
+    }
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    .nav-menu-wrap { position: relative; }
+
+    .mobile-menu {
+      display: none; position: absolute; top: calc(100% + 12px); right: 0; z-index: 150;
+      background: rgba(12,12,18,0.98);
+      border: 1px solid var(--border); border-radius: 12px;
+      backdrop-filter: blur(20px);
+      flex-direction: column; padding: 12px 0;
+      min-width: 200px;
+      opacity: 0; transform: translateY(-8px); transition: all 0.25s ease;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    }
+    .mobile-menu.open { display: flex; opacity: 1; transform: translateY(0); }
+    .mobile-menu a {
+      font-family: var(--sans); font-size: 14px; font-weight: 500;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+      padding: 12px 24px; transition: all 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--accent); background: rgba(74,124,247,0.08); }
+
     /* ── Sections ──────────────────────────────────── */
     section { padding: 120px 48px; max-width: 1200px; margin: 0 auto; }
 
@@ -438,8 +472,9 @@
 
     /* ── Responsive ────────────────────────────────── */
     @media (max-width: 900px) {
-      nav { padding: 20px 24px; }
+      nav { padding: 16px 24px; }
       .nav-links { gap: 20px; }
+      .nav-links a { font-size: 11px; }
       section { padding: 80px 24px; }
       #hero { padding-left: 24px; padding-right: 24px; }
       .projects-grid { grid-template-columns: repeat(2, 1fr); }
@@ -450,11 +485,34 @@
       #hero { flex-direction: column; gap: 32px; align-items: center; }
       .hero-photo-link .hero-photo { width: 220px; height: 220px; }
       .modal-stats { grid-template-columns: repeat(2, 1fr); }
+      .section-subtitle { font-size: 15px; }
     }
     @media (max-width: 600px) {
+      nav { padding: 14px 18px; }
       .nav-links { display: none; }
-      .projects-grid { grid-template-columns: 1fr; }
-      h1 { font-size: 48px; }
+      .hamburger { display: flex; }
+      .projects-grid { grid-template-columns: 1fr; gap: 16px; }
+      h1 { font-size: 40px; margin-bottom: 20px; }
+      .hero-photo { width: 180px; height: 180px; }
+      .hero-desc { font-size: 14px; }
+      .hero-ctas { flex-direction: column; gap: 12px; width: 100%; }
+      .btn-primary, .btn-ghost { text-align: center; width: 100%; }
+      .card-body { padding: 16px; }
+      .card-title { font-size: 15px; }
+      .section-title { font-size: 26px; margin-bottom: 12px; }
+      .section-subtitle { font-size: 14px; }
+      section { padding: 60px 18px; }
+      .modal { max-width: 100%; margin: 12px; }
+      .modal-body { padding: 20px; }
+      .modal-stats { grid-template-columns: 1fr 1fr; }
+      .modal-title { font-size: 22px; }
+      .modal-desc-block { font-size: 14px; }
+      .skill-pills { gap: 8px; }
+      .skill-pill { font-size: 13px; padding: 8px 14px; }
+      footer { padding: 20px 18px; }
+      .contact-links { flex-direction: column; align-items: center; gap: 14px; }
+      .timeline-content { font-size: 14px; }
+      .resume-btn { font-size: 14px; padding: 14px 28px; }
     }
 
     /* ── Modal overlay ─────────────────────────────── */
@@ -629,11 +687,24 @@
 <nav>
   <a href="#hero" class="nav-logo">Ryu Erck</a>
   <ul class="nav-links">
+    <li><a href="#hero">About</a></li>
     <li><a href="#projects">Work</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
+  <div class="nav-menu-wrap">
+    <button class="hamburger" aria-label="Menu" onclick="toggleMobileMenu()">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#hero" onclick="closeMobileMenu()">About</a>
+      <a href="#projects" onclick="closeMobileMenu()">Work</a>
+      <a href="#skills" onclick="closeMobileMenu()">Skills</a>
+      <a href="#experience" onclick="closeMobileMenu()">Experience</a>
+      <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+    </div>
+  </div>
 </nav>
 
 <!-- Hero -->
@@ -1650,6 +1721,32 @@
     btn.classList.remove('active');
     btn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg> Show More';
     btn.onclick = showMoreProjects;
+  }
+
+  function toggleMobileMenu() {
+    const menu = document.getElementById('mobileMenu');
+    const btn = document.querySelector('.hamburger');
+    menu.classList.toggle('open');
+    btn.classList.toggle('active');
+    if (menu.classList.contains('open')) {
+      document.addEventListener('click', closeMobileMenuOutside);
+    }
+  }
+
+  function closeMobileMenu() {
+    const menu = document.getElementById('mobileMenu');
+    const btn = document.querySelector('.hamburger');
+    menu.classList.remove('open');
+    btn.classList.remove('active');
+    document.removeEventListener('click', closeMobileMenuOutside);
+  }
+
+  function closeMobileMenuOutside(e) {
+    const menu = document.getElementById('mobileMenu');
+    const btn = document.querySelector('.hamburger');
+    if (!menu.contains(e.target) && !btn.contains(e.target)) {
+      closeMobileMenu();
+    }
   }
 
 </script>
