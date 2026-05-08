@@ -207,7 +207,7 @@
     #projects { padding-top: 80px; }
     .projects-grid {
       display: grid;
-      grid-template-columns: repeat(12, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 16px;
     }
     .card {
@@ -219,59 +219,39 @@
       cursor: pointer;
     }
     .card:hover { border-color: rgba(74,124,247,0.4); transform: translateY(-4px); }
-.card:nth-child(1) { grid-column: span 7; }
-.card:nth-child(2) { grid-column: span 5; }
-.card:nth-child(3) { grid-column: span 6; }
-.card:nth-child(4) { grid-column: span 6; }
-.card:nth-child(5) { grid-column: span 4; }
-.card:nth-child(6) { grid-column: span 4; }
-.card:nth-child(7) { grid-column: span 4; }
-.card:nth-child(8) { grid-column: span 6; }
-.card:nth-child(9) { grid-column: span 6; }
-.card:nth-child(10) { grid-column: span 12; }
-.card:nth-child(11) { grid-column: span 6; }
-.card:nth-child(12) { grid-column: span 6; }
 
     .card-thumb {
-      width: 100%; aspect-ratio: 16/9;
+      width: 100%; aspect-ratio: 16/10;
       background: var(--surface2);
       position: relative; overflow: hidden;
-      display: flex; align-items: center; justify-content: center;
+      padding: 4px;
     }
-    .card:nth-child(1) .card-thumb { aspect-ratio: 16/7; }
-    .card:nth-child(6) .card-thumb { aspect-ratio: 21/6; }
-.card:nth-child(7) .card-thumb { aspect-ratio: 16/9; }
-.card:nth-child(8) .card-thumb { aspect-ratio: 16/9; }
-.card:nth-child(9) .card-thumb { aspect-ratio: 16/9; }
-.card:nth-child(10) .card-thumb { aspect-ratio: 16/9; }
-.card:nth-child(11) .card-thumb { aspect-ratio: 16/9; }
-.card:nth-child(12) .card-thumb { aspect-ratio: 16/9; }
-
-    .card-thumb-bg {
-      position: absolute; inset: 0;
+    .card-thumb-img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      border-radius: 4px;
       transition: transform 0.6s cubic-bezier(0.23,1,0.32,1);
     }
-    .card:hover .card-thumb-bg { transform: scale(1.04); }
-
-    .card:nth-child(1) .card-thumb-bg { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%); }
-    .card:nth-child(2) .card-thumb-bg { background: linear-gradient(135deg, #1a0a0a 0%, #2d1515 50%, #4a1c1c 100%); }
-    .card:nth-child(3) .card-thumb-bg { background: linear-gradient(135deg, #0a1a0a 0%, #0d2b0d 60%, #1a4a1a 100%); }
-    .card:nth-child(4) .card-thumb-bg { background: linear-gradient(135deg, #1a1a0a 0%, #2d2d0d 50%, #4a4a0a 100%); }
-    .card:nth-child(5) .card-thumb-bg { background: linear-gradient(135deg, #0a0a1a 0%, #12123a 50%, #1e1e5a 100%); }
-    .card:nth-child(6) .card-thumb-bg { background: linear-gradient(135deg, #1a0a14 0%, #2d1022 50%, #4a1535 100%); }
-.card:nth-child(7) .card-thumb-bg { background: linear-gradient(135deg, #0a1a14 0%, #0d2b1a 50%, #1a4a2e 100%); }
-.card:nth-child(8) .card-thumb-bg { background: linear-gradient(135deg, #1a1a0a 0%, #2d2d0d 50%, #4a4a1a 100%); }
-.card:nth-child(9) .card-thumb-bg { background: linear-gradient(135deg, #1a0a0a 0%, #2d1515 50%, #4a1c1c 100%); }
-.card:nth-child(10) .card-thumb-bg { background: linear-gradient(135deg, #0a0a1a 0%, #12123a 50%, #1e1e5a 100%); }
-.card:nth-child(11) .card-thumb-bg { background: linear-gradient(135deg, #1a140a 0%, #2d2215 50%, #4a351c 100%); }
-.card:nth-child(12) .card-thumb-bg { background: linear-gradient(135deg, #0a141a 0%, #10222d 50%, #15354a 100%); }
-
-    .card-shape {
-      position: absolute; opacity: 0.15;
-      transition: opacity 0.3s;
+    .card:hover .card-thumb-img { transform: scale(1.03); }
+    .card-play-btn {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 48px; height: 48px;
+      background: rgba(0,0,0,0.55);
+      border: 2px solid rgba(255,255,255,0.7);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0;
+      transition: opacity 0.25s;
+      pointer-events: none;
     }
-    .card:hover .card-shape { opacity: 0.25; }
-
+    .card:hover .card-play-btn { opacity: 1; }
+    .card-play-btn svg {
+      width: 18px; height: 18px;
+      fill: #fff;
+      margin-left: 3px;
+    }
     .card-label {
       position: absolute; top: 16px; left: 16px;
       font-family: var(--sans); font-size: 10px; letter-spacing: 0.1em;
@@ -457,8 +437,7 @@
       .nav-links { gap: 20px; }
       section { padding: 80px 24px; }
       #hero { padding-left: 24px; padding-right: 24px; }
-      .projects-grid { grid-template-columns: 1fr; }
-      .card:nth-child(n) { grid-column: span 1; }
+      .projects-grid { grid-template-columns: repeat(2, 1fr); }
       .timeline-item { grid-template-columns: 1fr; gap: 8px; }
       .timeline-date { text-align: left; }
       .timeline-line { display: none; }
@@ -468,6 +447,7 @@
     }
     @media (max-width: 600px) {
       .nav-links { display: none; }
+      .projects-grid { grid-template-columns: 1fr; }
       h1 { font-size: 48px; }
     }
 
@@ -510,9 +490,16 @@
 
     /* Project modal layout */
     .modal-video {
-      width: 100%; aspect-ratio: 16/9;
-      background: var(--surface2);
+      width: 100%;
+      background: #000;
       position: relative; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .modal-video video {
+      width: 100%; height: auto;
+      max-height: 70vh;
+      object-fit: contain;
+      display: block;
     }
     .modal-video iframe {
       width: 100%; height: 100%; border: 0;
@@ -607,6 +594,14 @@
     }
     .skill-group:hover .skill-group-open-hint { opacity: 1; }
 
+    /* Tags */
+    .tag {
+      font-family: var(--sans); font-size: 10px; letter-spacing: 0.08em;
+      text-transform: uppercase; padding: 4px 10px;
+      background: var(--surface2); border: 1px solid var(--border);
+      color: var(--muted);
+    }
+
   </style>
 </head>
 <body>
@@ -648,129 +643,168 @@
 
   <div class="projects-grid">
 
-    <div class="card reveal" data-modal="proj-rec-con">
+    <div class="card reveal" data-modal="proj-nilo">
       <div class="card-thumb">
-        <div class="card-thumb-bg"></div>
-        <svg class="card-shape" width="300" height="200" viewBox="0 0 300 200">
-          <circle cx="150" cy="100" r="80" fill="none" stroke="white" stroke-width="1"/>
-          <circle cx="150" cy="100" r="120" fill="none" stroke="white" stroke-width="0.5"/>
-          <line x1="0" y1="100" x2="300" y2="100" stroke="white" stroke-width="0.5"/>
-          <line x1="150" y1="0" x2="150" y2="200" stroke="white" stroke-width="0.5"/>
-        </svg>
+        <img class="card-thumb-img" src="public/Nilo Open Beta.png" alt="Nilo Open Beta" />
+        <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
+        <div class="card-label">Go-To-Market</div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Nilo Open Beta Launch</div>
+        <div class="card-footer" style="justify-content:flex-end;">
+          <span class="card-open-hint">Open ↗</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card reveal reveal-delay-1" data-modal="proj-originals">
+      <div class="card-thumb">
+        <img class="card-thumb-img" src="public/Showdown Rec Room Original.jpg" alt="Rec Room Originals" />
+        <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
+        <div class="card-label">Go-To-Market</div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Rec Room Originals</div>
+        <div class="card-footer" style="justify-content:flex-end;">
+          <span class="card-open-hint">Open ↗</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card reveal reveal-delay-2" data-modal="proj-platform">
+      <div class="card-thumb">
+        <img class="card-thumb-img" src="public/Nintendo Switch x Rec Room.png" alt="Nintendo Switch Launch" />
+        <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
+        <div class="card-label">Platform Launch</div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Xbox, iOS &amp; Nintendo Switch</div>
+        <div class="card-footer" style="justify-content:flex-end;">
+          <span class="card-open-hint">Open ↗</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card reveal" data-modal="proj-social">
+      <div class="card-thumb">
+        <img class="card-thumb-img" src="public/Rec Room Social Content.png" alt="Social Content" />
+        <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
+        <div class="card-label">Social Growth</div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Social Content Creation</div>
+        <div class="card-footer" style="justify-content:flex-end;">
+          <span class="card-open-hint">Open ↗</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card reveal reveal-delay-1" data-modal="proj-rec-con">
+      <div class="card-thumb">
+        <img class="card-thumb-img" src="public/RecCon Event Rec Room.png" alt="Rec Con" />
+        <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
         <div class="card-label">Community Event</div>
       </div>
       <div class="card-body">
-        <div class="card-title">Rec Con — Online Gaming Convention</div>
-        <p class="card-desc">Created and led Rec Con, an online convention that brought together 120K+ players to celebrate Rec Room's milestones. Coordinated programming, partners, and live-ops from scratch.</p>
+        <div class="card-title">Rec Con Event</div>
         <div class="card-footer" style="justify-content:flex-end;">
           <span class="card-open-hint">Open ↗</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card reveal reveal-delay-2" data-modal="proj-nba">
+      <div class="card-thumb">
+        <img class="card-thumb-img" src="public/NFL x Rec Room.webp" alt="NFL x Rec Room" />
+        <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
+        <div class="card-label">Brand Partnership</div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">NBA &amp; NFL x Rec Room</div>
+        <div class="card-footer" style="justify-content:flex-end;">
+          <span class="card-open-hint">Open ↗</span>
+        </div>
+      </div>
     </div>
 
     <div class="card reveal" data-modal="proj-android">
       <div class="card-thumb">
-        <div class="card-thumb-bg"></div>
-        <svg class="card-shape" width="160" height="160" viewBox="0 0 160 160">
-          <rect x="50" y="50" width="60" height="60" fill="none" stroke="white" stroke-width="1"/>
-          <circle cx="80" cy="80" r="40" fill="none" stroke="white" stroke-width="0.5"/>
-        </svg>
+        <img class="card-thumb-img" src="public/Android x Rec Room.jpg" alt="Android x Rec Room" />
+        <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
         <div class="card-label">Platform Launch</div>
       </div>
       <div class="card-body">
         <div class="card-title">Android x Rec Room</div>
-        <p class="card-desc">Led go-to-market for Rec Room's Android launch, expanding the platform's reach to billions of mobile users worldwide. Coordinated cross-functional teams across engineering, marketing, and community to deliver a seamless launch experience.</p>
         <div class="card-footer" style="justify-content:flex-end;">
           <span class="card-open-hint">Open ↗</span>
         </div>
       </div>
     </div>
 
-    <div class="card reveal reveal-delay-1" data-modal="proj-destiny">
+    <div class="card reveal reveal-delay-2" data-modal="proj-destiny">
       <div class="card-thumb">
-        <div class="card-thumb-bg"></div>
-        <svg class="card-shape" width="200" height="200" viewBox="0 0 200 200">
-          <polygon points="100,20 180,180 20,180" fill="none" stroke="white" stroke-width="1"/>
-          <polygon points="100,60 150,160 50,160" fill="none" stroke="white" stroke-width="0.5"/>
-        </svg>
+        <img class="card-thumb-img" src="public/Destiny 2 x Rec Room.jpg" alt="Destiny 2 x Rec Room" />
+        <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
         <div class="card-label">Brand Partnership</div>
       </div>
       <div class="card-body">
         <div class="card-title">Destiny 2 x Rec Room</div>
-        <p class="card-desc">Partnered with Bungie to bring Destiny 2 into Rec Room, creating an immersive crossover experience that bridged two passionate gaming communities.</p>
         <div class="card-footer" style="justify-content:flex-end;">
           <span class="card-open-hint">Open ↗</span>
         </div>
       </div>
     </div>
 
-    <div class="card reveal reveal-delay-2" data-modal="proj-heman">
+    <div class="card reveal" data-modal="proj-heman">
       <div class="card-thumb">
-        <div class="card-thumb-bg"></div>
-        <svg class="card-shape" width="160" height="160" viewBox="0 0 160 160">
-          <rect x="30" y="30" width="100" height="100" fill="none" stroke="white" stroke-width="1" transform="rotate(45 80 80)"/>
-          <circle cx="80" cy="80" r="30" fill="none" stroke="white" stroke-width="0.5"/>
-        </svg>
+        <img class="card-thumb-img" src="public/He Man x Rec Room.jpg" alt="He-Man x Rec Room" />
+        <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
         <div class="card-label">Brand Partnership</div>
       </div>
       <div class="card-body">
         <div class="card-title">He-Man x Rec Room</div>
-        <p class="card-desc">Brought the classic He-Man IP into Rec Room through a brand partnership activation, creating nostalgic experiences for players and introducing the franchise to a new generation.</p>
         <div class="card-footer" style="justify-content:flex-end;">
           <span class="card-open-hint">Open ↗</span>
         </div>
       </div>
     </div>
 
-    <div class="card reveal" data-modal="proj-monster-high">
+    <div class="card reveal reveal-delay-1" data-modal="proj-monster-high">
       <div class="card-thumb">
-        <div class="card-thumb-bg"></div>
-        <svg class="card-shape" width="180" height="180" viewBox="0 0 180 180">
-          <circle cx="90" cy="90" r="60" fill="none" stroke="white" stroke-width="1"/>
-          <circle cx="90" cy="90" r="30" fill="none" stroke="white" stroke-width="0.5"/>
-          <circle cx="90" cy="90" r="8" fill="white" opacity="0.3"/>
-        </svg>
+        <img class="card-thumb-img" src="public/Monster High x Rec Room.jpg" alt="Monster High x Rec Room" />
+        <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
         <div class="card-label">Brand Partnership</div>
       </div>
       <div class="card-body">
         <div class="card-title">Monster High x Rec Room</div>
-        <p class="card-desc">Partnered with Mattel to bring Monster High into Rec Room, creating an immersive branded experience that resonated with the franchise's young audience and drove significant engagement.</p>
         <div class="card-footer" style="justify-content:flex-end;">
           <span class="card-open-hint">Open ↗</span>
         </div>
       </div>
     </div>
 
-    <div class="card reveal reveal-delay-1" data-modal="proj-tmnt">
+    <div class="card reveal reveal-delay-2" data-modal="proj-tmnt">
       <div class="card-thumb">
-        <div class="card-thumb-bg"></div>
-        <svg class="card-shape" width="160" height="160" viewBox="0 0 160 160">
-          <polygon points="80,20 120,60 120,120 80,140 40,120 40,60" fill="none" stroke="white" stroke-width="1"/>
-          <circle cx="80" cy="80" r="25" fill="none" stroke="white" stroke-width="0.5"/>
-        </svg>
+        <img class="card-thumb-img" src="public/TMNT x Rec Room.jpg" alt="TMNT x Rec Room" />
+        <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
         <div class="card-label">Brand Partnership</div>
       </div>
       <div class="card-body">
         <div class="card-title">TMNT x Rec Room</div>
-        <p class="card-desc">Brought Teenage Mutant Ninja Turtles into Rec Room through a major brand partnership with Nickelodeon, creating an interactive experience that appealed to both nostalgic fans and new players.</p>
         <div class="card-footer" style="justify-content:flex-end;">
           <span class="card-open-hint">Open ↗</span>
         </div>
       </div>
     </div>
 
-    <div class="card reveal reveal-delay-2" data-modal="proj-winter">
+    <div class="card reveal" data-modal="proj-winter">
       <div class="card-thumb">
-        <div class="card-thumb-bg"></div>
-        <svg class="card-shape" width="200" height="200" viewBox="0 0 200 200">
-          <line x1="100" y1="20" x2="100" y2="180" stroke="white" stroke-width="1"/>
-          <line x1="20" y1="100" x2="180" y2="100" stroke="white" stroke-width="1"/>
-          <line x1="40" y1="40" x2="160" y2="160" stroke="white" stroke-width="0.5"/>
-          <line x1="160" y1="40" x2="40" y2="160" stroke="white" stroke-width="0.5"/>
-        </svg>
-        <div class="card-label">Live Event</div>
+        <img class="card-thumb-img" src="public/Winter Wonderland Event Rec Room.webp" alt="Winter Wonderland" />
+        <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
+        <div class="card-label">Community Event</div>
       </div>
       <div class="card-body">
         <div class="card-title">Winter Wonderland Event</div>
-        <p class="card-desc">Designed and executed Rec Room's Winter Wonderland seasonal event, creating festive in-game experiences, limited-time content, and community programming that drove holiday engagement.</p>
         <div class="card-footer" style="justify-content:flex-end;">
           <span class="card-open-hint">Open ↗</span>
         </div>
@@ -936,7 +970,6 @@
     <div class="modal-video">
       <video controls preload="metadata" poster="public/RecCon Event Rec Room.png">
         <source src="public/RecCon Event Rec Room.mp4" type="video/mp4">
-        <source src="public/RecCon Event Rec Room.mp4" type="video/webm">
       </video>
     </div>
     <div class="modal-body">
@@ -951,9 +984,6 @@
         <div class="modal-stat"><div class="modal-stat-val">Multi-day</div><div class="modal-stat-label">Event Duration</div></div>
         <div class="modal-stat"><div class="modal-stat-val">10+</div><div class="modal-stat-label">Partner Brands</div></div>
       </div>
-      <div class="modal-tags">
-        <span class="tag">Community</span><span class="tag">Events</span><span class="tag">Live-Ops</span><span class="tag">Partnerships</span>
-      </div>
     </div>
   </div>
 </div>
@@ -965,7 +995,6 @@
     <div class="modal-video">
       <video controls preload="metadata" poster="public/Nilo Open Beta.png">
         <source src="public/Nilo Open Beta.webm" type="video/webm">
-        <source src="public/Nilo Open Beta.webm" type="video/mp4">
       </video>
     </div>
     <div class="modal-body">
@@ -981,9 +1010,6 @@
         <div class="modal-stat"><div class="modal-stat-val">9.5K</div><div class="modal-stat-label">Organic Users</div></div>
         <div class="modal-stat"><div class="modal-stat-val">$0</div><div class="modal-stat-label">Ad Spend</div></div>
       </div>
-      <div class="modal-tags">
-        <span class="tag">GTM</span><span class="tag">Zero-to-One</span><span class="tag">AI Tools</span><span class="tag">Community</span>
-      </div>
     </div>
   </div>
 </div>
@@ -993,10 +1019,9 @@
   <div class="modal">
     <button class="modal-close" onclick="closeModal('modal-proj-nba')">&times;</button>
     <div class="modal-video">
-      <div class="modal-video-placeholder" style="background-image:url('public/NFL x Rec Room.webp');background-size:cover;background-position:center;">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16"/></svg>
-        <p>Video unavailable — convert .mkv to .mp4</p>
-      </div>
+      <video controls preload="metadata" poster="public/NFL x Rec Room.webp">
+        <source src="public/NFL x Rec Room.mp4" type="video/mp4">
+      </video>
     </div>
     <div class="modal-body">
       <div class="modal-meta">
@@ -1009,9 +1034,6 @@
         <div class="modal-stat"><div class="modal-stat-val">6+</div><div class="modal-stat-label">Major Brands</div></div>
         <div class="modal-stat"><div class="modal-stat-val">Millions</div><div class="modal-stat-label">User Reach</div></div>
       </div>
-      <div class="modal-tags">
-        <span class="tag">Brand</span><span class="tag">GTM</span><span class="tag">Partnerships</span><span class="tag">IP Licensing</span>
-      </div>
     </div>
   </div>
 </div>
@@ -1023,7 +1045,6 @@
     <div class="modal-video">
       <video controls preload="metadata" poster="public/Rec Room Social Content.png">
         <source src="public/Rec Room Social Content.webm" type="video/webm">
-        <source src="public/Rec Room Social Content.webm" type="video/mp4">
       </video>
     </div>
     <div class="modal-body">
@@ -1031,15 +1052,13 @@
         <span class="modal-label">Social Growth</span>
         <span class="modal-label">Rec Room</span>
       </div>
-      <h3 class="modal-title">1M TikTok &amp; 300K YouTube</h3>
+      <h3 class="modal-title">Social Content Creation</h3>
       <p class="modal-desc">Grew Rec Room's TikTok to 1 million followers and YouTube to 300K with multi-million views per month. Developed content strategies, launched in-game and social-driven events that contributed to 22%+ in revenue growth. Hired, managed, and mentored a team of content creators to sustain and scale output across platforms.</p>
       <div class="modal-stats">
         <div class="modal-stat"><div class="modal-stat-val">1M</div><div class="modal-stat-label">TikTok Followers</div></div>
         <div class="modal-stat"><div class="modal-stat-val">300K</div><div class="modal-stat-label">YouTube Subs</div></div>
+        <div class="modal-stat"><div class="modal-stat-val">60M</div><div class="modal-stat-label">Total Views</div></div>
         <div class="modal-stat"><div class="modal-stat-val">22%+</div><div class="modal-stat-label">Revenue Growth</div></div>
-      </div>
-      <div class="modal-tags">
-        <span class="tag">TikTok</span><span class="tag">YouTube</span><span class="tag">Content</span><span class="tag">Team Leadership</span>
       </div>
     </div>
   </div>
@@ -1052,7 +1071,6 @@
     <div class="modal-video">
       <video controls preload="metadata" poster="public/Nintendo Switch x Rec Room.png">
         <source src="public/Nintendo Switch x Rec Room.mp4" type="video/mp4">
-        <source src="public/Nintendo Switch x Rec Room.mp4" type="video/webm">
       </video>
     </div>
     <div class="modal-body">
@@ -1067,9 +1085,6 @@
         <div class="modal-stat"><div class="modal-stat-val">4</div><div class="modal-stat-label">Platforms</div></div>
         <div class="modal-stat"><div class="modal-stat-val">+16%</div><div class="modal-stat-label">CCU Growth</div></div>
       </div>
-      <div class="modal-tags">
-        <span class="tag">GTM</span><span class="tag">Platform</span><span class="tag">Cross-functional</span><span class="tag">OKRs</span>
-      </div>
     </div>
   </div>
 </div>
@@ -1081,7 +1096,6 @@
     <div class="modal-video">
       <video controls preload="metadata">
         <source src="public/My Little Monsters Rec Room Original.mp4" type="video/mp4">
-        <source src="public/My Little Monsters Rec Room Original.mp4" type="video/webm">
       </video>
     </div>
     <div class="modal-body">
@@ -1095,9 +1109,6 @@
         <div class="modal-stat"><div class="modal-stat-val">4+</div><div class="modal-stat-label">Original Titles</div></div>
         <div class="modal-stat"><div class="modal-stat-val">Multi-channel</div><div class="modal-stat-label">Launch Strategy</div></div>
       </div>
-      <div class="modal-tags">
-        <span class="tag">Community</span><span class="tag">GTM</span><span class="tag">Social</span><span class="tag">Brand</span><span class="tag">Game Development</span>
-      </div>
     </div>
   </div>
 </div>
@@ -1107,10 +1118,9 @@
   <div class="modal">
     <button class="modal-close" onclick="closeModal('modal-proj-android')">&times;</button>
     <div class="modal-video">
-      <div class="modal-video-placeholder" style="background-image:url('public/Android x Rec Room.jpg');background-size:cover;background-position:center;">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16"/></svg>
-        <p>Video unavailable — convert .mkv to .mp4</p>
-      </div>
+      <video controls preload="metadata" poster="public/Android x Rec Room.jpg">
+        <source src="public/Android x Rec Room.mp4" type="video/mp4">
+      </video>
     </div>
     <div class="modal-body">
       <div class="modal-meta">
@@ -1123,9 +1133,6 @@
         <div class="modal-stat"><div class="modal-stat-val">2B+</div><div class="modal-stat-label">Potential Reach</div></div>
         <div class="modal-stat"><div class="modal-stat-val">Android</div><div class="modal-stat-label">Platform</div></div>
       </div>
-      <div class="modal-tags">
-        <span class="tag">Platform</span><span class="tag">Mobile</span><span class="tag">GTM</span>
-      </div>
     </div>
   </div>
 </div>
@@ -1135,10 +1142,9 @@
   <div class="modal">
     <button class="modal-close" onclick="closeModal('modal-proj-destiny')">&times;</button>
     <div class="modal-video">
-      <div class="modal-video-placeholder" style="background-image:url('public/Destiny 2 x Rec Room.jpg');background-size:cover;background-position:center;">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16"/></svg>
-        <p>Video unavailable — convert .mkv to .mp4</p>
-      </div>
+      <video controls preload="metadata" poster="public/Destiny 2 x Rec Room.jpg">
+        <source src="public/Destiny 2 x Rec Room.mp4" type="video/mp4">
+      </video>
     </div>
     <div class="modal-body">
       <div class="modal-meta">
@@ -1151,9 +1157,6 @@
         <div class="modal-stat"><div class="modal-stat-val">Major</div><div class="modal-stat-label">Partnership Scale</div></div>
         <div class="modal-stat"><div class="modal-stat-val">Bungie</div><div class="modal-stat-label">Partner</div></div>
       </div>
-      <div class="modal-tags">
-        <span class="tag">Brand</span><span class="tag">Partnership</span><span class="tag">Gaming</span>
-      </div>
     </div>
   </div>
 </div>
@@ -1163,10 +1166,9 @@
   <div class="modal">
     <button class="modal-close" onclick="closeModal('modal-proj-heman')">&times;</button>
     <div class="modal-video">
-      <div class="modal-video-placeholder" style="background-image:url('public/He Man x Rec Room.jpg');background-size:cover;background-position:center;">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16"/></svg>
-        <p>Video unavailable — convert .mkv to .mp4</p>
-      </div>
+      <video controls preload="metadata" poster="public/He Man x Rec Room.jpg">
+        <source src="public/He-Man x Rec Room.mp4" type="video/mp4">
+      </video>
     </div>
     <div class="modal-body">
       <div class="modal-meta">
@@ -1179,9 +1181,6 @@
         <div class="modal-stat"><div class="modal-stat-val">Mattel</div><div class="modal-stat-label">Partner</div></div>
         <div class="modal-stat"><div class="modal-stat-val">Classic IP</div><div class="modal-stat-label">Franchise</div></div>
       </div>
-      <div class="modal-tags">
-        <span class="tag">Brand</span><span class="tag">IP Licensing</span><span class="tag">Nostalgia</span>
-      </div>
     </div>
   </div>
 </div>
@@ -1191,10 +1190,9 @@
   <div class="modal">
     <button class="modal-close" onclick="closeModal('modal-proj-monster-high')">&times;</button>
     <div class="modal-video">
-      <div class="modal-video-placeholder" style="background-image:url('public/Monster High x Rec Room.jpg');background-size:cover;background-position:center;">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16"/></svg>
-        <p>Video unavailable — convert .mkv to .mp4</p>
-      </div>
+      <video controls preload="metadata" poster="public/Monster High x Rec Room.jpg">
+        <source src="public/Monster High x Rec Room.mp4" type="video/mp4">
+      </video>
     </div>
     <div class="modal-body">
       <div class="modal-meta">
@@ -1207,9 +1205,6 @@
         <div class="modal-stat"><div class="modal-stat-val">Mattel</div><div class="modal-stat-label">Partner</div></div>
         <div class="modal-stat"><div class="modal-stat-val">Youth</div><div class="modal-stat-label">Demographic</div></div>
       </div>
-      <div class="modal-tags">
-        <span class="tag">Brand</span><span class="tag">IP Licensing</span><span class="tag">Youth Marketing</span>
-      </div>
     </div>
   </div>
 </div>
@@ -1221,7 +1216,6 @@
     <div class="modal-video">
       <video controls preload="metadata">
         <source src="public/TMNT x Rec Room.mp4" type="video/mp4">
-        <source src="public/TMNT x Rec Room.mp4" type="video/webm">
       </video>
     </div>
     <div class="modal-body">
@@ -1235,9 +1229,6 @@
         <div class="modal-stat"><div class="modal-stat-val">Nickelodeon</div><div class="modal-stat-label">Partner</div></div>
         <div class="modal-stat"><div class="modal-stat-val">Multi-genre</div><div class="modal-stat-label">Appeal</div></div>
       </div>
-      <div class="modal-tags">
-        <span class="tag">Brand</span><span class="tag">IP Licensing</span><span class="tag">Nickelodeon</span>
-      </div>
     </div>
   </div>
 </div>
@@ -1247,10 +1238,9 @@
   <div class="modal">
     <button class="modal-close" onclick="closeModal('modal-proj-winter')">&times;</button>
     <div class="modal-video">
-      <div class="modal-video-placeholder" style="background-image:url('public/Winter Wonderland Event Rec Room.webp');background-size:cover;background-position:center;">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16"/></svg>
-        <p>Video unavailable — convert .mkv to .mp4</p>
-      </div>
+      <video controls preload="metadata" poster="public/Winter Wonderland Event Rec Room.webp">
+        <source src="public/Winter Wonderland Event Rec Room.mp4" type="video/mp4">
+      </video>
     </div>
     <div class="modal-body">
       <div class="modal-meta">
@@ -1262,9 +1252,6 @@
       <div class="modal-stats">
         <div class="modal-stat"><div class="modal-stat-val">Seasonal</div><div class="modal-stat-label">Event Type</div></div>
         <div class="modal-stat"><div class="modal-stat-val">Festive</div><div class="modal-stat-label">Theme</div></div>
-      </div>
-      <div class="modal-tags">
-        <span class="tag">Live Event</span><span class="tag">Seasonal</span><span class="tag">Community</span>
       </div>
     </div>
   </div>
@@ -1467,7 +1454,11 @@
   }
   function closeModal(id) {
     const el = document.getElementById(id);
-    if (el) { el.classList.remove('open'); document.body.style.overflow = ''; }
+    if (el) {
+      el.classList.remove('open');
+      el.querySelectorAll('video').forEach(v => v.pause());
+      document.body.style.overflow = '';
+    }
   }
 
   // Open modals on card/skill click
@@ -1484,16 +1475,17 @@
     overlay.addEventListener('click', e => {
       if (e.target === overlay) {
         overlay.classList.remove('open');
+        overlay.querySelectorAll('video').forEach(v => v.pause());
         document.body.style.overflow = '';
       }
     });
   });
 
-  // Close modal on Escape key
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') {
       document.querySelectorAll('.modal-overlay.open').forEach(m => {
         m.classList.remove('open');
+        m.querySelectorAll('video').forEach(v => v.pause());
         document.body.style.overflow = '';
       });
     }
