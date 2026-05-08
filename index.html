@@ -6,7 +6,7 @@
   <title>Ryu Erck — Product Marketing & Community</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -19,8 +19,7 @@
       --accent2:   #2554d4;
       --text:      #e8e8f0;
       --muted:     #6b6b80;
-      --mono:      'DM Mono', monospace;
-      --sans:      'Syne', sans-serif;
+      --sans:      'Baloo 2', sans-serif;
     }
 
     html { scroll-behavior: smooth; }
@@ -52,14 +51,14 @@
     }
     .nav-logo {
       font-size: 13px; letter-spacing: 0.15em; text-transform: uppercase;
-      font-family: var(--mono); color: var(--accent); text-decoration: none;
+      font-family: var(--sans); color: var(--accent); text-decoration: none;
     }
     .nav-links { display: flex; gap: 36px; list-style: none; }
     .nav-links a {
       font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
       color: var(--muted); text-decoration: none;
       transition: color 0.2s;
-      font-family: var(--mono);
+      font-family: var(--sans);
     }
     .nav-links a:hover { color: var(--text); }
 
@@ -74,7 +73,7 @@
       position: relative;
     }
     .hero-eyebrow {
-      font-family: var(--mono); font-size: 12px; letter-spacing: 0.2em;
+      font-family: var(--sans); font-size: 12px; letter-spacing: 0.2em;
       text-transform: uppercase; color: var(--accent);
       margin-bottom: 28px;
       display: flex; align-items: center; gap: 12px;
@@ -109,7 +108,7 @@
     }
     .btn-primary {
       background: var(--accent); color: #fff;
-      font-family: var(--mono); font-size: 12px; letter-spacing: 0.15em;
+      font-family: var(--sans); font-size: 12px; letter-spacing: 0.15em;
       text-transform: uppercase; font-weight: 500;
       padding: 14px 28px; text-decoration: none;
       transition: opacity 0.2s, transform 0.2s;
@@ -117,7 +116,7 @@
     }
     .btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
     .btn-ghost {
-      font-family: var(--mono); font-size: 12px; letter-spacing: 0.15em;
+      font-family: var(--sans); font-size: 12px; letter-spacing: 0.15em;
       text-transform: uppercase; color: var(--muted);
       text-decoration: none; padding: 14px 0;
       border-bottom: 1px solid var(--border);
@@ -127,7 +126,7 @@
 
     .hero-scroll {
       position: absolute; bottom: 48px; left: 48px;
-      font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em;
+      font-family: var(--sans); font-size: 11px; letter-spacing: 0.18em;
       color: var(--muted); text-transform: uppercase;
       display: flex; align-items: center; gap: 10px;
       opacity: 0; animation: fadeUp 1s 0.8s ease forwards;
@@ -157,7 +156,7 @@
       margin-bottom: 64px;
     }
     .section-tag {
-      font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em;
+      font-family: var(--sans); font-size: 11px; letter-spacing: 0.2em;
       text-transform: uppercase; color: var(--accent);
     }
     .section-line {
@@ -174,20 +173,6 @@
 
     /* ── Projects ──────────────────────────────────── */
     #projects { padding-top: 80px; }
-    .filter-bar {
-      display: flex; gap: 8px; margin-bottom: 48px; flex-wrap: wrap;
-    }
-    .filter-btn {
-      font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em;
-      text-transform: uppercase; padding: 8px 18px;
-      background: transparent; border: 1px solid var(--border);
-      color: var(--muted); cursor: pointer;
-      transition: all 0.2s;
-    }
-    .filter-btn:hover, .filter-btn.active {
-      background: var(--accent); color: #fff;
-      border-color: var(--accent);
-    }
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(12, 1fr);
@@ -239,21 +224,13 @@
 
     .card-label {
       position: absolute; top: 16px; left: 16px;
-      font-family: var(--mono); font-size: 10px; letter-spacing: 0.15em;
+      font-family: var(--sans); font-size: 10px; letter-spacing: 0.15em;
       text-transform: uppercase; padding: 4px 10px;
       background: rgba(0,0,0,0.6); color: var(--accent);
       border: 1px solid rgba(74,124,247,0.25);
     }
 
     .card-body { padding: 24px; }
-    .card-tags {
-      display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px;
-    }
-    .tag {
-      font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em;
-      color: var(--muted); padding: 3px 8px;
-      border: 1px solid var(--border);
-    }
     .card-title {
       font-size: 18px; font-weight: 600; letter-spacing: -0.01em;
       margin-bottom: 8px; line-height: 1.3;
@@ -267,7 +244,7 @@
     }
     .card-links { display: flex; gap: 12px; }
     .card-link {
-      font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em;
+      font-family: var(--sans); font-size: 11px; letter-spacing: 0.1em;
       text-transform: uppercase; color: var(--muted); text-decoration: none;
       display: flex; align-items: center; gap: 6px;
       transition: color 0.2s;
@@ -298,7 +275,7 @@
     }
     .skill-group:hover { border-color: rgba(74,124,247,0.4); transform: translateY(-3px); }
     .skill-group-title {
-      font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em;
+      font-family: var(--sans); font-size: 11px; letter-spacing: 0.2em;
       text-transform: uppercase; color: var(--accent);
       margin-bottom: 20px;
       display: flex; align-items: center; gap: 10px;
@@ -306,18 +283,6 @@
     .skill-group-title::after {
       content: ''; flex: 1; height: 1px; background: var(--border);
     }
-    .skill-list {
-      display: flex; flex-wrap: wrap; gap: 8px;
-    }
-    .skill-pill {
-      font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em;
-      color: var(--text); padding: 6px 14px;
-      border: 1px solid var(--border);
-      background: var(--surface2);
-      transition: border-color 0.2s, color 0.2s;
-    }
-    .skill-group:hover .skill-pill { border-color: rgba(74,124,247,0.25); }
-    .skill-pill:hover { border-color: var(--accent) !important; color: var(--accent); }
 
     /* ── Experience ────────────────────────────────── */
     #experience { }
@@ -330,7 +295,7 @@
     }
     .timeline-item:last-child { padding-bottom: 0; }
     .timeline-date {
-      font-family: var(--mono); font-size: 12px; color: var(--muted);
+      font-family: var(--sans); font-size: 12px; color: var(--muted);
       text-align: right; padding-top: 4px; letter-spacing: 0.05em;
     }
     .timeline-line {
@@ -354,7 +319,7 @@
       margin-bottom: 4px;
     }
     .timeline-company {
-      font-family: var(--mono); font-size: 12px; color: var(--accent);
+      font-family: var(--sans); font-size: 12px; color: var(--accent);
       margin-bottom: 14px; letter-spacing: 0.05em;
     }
     .timeline-desc {
@@ -374,7 +339,7 @@
     }
     .contact-inner { max-width: 640px; margin: 0 auto; }
     .contact-pre {
-      font-family: var(--mono); font-size: 12px; color: var(--accent);
+      font-family: var(--sans); font-size: 12px; color: var(--accent);
       letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 20px;
     }
     .contact-title {
@@ -389,7 +354,7 @@
       display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
     }
     .contact-link {
-      font-family: var(--mono); font-size: 12px; letter-spacing: 0.12em;
+      font-family: var(--sans); font-size: 12px; letter-spacing: 0.12em;
       text-transform: uppercase; padding: 14px 28px;
       border: 1px solid var(--border); color: var(--text);
       text-decoration: none; transition: all 0.2s;
@@ -411,11 +376,11 @@
       border-top: 1px solid var(--border);
     }
     .footer-copy {
-      font-family: var(--mono); font-size: 11px; color: var(--muted);
+      font-family: var(--sans); font-size: 11px; color: var(--muted);
       letter-spacing: 0.08em;
     }
     .footer-right {
-      font-family: var(--mono); font-size: 11px; color: var(--muted);
+      font-family: var(--sans); font-size: 11px; color: var(--muted);
       display: flex; gap: 24px;
     }
     .footer-right a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
@@ -510,7 +475,7 @@
     }
     .modal-video-placeholder svg { opacity: 0.3; }
     .modal-video-placeholder p {
-      font-family: var(--mono); font-size: 11px;
+      font-family: var(--sans); font-size: 11px;
       letter-spacing: 0.15em; text-transform: uppercase;
     }
     .modal-body { padding: 32px; }
@@ -519,7 +484,7 @@
       margin-bottom: 16px; flex-wrap: wrap;
     }
     .modal-label {
-      font-family: var(--mono); font-size: 10px; letter-spacing: 0.15em;
+      font-family: var(--sans); font-size: 10px; letter-spacing: 0.15em;
       text-transform: uppercase; padding: 4px 10px;
       background: rgba(74,124,247,0.12); color: var(--accent);
       border: 1px solid rgba(74,124,247,0.25);
@@ -546,7 +511,7 @@
       letter-spacing: -0.02em; margin-bottom: 4px;
     }
     .modal-stat-label {
-      font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em;
+      font-family: var(--sans); font-size: 10px; letter-spacing: 0.12em;
       text-transform: uppercase; color: var(--muted);
     }
     .modal-tags { display: flex; gap: 6px; flex-wrap: wrap; }
@@ -557,7 +522,7 @@
     }
     .modal-skill-section { margin-bottom: 28px; }
     .modal-skill-section-title {
-      font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em;
+      font-family: var(--sans); font-size: 10px; letter-spacing: 0.18em;
       text-transform: uppercase; color: var(--muted);
       margin-bottom: 14px;
       display: flex; align-items: center; gap: 10px;
@@ -567,7 +532,7 @@
     }
     .modal-pills { display: flex; flex-wrap: wrap; gap: 8px; }
     .modal-pill {
-      font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em;
+      font-family: var(--sans); font-size: 12px; letter-spacing: 0.04em;
       color: var(--text); padding: 7px 16px;
       border: 1px solid var(--border); background: var(--surface2);
     }
@@ -578,14 +543,14 @@
 
     /* Card open hint */
     .card-open-hint {
-      font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em;
+      font-family: var(--sans); font-size: 10px; letter-spacing: 0.12em;
       text-transform: uppercase; color: var(--accent); opacity: 0;
       display: flex; align-items: center; gap: 5px;
       transition: opacity 0.2s;
     }
     .card:hover .card-open-hint { opacity: 1; }
     .skill-group-open-hint {
-      font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em;
+      font-family: var(--sans); font-size: 10px; letter-spacing: 0.12em;
       text-transform: uppercase; color: var(--accent); opacity: 0;
       margin-top: 16px;
       transition: opacity 0.2s;
@@ -626,17 +591,9 @@
   </div>
   <h2 class="section-title reveal" style="margin-bottom:40px;">Selected <em>Projects</em></h2>
 
-  <div class="filter-bar reveal reveal-delay-1">
-    <button class="filter-btn active" data-filter="all">All</button>
-    <button class="filter-btn" data-filter="gtm">Go-To-Market</button>
-    <button class="filter-btn" data-filter="community">Community</button>
-    <button class="filter-btn" data-filter="social">Social</button>
-    <button class="filter-btn" data-filter="brand">Brand</button>
-  </div>
-
   <div class="projects-grid">
 
-    <div class="card reveal" data-category="community gtm" data-modal="proj-rec-con">
+    <div class="card reveal" data-modal="proj-rec-con">
       <div class="card-thumb">
         <div class="card-thumb-bg"></div>
         <svg class="card-shape" width="300" height="200" viewBox="0 0 300 200">
@@ -648,9 +605,6 @@
         <div class="card-label">Community Event</div>
       </div>
       <div class="card-body">
-        <div class="card-tags">
-          <span class="tag">Community</span><span class="tag">Event</span><span class="tag">Rec Room</span>
-        </div>
         <div class="card-title">Rec Con — Online Gaming Convention</div>
         <p class="card-desc">Created and led Rec Con, an online convention that brought together 120K+ players to celebrate Rec Room's milestones. Coordinated programming, partners, and live-ops from scratch.</p>
         <div class="card-footer" style="justify-content:flex-end;">
@@ -659,7 +613,7 @@
       </div>
     </div>
 
-    <div class="card reveal reveal-delay-1" data-category="gtm brand" data-modal="proj-nilo">
+    <div class="card reveal reveal-delay-1" data-modal="proj-nilo">
       <div class="card-thumb">
         <div class="card-thumb-bg"></div>
         <svg class="card-shape" width="200" height="200" viewBox="0 0 200 200">
@@ -669,9 +623,6 @@
         <div class="card-label">Go-To-Market</div>
       </div>
       <div class="card-body">
-        <div class="card-tags">
-          <span class="tag">GTM</span><span class="tag">Nilo</span>
-        </div>
         <div class="card-title">Nilo Open Beta Launch</div>
         <p class="card-desc">Took Nilo from zero to 20K+ users in 6 months with a team of 3 and zero ad spend. Built end-to-end systems for product education, live-ops, referrals, and go-to-market execution.</p>
         <div class="card-footer" style="justify-content:flex-end;">
@@ -680,7 +631,7 @@
       </div>
     </div>
 
-    <div class="card reveal" data-category="gtm brand" data-modal="proj-nba">
+    <div class="card reveal" data-modal="proj-nba">
       <div class="card-thumb">
         <div class="card-thumb-bg"></div>
         <svg class="card-shape" width="160" height="160" viewBox="0 0 160 160">
@@ -689,7 +640,6 @@
         <div class="card-label">Brand Partnership</div>
       </div>
       <div class="card-body">
-        <div class="card-tags"><span class="tag">Brand</span><span class="tag">GTM</span></div>
         <div class="card-title">NBA &amp; NFL x Rec Room</div>
         <p class="card-desc">Led go-to-market for major brand partnerships with NBA, NFL, Mattel, Puma, TMNT, and more — bridging gaming culture with mainstream IP activations.</p>
         <div class="card-footer" style="justify-content:flex-end;">
@@ -698,7 +648,7 @@
       </div>
     </div>
 
-    <div class="card reveal reveal-delay-1" data-category="social community" data-modal="proj-social">
+    <div class="card reveal reveal-delay-1" data-modal="proj-social">
       <div class="card-thumb">
         <div class="card-thumb-bg"></div>
         <svg class="card-shape" width="160" height="160" viewBox="0 0 160 160">
@@ -709,7 +659,6 @@
         <div class="card-label">Social Growth</div>
       </div>
       <div class="card-body">
-        <div class="card-tags"><span class="tag">Social</span><span class="tag">TikTok</span><span class="tag">YouTube</span></div>
         <div class="card-title">1M TikTok &amp; 300K YouTube</div>
         <p class="card-desc">Grew Rec Room's TikTok to 1M followers and YouTube to 300K with multi-million monthly views. Hired and mentored a team of content creators to sustain and scale output.</p>
         <div class="card-footer" style="justify-content:flex-end;">
@@ -718,7 +667,7 @@
       </div>
     </div>
 
-    <div class="card reveal reveal-delay-2" data-category="gtm brand" data-modal="proj-platform">
+    <div class="card reveal reveal-delay-2" data-modal="proj-platform">
       <div class="card-thumb">
         <div class="card-thumb-bg"></div>
         <svg class="card-shape" width="160" height="160" viewBox="0 0 160 160">
@@ -729,7 +678,6 @@
         <div class="card-label">Platform Launch</div>
       </div>
       <div class="card-body">
-        <div class="card-tags"><span class="tag">GTM</span><span class="tag">Platform</span></div>
         <div class="card-title">Xbox, iOS &amp; Nintendo Switch Launches</div>
         <p class="card-desc">Directed go-to-market for Rec Room's launches on Xbox, iOS, Android, and Nintendo Switch — driving adoption of 150K+ new users through integrated campaigns.</p>
         <div class="card-footer" style="justify-content:flex-end;">
@@ -738,7 +686,7 @@
       </div>
     </div>
 
-    <div class="card reveal" data-category="community gtm social" data-modal="proj-originals">
+    <div class="card reveal" data-modal="proj-originals">
       <div class="card-thumb">
         <div class="card-thumb-bg"></div>
         <svg class="card-shape" width="600" height="200" viewBox="0 0 600 200">
@@ -748,9 +696,6 @@
         <div class="card-label">Original Title</div>
       </div>
       <div class="card-body">
-        <div class="card-tags">
-          <span class="tag">Community</span><span class="tag">GTM</span><span class="tag">Social</span><span class="tag">Brand</span>
-        </div>
         <div class="card-title">Rec Room Originals — Showdown &amp; Make It To Midnight</div>
         <p class="card-desc">Shaped the identity and launch strategy for Rec Room Original titles including Showdown, Make It To Midnight, My Little Monster, and Run The Block — spanning in-game events, social campaigns, and creator programs.</p>
         <div class="card-footer" style="justify-content:flex-end;">
@@ -774,54 +719,21 @@
 
     <div class="skill-group reveal" data-modal="skill-ai">
       <div class="skill-group-title">AI Tools</div>
-      <div class="skill-list">
-        <span class="skill-pill">Claude / Anthropic</span>
-        <span class="skill-pill">OpenAI GPT</span>
-        <span class="skill-pill">Gemini</span>
-        <span class="skill-pill">Relay</span>
-        <span class="skill-pill">CapCut AI</span>
-        <span class="skill-pill">Nano Banana</span>
-      </div>
       <div class="skill-group-open-hint">Open ↗</div>
     </div>
 
     <div class="skill-group reveal reveal-delay-1" data-modal="skill-pmm">
       <div class="skill-group-title">Product Marketing</div>
-      <div class="skill-list">
-        <span class="skill-pill">Go-To-Market Strategy</span>
-        <span class="skill-pill">Marketing Campaigns</span>
-        <span class="skill-pill">Positioning &amp; Messaging</span>
-        <span class="skill-pill">Live-Ops</span>
-        <span class="skill-pill">Referral Programs</span>
-        <span class="skill-pill">OKR / KPI Alignment</span>
-      </div>
       <div class="skill-group-open-hint">Open ↗</div>
     </div>
 
     <div class="skill-group reveal reveal-delay-2" data-modal="skill-community">
       <div class="skill-group-title">Community &amp; Content</div>
-      <div class="skill-list">
-        <span class="skill-pill">Community Management</span>
-        <span class="skill-pill">Social Media Strategy</span>
-        <span class="skill-pill">Content Marketing</span>
-        <span class="skill-pill">Copywriting</span>
-        <span class="skill-pill">Live Events</span>
-        <span class="skill-pill">Customer Support</span>
-      </div>
       <div class="skill-group-open-hint">Open ↗</div>
     </div>
 
     <div class="skill-group reveal reveal-delay-3" data-modal="skill-tools">
       <div class="skill-group-title">Tools &amp; Platforms</div>
-      <div class="skill-list">
-        <span class="skill-pill">Adobe Creative Suite</span>
-        <span class="skill-pill">Blender &amp; Unity</span>
-        <span class="skill-pill">Sprout Social</span>
-        <span class="skill-pill">Squarespace</span>
-        <span class="skill-pill">Discord &amp; Reddit</span>
-        <span class="skill-pill">Google Suite</span>
-        <span class="skill-pill">YouTube Studio</span>
-      </div>
       <div class="skill-group-open-hint">Open ↗</div>
     </div>
 
@@ -1247,23 +1159,6 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
   }, { threshold: 0.12 });
   reveals.forEach(el => io.observe(el));
-
-  // Project filter
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const cards = document.querySelectorAll('.card[data-category]');
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const filter = btn.dataset.filter;
-      cards.forEach(card => {
-        const cats = card.dataset.category || '';
-        const show = filter === 'all' || cats.includes(filter);
-        card.style.opacity = show ? '1' : '0.2';
-        card.style.pointerEvents = show ? '' : 'none';
-      });
-    });
-  });
 
   // Nav shrink on scroll
   const nav = document.querySelector('nav');
