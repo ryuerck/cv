@@ -543,7 +543,7 @@
       margin-bottom: 24px;
     }
     .modal-stats {
-      display: grid; grid-template-columns: repeat(4, 1fr);
+      display: grid; grid-template-columns: repeat(3, 1fr);
       gap: 12px; margin-bottom: 28px;
     }
     .modal-stat {
@@ -601,13 +601,25 @@
     }
     .skill-group:hover .skill-group-open-hint { opacity: 1; }
 
-    /* Tags */
-    .tag {
-      font-family: var(--sans); font-size: 10px; letter-spacing: 0.08em;
-      text-transform: uppercase; padding: 4px 10px;
-      background: var(--surface2); border: 1px solid var(--border);
-      color: var(--muted);
+    .more-projects-wrap { display: contents; }
+    .more-projects-wrap .card.hidden { display: none; }
+
+    .show-more-btn {
+      font-family: var(--sans); font-size: 12px; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 14px 32px;
+      background: var(--accent); color: #fff;
+      border: none; cursor: pointer;
+      display: flex; align-items: center; gap: 8px;
+      transition: all 0.2s; margin: 0 auto;
     }
+    .show-more-btn:hover { opacity: 0.85; }
+    .show-more-btn.active {
+      background: transparent; color: var(--muted);
+      border: 1px solid var(--border);
+    }
+    .show-more-btn.active:hover { color: var(--text); border-color: var(--accent); }
+    .show-more-btn svg { transition: transform 0.3s; }
+    .show-more-btn.active svg { transform: rotate(180deg); }
 
   </style>
 </head>
@@ -664,14 +676,56 @@
       </div>
     </div>
 
-    <div class="card reveal reveal-delay-1" data-modal="proj-showdown">
+    <div class="card reveal reveal-delay-1" data-modal="proj-platform">
       <div class="card-thumb">
-        <img class="card-thumb-img" src="public/Showdown Rec Room Original.jpg" alt="Showdown" />
+        <img class="card-thumb-img" src="public/Nintendo Switch x Rec Room.png" alt="Nintendo Switch Launch" />
         <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
-        <div class="card-label">Go-To-Market</div>
+        <div class="card-label">Platform Launch</div>
       </div>
       <div class="card-body">
-        <div class="card-title">Showdown Game Launch</div>
+        <div class="card-title">Xbox, iOS &amp; Nintendo Switch</div>
+        <div class="card-footer" style="justify-content:flex-end;">
+          <span class="card-open-hint">Open ↗</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card reveal reveal-delay-2" data-modal="proj-social">
+      <div class="card-thumb">
+        <img class="card-thumb-img" src="public/Rec Room Social Content.png" alt="Social Content" />
+        <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
+        <div class="card-label">Social Growth</div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Social Content Creation</div>
+        <div class="card-footer" style="justify-content:flex-end;">
+          <span class="card-open-hint">Open ↗</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card reveal" data-modal="proj-rec-con">
+      <div class="card-thumb">
+        <img class="card-thumb-img" src="public/RecCon Event Rec Room.png" alt="Rec Con" />
+        <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
+        <div class="card-label">Community Event</div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Rec Con Event</div>
+        <div class="card-footer" style="justify-content:flex-end;">
+          <span class="card-open-hint">Open ↗</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card reveal reveal-delay-1" data-modal="proj-nba">
+      <div class="card-thumb">
+        <img class="card-thumb-img" src="public/NFL x Rec Room.webp" alt="NFL x Rec Room" />
+        <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
+        <div class="card-label">Brand Partnership</div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">NBA &amp; NFL x Rec Room</div>
         <div class="card-footer" style="justify-content:flex-end;">
           <span class="card-open-hint">Open ↗</span>
         </div>
@@ -692,172 +746,141 @@
       </div>
     </div>
 
-    <div class="card reveal" data-modal="proj-rally">
-      <div class="card-thumb">
-        <img class="card-thumb-img" src="public/Rec Rally Rec Room Original.jpg" alt="Rec Rally" />
-        <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
-        <div class="card-label">Go-To-Market</div>
-      </div>
-      <div class="card-body">
-        <div class="card-title">Rec Rally Game Launch</div>
-        <div class="card-footer" style="justify-content:flex-end;">
-          <span class="card-open-hint">Open ↗</span>
+    <div id="more-projects" class="more-projects-wrap">
+
+      <div class="card hidden reveal" data-modal="proj-destiny">
+        <div class="card-thumb">
+          <img class="card-thumb-img" src="public/Destiny 2 x Rec Room.jpg" alt="Destiny 2 x Rec Room" />
+          <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
+          <div class="card-label">Brand Partnership</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Destiny 2 x Rec Room</div>
+          <div class="card-footer" style="justify-content:flex-end;">
+            <span class="card-open-hint">Open ↗</span>
+          </div>
         </div>
       </div>
+
+      <div class="card hidden reveal" data-modal="proj-android">
+        <div class="card-thumb">
+          <img class="card-thumb-img" src="public/Android x Rec Room.jpg" alt="Android x Rec Room" />
+          <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
+          <div class="card-label">Platform Launch</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Android x Rec Room</div>
+          <div class="card-footer" style="justify-content:flex-end;">
+            <span class="card-open-hint">Open ↗</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card hidden reveal reveal-delay-2" data-modal="proj-heman">
+        <div class="card-thumb">
+          <img class="card-thumb-img" src="public/He Man x Rec Room.jpg" alt="He-Man x Rec Room" />
+          <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
+          <div class="card-label">Brand Partnership</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">He-Man x Rec Room</div>
+          <div class="card-footer" style="justify-content:flex-end;">
+            <span class="card-open-hint">Open ↗</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card hidden reveal" data-modal="proj-monster-high">
+        <div class="card-thumb">
+          <img class="card-thumb-img" src="public/Monster High x Rec Room.jpg" alt="Monster High x Rec Room" />
+          <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
+          <div class="card-label">Brand Partnership</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Monster High x Rec Room</div>
+          <div class="card-footer" style="justify-content:flex-end;">
+            <span class="card-open-hint">Open ↗</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card hidden reveal reveal-delay-1" data-modal="proj-tmnt">
+        <div class="card-thumb">
+          <img class="card-thumb-img" src="public/TMNT x Rec Room.jpg" alt="TMNT x Rec Room" />
+          <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
+          <div class="card-label">Brand Partnership</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">TMNT x Rec Room</div>
+          <div class="card-footer" style="justify-content:flex-end;">
+            <span class="card-open-hint">Open ↗</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card hidden reveal reveal-delay-2" data-modal="proj-winter">
+        <div class="card-thumb">
+          <img class="card-thumb-img" src="public/Winter Wonderland Event Rec Room.webp" alt="Winter Wonderland" />
+          <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
+          <div class="card-label">Community Event</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Winter Wonderland Event</div>
+          <div class="card-footer" style="justify-content:flex-end;">
+            <span class="card-open-hint">Open ↗</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card hidden reveal reveal-delay-1" data-modal="proj-showdown">
+        <div class="card-thumb">
+          <img class="card-thumb-img" src="public/Showdown Rec Room Original.jpg" alt="Showdown" />
+          <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
+          <div class="card-label">Go-To-Market</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Showdown Game Launch</div>
+          <div class="card-footer" style="justify-content:flex-end;">
+            <span class="card-open-hint">Open ↗</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card hidden reveal reveal-delay-2" data-modal="proj-rally">
+        <div class="card-thumb">
+          <img class="card-thumb-img" src="public/Rec Rally Rec Room Original.jpg" alt="Rec Rally" />
+          <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
+          <div class="card-label">Go-To-Market</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Rec Rally Game Launch</div>
+          <div class="card-footer" style="justify-content:flex-end;">
+            <span class="card-open-hint">Open ↗</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card hidden reveal" data-modal="proj-run-the-block">
+        <div class="card-thumb">
+          <img class="card-thumb-img" src="public/Run the Block Rec Room Original.jpg" alt="Run The Block" />
+          <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
+          <div class="card-label">Go-To-Market</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Run The Block Game Launch</div>
+          <div class="card-footer" style="justify-content:flex-end;">
+            <span class="card-open-hint">Open ↗</span>
+          </div>
+        </div>
+      </div>
+
     </div>
 
-    <div class="card reveal reveal-delay-1" data-modal="proj-run-the-block">
-      <div class="card-thumb">
-        <img class="card-thumb-img" src="public/Run the Block Rec Room Original.jpg" alt="Run The Block" />
-        <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
-        <div class="card-label">Go-To-Market</div>
-      </div>
-      <div class="card-body">
-        <div class="card-title">Run The Block Game Launch</div>
-        <div class="card-footer" style="justify-content:flex-end;">
-          <span class="card-open-hint">Open ↗</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="card reveal reveal-delay-2" data-modal="proj-platform">
-      <div class="card-thumb">
-        <img class="card-thumb-img" src="public/Nintendo Switch x Rec Room.png" alt="Nintendo Switch Launch" />
-        <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
-        <div class="card-label">Platform Launch</div>
-      </div>
-      <div class="card-body">
-        <div class="card-title">Xbox, iOS &amp; Nintendo Switch</div>
-        <div class="card-footer" style="justify-content:flex-end;">
-          <span class="card-open-hint">Open ↗</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="card reveal" data-modal="proj-social">
-      <div class="card-thumb">
-        <img class="card-thumb-img" src="public/Rec Room Social Content.png" alt="Social Content" />
-        <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
-        <div class="card-label">Social Growth</div>
-      </div>
-      <div class="card-body">
-        <div class="card-title">Social Content Creation</div>
-        <div class="card-footer" style="justify-content:flex-end;">
-          <span class="card-open-hint">Open ↗</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="card reveal reveal-delay-1" data-modal="proj-rec-con">
-      <div class="card-thumb">
-        <img class="card-thumb-img" src="public/RecCon Event Rec Room.png" alt="Rec Con" />
-        <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
-        <div class="card-label">Community Event</div>
-      </div>
-      <div class="card-body">
-        <div class="card-title">Rec Con Event</div>
-        <div class="card-footer" style="justify-content:flex-end;">
-          <span class="card-open-hint">Open ↗</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="card reveal reveal-delay-2" data-modal="proj-nba">
-      <div class="card-thumb">
-        <img class="card-thumb-img" src="public/NFL x Rec Room.webp" alt="NFL x Rec Room" />
-        <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
-        <div class="card-label">Brand Partnership</div>
-      </div>
-      <div class="card-body">
-        <div class="card-title">NBA &amp; NFL x Rec Room</div>
-        <div class="card-footer" style="justify-content:flex-end;">
-          <span class="card-open-hint">Open ↗</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="card reveal" data-modal="proj-android">
-      <div class="card-thumb">
-        <img class="card-thumb-img" src="public/Android x Rec Room.jpg" alt="Android x Rec Room" />
-        <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
-        <div class="card-label">Platform Launch</div>
-      </div>
-      <div class="card-body">
-        <div class="card-title">Android x Rec Room</div>
-        <div class="card-footer" style="justify-content:flex-end;">
-          <span class="card-open-hint">Open ↗</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="card reveal reveal-delay-2" data-modal="proj-destiny">
-      <div class="card-thumb">
-        <img class="card-thumb-img" src="public/Destiny 2 x Rec Room.jpg" alt="Destiny 2 x Rec Room" />
-        <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
-        <div class="card-label">Brand Partnership</div>
-      </div>
-      <div class="card-body">
-        <div class="card-title">Destiny 2 x Rec Room</div>
-        <div class="card-footer" style="justify-content:flex-end;">
-          <span class="card-open-hint">Open ↗</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="card reveal" data-modal="proj-heman">
-      <div class="card-thumb">
-        <img class="card-thumb-img" src="public/He Man x Rec Room.jpg" alt="He-Man x Rec Room" />
-        <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
-        <div class="card-label">Brand Partnership</div>
-      </div>
-      <div class="card-body">
-        <div class="card-title">He-Man x Rec Room</div>
-        <div class="card-footer" style="justify-content:flex-end;">
-          <span class="card-open-hint">Open ↗</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="card reveal reveal-delay-1" data-modal="proj-monster-high">
-      <div class="card-thumb">
-        <img class="card-thumb-img" src="public/Monster High x Rec Room.jpg" alt="Monster High x Rec Room" />
-        <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
-        <div class="card-label">Brand Partnership</div>
-      </div>
-      <div class="card-body">
-        <div class="card-title">Monster High x Rec Room</div>
-        <div class="card-footer" style="justify-content:flex-end;">
-          <span class="card-open-hint">Open ↗</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="card reveal reveal-delay-2" data-modal="proj-tmnt">
-      <div class="card-thumb">
-        <img class="card-thumb-img" src="public/TMNT x Rec Room.jpg" alt="TMNT x Rec Room" />
-        <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
-        <div class="card-label">Brand Partnership</div>
-      </div>
-      <div class="card-body">
-        <div class="card-title">TMNT x Rec Room</div>
-        <div class="card-footer" style="justify-content:flex-end;">
-          <span class="card-open-hint">Open ↗</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="card reveal" data-modal="proj-winter">
-      <div class="card-thumb">
-        <img class="card-thumb-img" src="public/Winter Wonderland Event Rec Room.webp" alt="Winter Wonderland" />
-        <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
-        <div class="card-label">Community Event</div>
-      </div>
-      <div class="card-body">
-        <div class="card-title">Winter Wonderland Event</div>
-        <div class="card-footer" style="justify-content:flex-end;">
-          <span class="card-open-hint">Open ↗</span>
-        </div>
-      </div>
+    <div style="text-align:center; grid-column: 1 / -1; margin-top:8px;" class="reveal">
+      <button id="show-more-btn" class="show-more-btn" onclick="showMoreProjects()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        Show More
+      </button>
     </div>
 
   </div>
@@ -1141,7 +1164,6 @@
       <p class="modal-desc">Grew Rec Room's TikTok to 1 million followers and YouTube to 300K with multi-million views per month. Developed content strategies, launched in-game and social-driven events that contributed to 22%+ in revenue growth. Hired, managed, and mentored a team of content creators to sustain and scale output across platforms.</p>
       <div class="modal-stats">
         <div class="modal-stat"><div class="modal-stat-val">1M</div><div class="modal-stat-label">TikTok Followers</div></div>
-        <div class="modal-stat"><div class="modal-stat-val">300K</div><div class="modal-stat-label">YouTube Subs</div></div>
         <div class="modal-stat"><div class="modal-stat-val">60M</div><div class="modal-stat-label">Total Views</div></div>
         <div class="modal-stat"><div class="modal-stat-val">22%+</div><div class="modal-stat-label">Revenue Growth</div></div>
       </div>
@@ -1190,6 +1212,7 @@
     </div>
   </div>
 </div>
+
 
 <!-- Project: Make It To Midnight -->
 <div class="modal-overlay" id="modal-proj-midnight">
@@ -1339,7 +1362,7 @@
   <div class="modal">
     <button class="modal-close" onclick="closeModal('modal-proj-tmnt')">&times;</button>
     <div class="modal-video">
-      <video controls preload="metadata">
+      <video controls preload="metadata" poster="public/TMNT x Rec Room.jpg">
         <source src="public/TMNT x Rec Room.mp4" type="video/mp4">
       </video>
     </div>
@@ -1607,6 +1630,28 @@
       });
     }
   });
+
+  function showMoreProjects() {
+    const wrap = document.getElementById('more-projects');
+    const btn = document.getElementById('show-more-btn');
+    wrap.querySelectorAll('.card.hidden').forEach(card => card.classList.remove('hidden'));
+    btn.classList.add('active');
+    btn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transform:rotate(180deg)"><polyline points="6 9 12 15 18 9"/></svg> Show Less';
+    btn.onclick = hideMoreProjects;
+    setTimeout(() => {
+      wrap.querySelectorAll('.reveal:not(.visible)').forEach(el => io.observe(el));
+    }, 50);
+  }
+
+  function hideMoreProjects() {
+    const wrap = document.getElementById('more-projects');
+    const btn = document.getElementById('show-more-btn');
+    wrap.querySelectorAll('.card').forEach(card => card.classList.add('hidden'));
+    btn.classList.remove('active');
+    btn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg> Show More';
+    btn.onclick = showMoreProjects;
+  }
+
 </script>
 </body>
 </html>
