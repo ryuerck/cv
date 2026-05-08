@@ -24,8 +24,6 @@
 
     html {
       scroll-behavior: smooth;
-      background: linear-gradient(180deg, #1a1a1e 0%, #0e0e14 50%, #080810 100%);
-      min-height: 100%;
     }
 
     body {
@@ -33,6 +31,15 @@
       color: var(--text);
       font-family: var(--sans);
       overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(180deg, #1a1a1e 0%, #0e0e14 50%, #080810 100%);
+      z-index: -1;
     }
 
     /* ── Noise overlay ─────────────────────────────── */
