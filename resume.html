@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ryu Erck — Resume</title>
+  <style>
+    @page { margin: 0.6in 0.55in; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
+      font-size: 10.5pt;
+      color: #1a1a1a;
+      line-height: 1.45;
+      max-width: 7.5in;
+      margin: 0 auto;
+      padding: 0.3in 0.5in;
+      background: #fff;
+    }
+
+    .header { text-align: center; margin-bottom: 14px; }
+    .header h1 { font-size: 22pt; font-weight: 700; letter-spacing: 0.02em; margin-bottom: 4px; }
+    .header .tagline { font-size: 9.5pt; color: #555; margin-bottom: 6px; font-style: italic; }
+    .header .contact { font-size: 9pt; color: #444; display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+    .header .contact a { color: #2a5db0; text-decoration: none; }
+
+    .summary { font-size: 10pt; color: #333; margin-bottom: 16px; text-align: center; font-style: italic; }
+
+    .section { margin-bottom: 14px; }
+    .section-title {
+      font-size: 11.5pt; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.08em; color: #1a1a1a;
+      border-bottom: 1.5px solid #1a1a1a;
+      padding-bottom: 3px; margin-bottom: 10px;
+    }
+
+    .exp-company { margin-bottom: 2px; }
+    .exp-company-name { font-size: 11pt; font-weight: 700; text-transform: uppercase; }
+    .exp-narrative { font-size: 9.5pt; color: #444; margin-bottom: 8px; font-style: italic; }
+
+    .exp-role { margin-bottom: 8px; }
+    .exp-role-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2px; }
+    .exp-role-title { font-size: 10pt; font-weight: 600; }
+    .exp-role-dates { font-size: 9pt; color: #555; white-space: nowrap; }
+
+    .exp-bullets { list-style: none; padding-left: 14px; margin-top: 2px; }
+    .exp-bullets li { font-size: 9.5pt; color: #2a2a2a; margin-bottom: 2px; position: relative; padding-left: 10px; }
+    .exp-bullets li::before { content: '\2022'; position: absolute; left: 0; color: #444; font-weight: bold; }
+
+    .exp-divider { border: none; border-top: 1px solid #ddd; margin: 10px 0 12px; }
+
+    .skills-grid { display: flex; flex-direction: column; gap: 4px; }
+    .skill-row { font-size: 9.5pt; display: flex; }
+    .skill-label { font-weight: 700; min-width: 160px; color: #1a1a1a; }
+    .skill-items { color: #333; }
+
+    @media print {
+      body { padding: 0; background: #fff; color: #000; }
+      .header .contact a { color: #000; }
+      .no-print { display: none !important; }
+    }
+
+    .no-print { position: fixed; top: 20px; right: 20px; z-index: 1000; display: flex; gap: 10px; }
+    .no-print button {
+      background: #2a5db0; color: #fff; border: none; padding: 10px 20px; border-radius: 6px;
+      font-size: 13px; cursor: pointer; font-weight: 600; transition: background 0.2s;
+    }
+    .no-print button:hover { background: #1a4a90; }
+    .no-print button.secondary { background: #666; }
+    .no-print button.secondary:hover { background: #444; }
+  </style>
+</head>
+<body>
+
+<div class="no-print">
+  <button onclick="window.print()">Save as PDF</button>
+  <button class="secondary" onclick="window.location.href='index.html'">← Back to Portfolio</button>
+</div>
+
+<div class="header">
+  <h1 id="r-name"></h1>
+  <div class="tagline" id="r-tagline"></div>
+  <div class="contact">
+    <a id="r-email" href=""></a>
+    <a id="r-linkedin" href="" target="_blank"></a>
+  </div>
+</div>
+
+<div class="summary" id="r-summary"></div>
+
+<div class="section">
+  <div class="section-title">Experience</div>
+  <div id="r-experience"></div>
+</div>
+
+<div class="section">
+  <div class="section-title">Skills</div>
+  <div class="skills-grid" id="r-skills"></div>
+</div>
+
+<script>
+function loadResume() {
+  fetch('index.html')
+    .then(function(r) { return r.text(); })
+    .then(function(html) {
+      build(html);
+    })
+    .catch(function(e) {
+      console.error('Failed to load resume data:', e);
+      document.getElementById('r-name').textContent = 'Error loading resume data';
+    });
+}
+
+function build(html) {
+  var data = {};
+
+  data.name = between(html, '<h1>', '</h1>') || 'Ryu Erck';
+  data.tagline = extractAttr(html, 'div', 'class', 'hero-eyebrow');
+  data.summary = extractAttr(html, 'p', 'class', 'hero-desc');
+
+  var emailMatch = html.match(/href="(mailto:[^"]+)"/);
+  data.email = emailMatch ? emailMatch[1].replace('mailto:', '') : '';
+  var liMatch = html.match(/href="(https:\/\/[^"]*linkedin[^"]+)"/);
+  data.linkedin = liMatch ? liMatch[1] : '';
+
+  data.experience = extractExperience(html);
+  data.skills = extractSkills(html);
+
+  render(data);
+}
+
+function extractExperience(html) {
+  var items = [];
+  var searchFrom = 0;
+  while (true) {
+    var startIdx = html.indexOf('class="timeline-item', searchFrom);
+    if (startIdx === -1) break;
+    var tagEnd = html.indexOf('>', startIdx);
+    if (tagEnd === -1) break;
+    var contentStart = tagEnd + 1;
+    var pos = contentStart;
+    var depth = 1;
+    while (pos < html.length && depth > 0) {
+      var nextOpen = html.indexOf('<div', pos);
+      var nextClose = html.indexOf('</div>', pos);
+      if (nextClose === -1) break;
+      if (nextOpen !== -1 && nextOpen < nextClose) { depth++; pos = nextOpen + 4; }
+      else {
+        depth--;
+        if (depth === 0) {
+          var block = html.substring(contentStart, nextClose);
+          var date = '', role = '', company = '';
+          var dateM = block.match(/class="timeline-date"[^>]*>(.*?)<\/div>/);
+          if (dateM) date = dateM[1].replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').trim();
+          var roleM = block.match(/class="timeline-role"[^>]*>(.*?)<\/div>/);
+          if (roleM) role = roleM[1].replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').trim();
+          var compM = block.match(/class="timeline-company"[^>]*>(.*?)<\/div>/);
+          if (compM) company = compM[1].replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').trim();
+          var bullets = [];
+          var bulletRegex = /<li[^>]*>(.*?)<\/li>/g;
+          var bm;
+          while ((bm = bulletRegex.exec(block)) !== null) {
+            bullets.push(bm[1].replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').trim());
+          }
+          if (company) items.push({ date: date, role: role, company: company, bullets: bullets });
+        }
+        pos = nextClose + 6;
+      }
+    }
+    searchFrom = pos;
+  }
+  return items;
+}
+
+function extractSkills(html) {
+  var skills = [];
+  var skillNames = { 'skill-ai': 'AI Tools', 'skill-pmm': 'Product Marketing', 'skill-community': 'Community Ops', 'skill-content': 'Content Creation', 'skill-pm': 'Project Management', 'skill-data': 'Analytics' };
+  Object.keys(skillNames).forEach(function(key) {
+    var modalId = 'modal-' + key;
+    var idIdx = html.indexOf('id="' + modalId + '"');
+    if (idIdx === -1) return;
+    var tagEnd = html.indexOf('>', idIdx);
+    if (tagEnd === -1) return;
+    var contentStart = tagEnd + 1;
+    var pos = contentStart;
+    var depth = 1;
+    while (pos < html.length && depth > 0) {
+      var nextOpen = html.indexOf('<div', pos);
+      var nextClose = html.indexOf('</div>', pos);
+      if (nextClose === -1) break;
+      if (nextOpen !== -1 && nextOpen < nextClose) { depth++; pos = nextOpen + 4; }
+      else {
+        depth--;
+        if (depth === 0) {
+          var modalContent = html.substring(contentStart, nextClose);
+          var pills = [];
+          var pillRegex = /class="modal-pill"[^>]*>(.*?)<\/span>/g;
+          var pm;
+          while ((pm = pillRegex.exec(modalContent)) !== null) {
+            pills.push(pm[1].replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').trim());
+          }
+          if (pills.length) skills.push({ name: skillNames[key], items: pills });
+        }
+        pos = nextClose + 6;
+      }
+    }
+  });
+  return skills;
+}
+
+function render(data) {
+  document.getElementById('r-name').textContent = data.name;
+  document.getElementById('r-tagline').textContent = data.tagline;
+  document.getElementById('r-summary').textContent = data.summary;
+
+  var emailEl = document.getElementById('r-email');
+  emailEl.href = 'mailto:' + data.email;
+  emailEl.textContent = data.email;
+
+  var liEl = document.getElementById('r-linkedin');
+  liEl.href = data.linkedin;
+  liEl.target = '_blank';
+  liEl.textContent = data.linkedin.replace('https://', '').replace(/\/$/, '');
+
+  var expContainer = document.getElementById('r-experience');
+  expContainer.innerHTML = '';
+
+  var groups = [];
+  data.experience.forEach(function(entry) {
+    if (groups.length > 0 && groups[groups.length - 1].name === entry.company) {
+      groups[groups.length - 1].roles.push(entry);
+    } else {
+      groups.push({ name: entry.company, dateRange: entry.date, roles: [entry] });
+    }
+  });
+
+  groups.forEach(function(g) {
+    var first = g.roles[0].date;
+    var last = g.roles[g.roles.length - 1].date;
+    if (first !== last) {
+      var sy = first.split(/[—–]/)[0] ? first.split(/[—–]/)[0].trim() : '';
+      var ey = last.split(/[—–]/)[1] ? last.split(/[—–]/)[1].trim() : '';
+      g.dateRange = (sy && ey) ? sy + ' — ' + ey : first;
+    }
+  });
+
+  groups.forEach(function(group, gi) {
+    if (gi > 0) {
+      var hr = document.createElement('hr');
+      hr.className = 'exp-divider';
+      expContainer.appendChild(hr);
+    }
+    var companyDiv = document.createElement('div');
+    companyDiv.className = 'exp-company';
+    companyDiv.innerHTML = '<span class="exp-company-name">' + esc(group.name) + '</span>';
+    expContainer.appendChild(companyDiv);
+
+    group.roles.forEach(function(role) {
+      var roleDiv = document.createElement('div');
+      roleDiv.className = 'exp-role';
+      var htmlStr = '<div class="exp-role-header"><span class="exp-role-title">' + esc(role.role) + '</span><span class="exp-role-dates">' + esc(role.date) + '</span></div>';
+      if (role.bullets.length) {
+        htmlStr += '<ul class="exp-bullets">' + role.bullets.map(function(b) { return '<li>' + esc(b) + '</li>'; }).join('') + '</ul>';
+      }
+      roleDiv.innerHTML = htmlStr;
+      expContainer.appendChild(roleDiv);
+    });
+  });
+
+  var skillsContainer = document.getElementById('r-skills');
+  skillsContainer.innerHTML = '';
+  data.skills.forEach(function(skill) {
+    var row = document.createElement('div');
+    row.className = 'skill-row';
+    row.innerHTML = '<span class="skill-label">' + esc(skill.name) + '</span><span class="skill-items">' + skill.items.map(esc).join(' / ') + '</span>';
+    skillsContainer.appendChild(row);
+  });
+
+  if (new URLSearchParams(window.location.search).get('print') === '1') {
+    setTimeout(function() { window.print(); }, 300);
+  }
+}
+
+function between(html, startTag, endTag) {
+  var si = html.indexOf(startTag);
+  if (si === -1) return '';
+  var ei = html.indexOf(endTag, si + startTag.length);
+  if (ei === -1) return '';
+  return html.substring(si + startTag.length, ei).replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/&#39;/g, "'").replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>').trim();
+}
+
+function extractAttr(html, tag, attrName, attrValue) {
+  var regex = new RegExp('<' + tag + '[^>]*' + attrName + '="[^"]*' + attrValue + '[^"]*"[^>]*>([\\s\\S]*?)</' + tag + '>');
+  var m = html.match(regex);
+  return m ? m[1].replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/&#39;/g, "'").replace(/&quot;/g, '"').trim() : '';
+}
+
+function esc(str) {
+  var d = document.createElement('div');
+  d.textContent = str || '';
+  return d.innerHTML;
+}
+
+loadResume();
+</script>
+
+</body>
+</html>
