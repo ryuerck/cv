@@ -68,20 +68,18 @@
     /* ── Hero ──────────────────────────────────────── */
     #hero {
       min-height: 100vh;
-      display: flex; flex-direction: column; justify-content: center;
-      padding-top: 160px; padding-bottom: 80px;
+      display: flex; flex-direction: row; align-items: center; justify-content: space-between;
+      padding-top: 160px; padding-bottom: 80px; gap: 64px;
       position: relative;
     }
-    .hero-content {
-      display: flex; gap: 48px; align-items: center;
-    }
+    .hero-text { flex: 1; }
     .hero-photo {
-      width: 320px; height: 320px;
+      width: 360px; height: 360px;
       border-radius: 50%;
       object-fit: cover;
       border: 3px solid var(--border);
       flex-shrink: 0;
-      opacity: 0; animation: fadeUp 0.9s 0.4s ease forwards;
+      opacity: 0; animation: fadeUp 0.9s 0.5s ease forwards;
     }
     .hero-eyebrow {
       font-family: var(--sans);       font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
@@ -424,7 +422,7 @@
       .timeline-date { text-align: left; }
       .timeline-line { display: none; }
       footer { flex-direction: column; gap: 16px; text-align: center; }
-      .hero-content { flex-direction: column; gap: 32px; }
+      #hero { flex-direction: column; gap: 32px; }
       .hero-photo { width: 220px; height: 220px; }
     }
     @media (max-width: 600px) {
@@ -585,9 +583,9 @@
 
 <!-- Hero -->
 <section id="hero">
-  <div class="hero-eyebrow">Product Marketing &amp; Community Ops</div>
-  <h1>Ryu Erck</h1>
-  <div class="hero-content">
+  <div class="hero-text">
+    <div class="hero-eyebrow">Product Marketing &amp; Community Ops</div>
+    <h1>Ryu Erck</h1>
     <p class="hero-desc">I live and breathe gaming — blending storytelling and strategy to build communities that don't just play, they stay. Marketing is my game, and engagement is my high score.</p>
     <div class="hero-ctas">
       <a href="#projects" class="btn-primary">View Work</a>
