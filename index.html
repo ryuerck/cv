@@ -728,12 +728,22 @@
     </div>
 
     <div class="skill-group reveal reveal-delay-2" data-modal="skill-community">
-      <div class="skill-group-title">Community &amp; Content</div>
+      <div class="skill-group-title">Community Ops</div>
       <div class="skill-group-open-hint">Open ↗</div>
     </div>
 
-    <div class="skill-group reveal reveal-delay-3" data-modal="skill-tools">
-      <div class="skill-group-title">Tools &amp; Platforms</div>
+    <div class="skill-group reveal" data-modal="skill-content">
+      <div class="skill-group-title">Content Creation</div>
+      <div class="skill-group-open-hint">Open ↗</div>
+    </div>
+
+    <div class="skill-group reveal reveal-delay-1" data-modal="skill-pm">
+      <div class="skill-group-title">Project Management</div>
+      <div class="skill-group-open-hint">Open ↗</div>
+    </div>
+
+    <div class="skill-group reveal reveal-delay-2" data-modal="skill-data">
+      <div class="skill-group-title">Data Analytics</div>
       <div class="skill-group-open-hint">Open ↗</div>
     </div>
 
@@ -1044,13 +1054,6 @@
           <span class="modal-pill">Prompt Engineering</span>
         </div>
       </div>
-      <div class="modal-skill-section">
-        <div class="modal-skill-section-title">Media &amp; Content</div>
-        <div class="modal-pills">
-          <span class="modal-pill">CapCut AI</span>
-          <span class="modal-pill">Nano Banana</span>
-        </div>
-      </div>
     </div>
   </div>
 </div>
@@ -1085,26 +1088,55 @@
   </div>
 </div>
 
-<!-- Skill Modal: Community & Content -->
+<!-- Skill Modal: Community Ops -->
 <div class="modal-overlay" id="modal-skill-community">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('modal-skill-community')">&times;</button>
     <div class="modal-skill-header">
-      <h3 class="modal-title">Community &amp; Content</h3>
-      <p class="modal-desc-block">Building and nurturing engaged communities through strategic content, live events, and responsive support — turning players into advocates.</p>
+      <h3 class="modal-title">Community Ops</h3>
+      <p class="modal-desc-block">Building and nurturing engaged communities through strategic programming, responsive support, and live events — turning players into advocates.</p>
     </div>
     <div class="modal-body">
       <div class="modal-skill-section">
-        <div class="modal-skill-section-title">Community</div>
+        <div class="modal-skill-section-title">Platforms</div>
         <div class="modal-pills">
-          <span class="modal-pill">Community Management</span>
-          <span class="modal-pill">Live Events</span>
-          <span class="modal-pill">Customer Support</span>
-          <span class="modal-pill">Moderation</span>
+          <span class="modal-pill">Discord</span>
+          <span class="modal-pill">Reddit</span>
         </div>
       </div>
       <div class="modal-skill-section">
-        <div class="modal-skill-section-title">Content</div>
+        <div class="modal-skill-section-title">Operations</div>
+        <div class="modal-pills">
+          <span class="modal-pill">Community Management</span>
+          <span class="modal-pill">Live Events</span>
+          <span class="modal-pill">Moderation</span>
+          <span class="modal-pill">Customer Support</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Skill Modal: Content Creation -->
+<div class="modal-overlay" id="modal-skill-content">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-skill-content')">&times;</button>
+    <div class="modal-skill-header">
+      <h3 class="modal-title">Content Creation</h3>
+      <p class="modal-desc-block">Crafting compelling content across social platforms and creative mediums — from video editing to 3D design to social media strategy.</p>
+    </div>
+    <div class="modal-body">
+      <div class="modal-skill-section">
+        <div class="modal-skill-section-title">Creative Tools</div>
+        <div class="modal-pills">
+          <span class="modal-pill">Adobe Creative Suite</span>
+          <span class="modal-pill">Blender</span>
+          <span class="modal-pill">Unity</span>
+          <span class="modal-pill">CapCut AI</span>
+        </div>
+      </div>
+      <div class="modal-skill-section">
+        <div class="modal-skill-section-title">Strategy &amp; Writing</div>
         <div class="modal-pills">
           <span class="modal-pill">Social Media Strategy</span>
           <span class="modal-pill">Content Marketing</span>
@@ -1115,37 +1147,58 @@
   </div>
 </div>
 
-<!-- Skill Modal: Tools & Platforms -->
-<div class="modal-overlay" id="modal-skill-tools">
+<!-- Skill Modal: Project Management -->
+<div class="modal-overlay" id="modal-skill-pm">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal('modal-skill-tools')">&times;</button>
+    <button class="modal-close" onclick="closeModal('modal-skill-pm')">&times;</button>
     <div class="modal-skill-header">
-      <h3 class="modal-title">Tools &amp; Platforms</h3>
-      <p class="modal-desc-block">Proficient across a wide range of creative, analytical, and community management tools used to drive marketing and operational excellence.</p>
+      <h3 class="modal-title">Project Management</h3>
+      <p class="modal-desc-block">Coordinating cross-functional teams, managing roadmaps, and aligning stakeholders to deliver marketing and product initiatives on time.</p>
     </div>
     <div class="modal-body">
       <div class="modal-skill-section">
-        <div class="modal-skill-section-title">Creative</div>
+        <div class="modal-skill-section-title">Tools</div>
         <div class="modal-pills">
-          <span class="modal-pill">Adobe Creative Suite</span>
-          <span class="modal-pill">Blender</span>
-          <span class="modal-pill">Unity</span>
-        </div>
-      </div>
-      <div class="modal-skill-section">
-        <div class="modal-skill-section-title">Social &amp; Community</div>
-        <div class="modal-pills">
-          <span class="modal-pill">Sprout Social</span>
-          <span class="modal-pill">Discord</span>
-          <span class="modal-pill">Reddit</span>
-          <span class="modal-pill">YouTube Studio</span>
-        </div>
-      </div>
-      <div class="modal-skill-section">
-        <div class="modal-skill-section-title">Productivity</div>
-        <div class="modal-pills">
+          <span class="modal-pill">Linear</span>
           <span class="modal-pill">Google Suite</span>
+          <span class="modal-pill">Sprout Social</span>
           <span class="modal-pill">Squarespace</span>
+        </div>
+      </div>
+      <div class="modal-skill-section">
+        <div class="modal-skill-section-title">Practices</div>
+        <div class="modal-pills">
+          <span class="modal-pill">Cross-Functional Collaboration</span>
+          <span class="modal-pill">Roadmaps</span>
+          <span class="modal-pill">Stakeholder Alignment</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Skill Modal: Data Analytics -->
+<div class="modal-overlay" id="modal-skill-data">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-skill-data')">&times;</button>
+    <div class="modal-skill-header">
+      <h3 class="modal-title">Data Analytics</h3>
+      <p class="modal-desc-block">Tracking performance, analyzing user behavior, and making data-driven decisions to optimize marketing campaigns and community engagement.</p>
+    </div>
+    <div class="modal-body">
+      <div class="modal-skill-section">
+        <div class="modal-skill-section-title">Analytics Platforms</div>
+        <div class="modal-pills">
+          <span class="modal-pill">Amplitude</span>
+          <span class="modal-pill">PostHog</span>
+        </div>
+      </div>
+      <div class="modal-skill-section">
+        <div class="modal-skill-section-title">Measurement</div>
+        <div class="modal-pills">
+          <span class="modal-pill">OKR / KPI Alignment</span>
+          <span class="modal-pill">Campaign Analytics</span>
+          <span class="modal-pill">User Insights</span>
         </div>
       </div>
     </div>
