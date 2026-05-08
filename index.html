@@ -16,7 +16,6 @@
       --surface2:  #17171d;
       --border:    rgba(255,255,255,0.07);
       --accent:    #4a7cf7;
-      --accent2:   #2554d4;
       --text:      #e8e8f0;
       --muted:     #6b6b80;
       --sans:      'Baloo 2', sans-serif;
@@ -53,7 +52,6 @@
       pointer-events: none;
       z-index: 9997;
       opacity: 0.4;
-      will-change: auto;
     }
 
     /* ── Nav ───────────────────────────────────────── */
@@ -75,7 +73,6 @@
       font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
       color: var(--muted); text-decoration: none;
       transition: color 0.2s;
-      font-family: var(--sans);
     }
     .nav-links a:hover { color: var(--text); }
 
@@ -144,7 +141,7 @@
       border: 3px solid var(--border);
     }
     .hero-eyebrow {
-      font-family: var(--sans);       font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+      font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
       color: var(--accent);
       margin-bottom: 28px;
       display: flex; align-items: center; gap: 12px;
@@ -194,32 +191,6 @@
       transition: color 0.2s, border-color 0.2s;
     }
     .btn-ghost:hover { color: var(--text); border-color: var(--text); }
-
-    .hero-scroll {
-      position: absolute; bottom: 48px; left: 48px;
-      font-family: var(--sans); font-size: 11px; letter-spacing: 0.12em;
-      color: var(--muted); text-transform: uppercase;
-      display: flex; align-items: center; gap: 10px;
-      opacity: 0; animation: fadeUp 1s 0.8s ease forwards;
-    }
-    .scroll-line {
-      width: 1px; height: 48px; background: var(--border);
-      animation: scrollPulse 2s ease-in-out infinite;
-    }
-    @keyframes scrollPulse {
-      0%,100% { opacity: 0.3; } 50% { opacity: 1; }
-    }
-
-    .hero-num {
-      position: absolute; right: -10px; top: 50%;
-      transform: translateY(-50%) translateZ(0);
-      font-size: clamp(180px, 25vw, 320px);
-      font-weight: 800; letter-spacing: -0.05em;
-      color: transparent;
-      -webkit-text-stroke: 1px rgba(255,255,255,0.03);
-      pointer-events: none; user-select: none;
-      line-height: 1;
-    }
 
     /* ── Section headers ───────────────────────────── */
     .section-header {
@@ -305,32 +276,12 @@
       font-size: 18px; font-weight: 600; letter-spacing: -0.01em;
       margin-bottom: 8px; line-height: 1.3;
     }
-    .card-desc {
-      font-size: 13px; line-height: 1.6; color: var(--muted);
-      margin-bottom: 20px;
-    }
     .card-footer {
       display: flex; align-items: center; justify-content: space-between;
     }
-    .card-links { display: flex; gap: 12px; }
-    .card-link {
-      font-family: var(--sans); font-size: 11px; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--muted); text-decoration: none;
-      display: flex; align-items: center; gap: 6px;
-      transition: color 0.2s;
-    }
-    .card-link:hover { color: var(--accent); }
-    .card-link svg { width: 12px; height: 12px; }
-    .card-arrow {
-      width: 32px; height: 32px; border: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: center;
-      color: var(--muted); text-decoration: none;
-      transition: all 0.2s;
-    }
-    .card-arrow:hover { background: var(--accent); color: #0a0a0c; border-color: var(--accent); }
+    .card-footer-end { justify-content: flex-end; }
 
     /* ── Skills ────────────────────────────────────── */
-    #skills { background: transparent; }
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -355,7 +306,6 @@
     }
 
     /* ── Experience ────────────────────────────────── */
-    #experience { }
     .timeline { display: flex; flex-direction: column; gap: 0; }
     .timeline-item {
       display: grid; grid-template-columns: 200px 1px 1fr;
@@ -439,7 +389,7 @@
       border-color: var(--accent);
     }
     .contact-link.primary {
-      background: var(--accent); color: #0a0a0c; border-color: var(--accent);
+      background: var(--accent); color: #fff; border-color: var(--accent);
     }
     .contact-link.primary:hover { opacity: 0.85; }
 
@@ -491,7 +441,6 @@
       #hero { flex-direction: column; gap: 32px; align-items: center; }
       .hero-photo-link .hero-photo { width: 220px; height: 220px; }
       .modal-stats { grid-template-columns: repeat(2, 1fr); }
-      .section-subtitle { font-size: 15px; }
     }
     @media (max-width: 600px) {
       nav { padding: 14px 18px; }
@@ -506,19 +455,17 @@
       .card-body { padding: 16px; }
       .card-title { font-size: 15px; }
       .section-title { font-size: 26px; margin-bottom: 12px; }
-      .section-subtitle { font-size: 14px; }
       section { padding: 60px 18px; }
       .modal { max-width: 100%; margin: 12px; }
       .modal-body { padding: 20px; }
       .modal-stats { grid-template-columns: 1fr 1fr; }
       .modal-title { font-size: 22px; }
       .modal-desc-block { font-size: 14px; }
-      .skill-pills { gap: 8px; }
-      .skill-pill { font-size: 13px; padding: 8px 14px; }
+      .modal-pills { gap: 8px; }
+      .modal-pill { font-size: 13px; padding: 8px 14px; }
       footer { padding: 20px 18px; }
       .contact-links { flex-direction: column; align-items: center; gap: 14px; }
       .timeline-content { font-size: 14px; }
-      .resume-btn { font-size: 14px; padding: 14px 28px; }
     }
 
     /* ── Modal overlay ─────────────────────────────── */
@@ -574,29 +521,7 @@
     .modal-video iframe {
       width: 100%; height: 100%; border: 0;
     }
-    .modal-video-placeholder {
-      width: 100%; height: 100%;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center; gap: 12px;
-      color: var(--muted);
-    }
-    .modal-video-placeholder svg { opacity: 0.3; }
-    .modal-video-placeholder p {
-      font-family: var(--sans); font-size: 11px;
-      letter-spacing: 0.15em; text-transform: uppercase;
-    }
     .modal-body { padding: 32px; }
-    .modal-meta {
-      display: flex; align-items: center; gap: 10px;
-      margin-bottom: 16px; flex-wrap: wrap;
-    }
-    .modal-label {
-      font-family: var(--sans); font-size: 10px; letter-spacing: 0.1em;
-      text-transform: uppercase; padding: 4px 10px;
-      background: rgba(74,124,247,0.35); color: var(--text);
-      border: 1px solid rgba(74,124,247,0.5);
-      font-weight: 600;
-    }
     .modal-title {
       font-size: clamp(22px, 3vw, 32px); font-weight: 700;
       letter-spacing: -0.02em; line-height: 1.15;
@@ -622,7 +547,6 @@
       font-family: var(--sans); font-size: 10px; letter-spacing: 0.12em;
       text-transform: uppercase; color: var(--muted);
     }
-    .modal-tags { display: flex; gap: 6px; flex-wrap: wrap; }
 
     /* Skill modal layout */
     .modal-skill-header {
@@ -685,6 +609,13 @@
     .show-more-btn svg { transition: transform 0.3s; }
     .show-more-btn.active svg { transform: rotate(180deg); }
 
+    /* Utility */
+    .show-more-wrap { text-align: center; grid-column: 1 / -1; margin-top: 8px; }
+    .resume-wrap { text-align: center; margin-top: 48px; }
+    .icon-sm { margin-right: 8px; vertical-align: -2px; }
+    .mb-sm { margin-bottom: 40px; }
+    .mb-md { margin-bottom: 48px; }
+    .mb-lg { margin-bottom: 64px; }
   </style>
 </head>
 <body>
@@ -744,7 +675,7 @@
     <span class="section-tag">Work</span>
     <div class="section-line"></div>
   </div>
-  <h2 class="section-title reveal" style="margin-bottom:40px;">Selected <em>Projects</em></h2>
+  <h2 class="section-title reveal mb-sm">Selected <em>Projects</em></h2>
 
   <div class="projects-grid">
 
@@ -756,7 +687,7 @@
       </div>
       <div class="card-body">
         <div class="card-title">Nilo Open Beta Launch</div>
-        <div class="card-footer" style="justify-content:flex-end;">
+        <div class="card-footer card-footer-end">
           <span class="card-open-hint">Open ↗</span>
         </div>
       </div>
@@ -770,7 +701,7 @@
       </div>
       <div class="card-body">
         <div class="card-title">Xbox, iOS &amp; Nintendo Switch</div>
-        <div class="card-footer" style="justify-content:flex-end;">
+        <div class="card-footer card-footer-end">
           <span class="card-open-hint">Open ↗</span>
         </div>
       </div>
@@ -784,7 +715,7 @@
       </div>
       <div class="card-body">
         <div class="card-title">Social Content Creation</div>
-        <div class="card-footer" style="justify-content:flex-end;">
+        <div class="card-footer card-footer-end">
           <span class="card-open-hint">Open ↗</span>
         </div>
       </div>
@@ -798,7 +729,7 @@
       </div>
       <div class="card-body">
         <div class="card-title">Rec Con Event</div>
-        <div class="card-footer" style="justify-content:flex-end;">
+        <div class="card-footer card-footer-end">
           <span class="card-open-hint">Open ↗</span>
         </div>
       </div>
@@ -812,7 +743,7 @@
       </div>
       <div class="card-body">
         <div class="card-title">NBA &amp; NFL x Rec Room</div>
-        <div class="card-footer" style="justify-content:flex-end;">
+        <div class="card-footer card-footer-end">
           <span class="card-open-hint">Open ↗</span>
         </div>
       </div>
@@ -826,7 +757,7 @@
       </div>
       <div class="card-body">
         <div class="card-title">Make It To Midnight Game Launch</div>
-        <div class="card-footer" style="justify-content:flex-end;">
+        <div class="card-footer card-footer-end">
           <span class="card-open-hint">Open ↗</span>
         </div>
       </div>
@@ -842,7 +773,7 @@
         </div>
         <div class="card-body">
           <div class="card-title">Destiny 2 x Rec Room</div>
-          <div class="card-footer" style="justify-content:flex-end;">
+          <div class="card-footer card-footer-end">
             <span class="card-open-hint">Open ↗</span>
           </div>
         </div>
@@ -856,7 +787,7 @@
         </div>
         <div class="card-body">
           <div class="card-title">Android x Rec Room</div>
-          <div class="card-footer" style="justify-content:flex-end;">
+          <div class="card-footer card-footer-end">
             <span class="card-open-hint">Open ↗</span>
           </div>
         </div>
@@ -870,7 +801,7 @@
         </div>
         <div class="card-body">
           <div class="card-title">He-Man x Rec Room</div>
-          <div class="card-footer" style="justify-content:flex-end;">
+          <div class="card-footer card-footer-end">
             <span class="card-open-hint">Open ↗</span>
           </div>
         </div>
@@ -884,7 +815,7 @@
         </div>
         <div class="card-body">
           <div class="card-title">Monster High x Rec Room</div>
-          <div class="card-footer" style="justify-content:flex-end;">
+          <div class="card-footer card-footer-end">
             <span class="card-open-hint">Open ↗</span>
           </div>
         </div>
@@ -898,7 +829,7 @@
         </div>
         <div class="card-body">
           <div class="card-title">TMNT x Rec Room</div>
-          <div class="card-footer" style="justify-content:flex-end;">
+          <div class="card-footer card-footer-end">
             <span class="card-open-hint">Open ↗</span>
           </div>
         </div>
@@ -912,7 +843,7 @@
         </div>
         <div class="card-body">
           <div class="card-title">Winter Wonderland Event</div>
-          <div class="card-footer" style="justify-content:flex-end;">
+          <div class="card-footer card-footer-end">
             <span class="card-open-hint">Open ↗</span>
           </div>
         </div>
@@ -926,7 +857,7 @@
         </div>
         <div class="card-body">
           <div class="card-title">Showdown Game Launch</div>
-          <div class="card-footer" style="justify-content:flex-end;">
+          <div class="card-footer card-footer-end">
             <span class="card-open-hint">Open ↗</span>
           </div>
         </div>
@@ -940,7 +871,7 @@
         </div>
         <div class="card-body">
           <div class="card-title">Rec Rally Game Launch</div>
-          <div class="card-footer" style="justify-content:flex-end;">
+          <div class="card-footer card-footer-end">
             <span class="card-open-hint">Open ↗</span>
           </div>
         </div>
@@ -954,7 +885,7 @@
         </div>
         <div class="card-body">
           <div class="card-title">Run The Block Game Launch</div>
-          <div class="card-footer" style="justify-content:flex-end;">
+          <div class="card-footer card-footer-end">
             <span class="card-open-hint">Open ↗</span>
           </div>
         </div>
@@ -962,7 +893,7 @@
 
     </div>
 
-    <div style="text-align:center; grid-column: 1 / -1; margin-top:8px;" class="reveal">
+    <div class="show-more-wrap reveal">
       <button id="show-more-btn" class="show-more-btn" onclick="showMoreProjects()">
         <svg width="20" height="20"><use href="#icon-chevron-down"/></svg>
         Show More
@@ -978,7 +909,7 @@
     <span class="section-tag">Skills</span>
     <div class="section-line"></div>
   </div>
-  <h2 class="section-title reveal" style="margin-bottom:48px;">Tools &amp; <em>Craft</em></h2>
+  <h2 class="section-title reveal mb-md">Tools &amp; <em>Craft</em></h2>
 
   <div class="skills-grid">
 
@@ -1021,7 +952,7 @@
     <span class="section-tag">Experience</span>
     <div class="section-line"></div>
   </div>
-  <h2 class="section-title reveal" style="margin-bottom:64px;">Where I've <em>Been</em></h2>
+  <h2 class="section-title reveal mb-lg">Where I've <em>Been</em></h2>
 
   <div class="timeline">
 
@@ -1137,9 +1068,9 @@
     </div>
 
   </div>
-  <div style="text-align:center; margin-top:48px;" class="reveal">
+  <div class="resume-wrap reveal">
     <a href="public/RyuErckResume.pdf" download class="btn-primary">
-      <svg width="14" height="14" style="margin-right:8px; vertical-align: -2px;"><use href="#icon-download"/></svg>
+      <svg width="14" height="14" class="icon-sm"><use href="#icon-download"/></svg>
       Download Resume
     </a>
   </div>
@@ -1151,7 +1082,7 @@
     <div class="contact-pre reveal">Let's work together</div>
     <h2 class="contact-title reveal">Say <em>hi!</em></h2>
     <div class="contact-links reveal">
-      <a href="mailto:ryuerck@gmail.com" class="contact-link primary" style="color:#fff;">
+      <a href="mailto:ryuerck@gmail.com" class="contact-link primary">
         <svg width="14" height="14"><use href="#icon-email"/></svg>
         Email
       </a>
@@ -1674,16 +1605,6 @@
   }, { threshold: 0 });
   navObserver.observe(document.querySelector('#hero'));
 
-  // Pause scrollPulse animation when hero is off-screen
-  const scrollLine = document.querySelector('.scroll-line');
-  const heroObserver = new IntersectionObserver(entries => {
-    entries[0].isIntersecting
-      ? scrollLine.style.animationPlayState = 'running'
-      : scrollLine.style.animationPlayState = 'paused';
-  }, { threshold: 0 });
-  heroObserver.observe(document.querySelector('#hero'));
-  if (scrollLine) scrollLine.style.animationPlayState = 'paused';
-
   // Modal open/close
   function openModal(id) {
     const el = document.getElementById(id);
@@ -1741,7 +1662,7 @@
     const btn = document.getElementById('show-more-btn');
     wrap.querySelectorAll('.card.hidden').forEach(card => card.classList.remove('hidden'));
     btn.classList.add('active');
-    btn.innerHTML = '<svg width="20" height="20" style="transform:rotate(180deg)"><use href="#icon-chevron-down"/></svg> Show Less';
+    btn.innerHTML = '<svg width="20" height="20"><use href="#icon-chevron-down"/></svg> Show Less';
     btn.onclick = hideMoreProjects;
     setTimeout(() => {
       wrap.querySelectorAll('.reveal:not(.visible)').forEach(el => io.observe(el));
