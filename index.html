@@ -34,7 +34,6 @@
       font-family: var(--sans);
       overflow-x: hidden;
       min-height: 100vh;
-      position: relative;
     }
     body::after {
       content: '';
@@ -117,7 +116,6 @@
       min-height: 100vh;
       display: flex; flex-direction: row; align-items: center; justify-content: space-between;
       padding: 160px 48px 80px; gap: 64px;
-      position: relative;
     }
     .hero-text { flex: 1; }
     .hero-photo-link {
@@ -308,7 +306,6 @@
       display: grid; grid-template-columns: 200px 1px 1fr;
       gap: 0 32px;
       padding-bottom: 56px;
-      position: relative;
     }
     .timeline-item:last-child { padding-bottom: 0; }
     .timeline-date {
@@ -356,7 +353,6 @@
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
       max-width: 100%;
-      padding: 120px 48px;
     }
     .contact-inner { max-width: 640px; margin: 0 auto; }
     .contact-pre {
@@ -368,9 +364,6 @@
       letter-spacing: -0.03em; line-height: 1; margin-bottom: 24px;
     }
     .contact-title em { font-style: normal; color: var(--muted); }
-    .contact-desc {
-      font-size: 15px; line-height: 1.7; color: var(--muted); margin-bottom: 48px;
-    }
     .contact-links {
       display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
     }
@@ -419,8 +412,6 @@
     .reveal.visible { opacity: 1; transform: translateY(0); }
     .reveal-delay-1 { transition-delay: 0.1s; }
     .reveal-delay-2 { transition-delay: 0.2s; }
-    .reveal-delay-3 { transition-delay: 0.3s; }
-    .reveal-delay-4 { transition-delay: 0.4s; }
 
     /* ── Responsive ────────────────────────────────── */
     @media (max-width: 900px) {
@@ -429,13 +420,12 @@
       .nav-links { gap: 20px; }
       .nav-links a { font-size: 11px; }
       section { padding: 80px 24px; }
-      #hero { padding-left: 24px; padding-right: 24px; }
+      #hero { padding: 160px 24px 80px; flex-direction: column; gap: 32px; align-items: center; }
       .projects-grid { grid-template-columns: repeat(2, 1fr); }
       .timeline-item { grid-template-columns: 1fr; gap: 8px; }
       .timeline-date { text-align: left; }
       .timeline-line { display: none; }
       footer { flex-direction: column; gap: 16px; text-align: center; }
-      #hero { flex-direction: column; gap: 32px; align-items: center; }
       .hero-photo { width: 220px; height: 220px; }
       .modal-stats { grid-template-columns: repeat(2, 1fr); }
     }
@@ -506,7 +496,7 @@
     .modal-video {
       width: 100%;
       background: #000;
-      position: relative; overflow: hidden;
+      overflow: hidden;
       display: flex; align-items: center; justify-content: center;
     }
     .modal-video video {
@@ -1588,117 +1578,79 @@
 </div>
 
 <script>
-  // Cached DOM references
   const mobileMenu = document.getElementById('mobileMenu');
   const hamburger = document.querySelector('.hamburger');
   const allModals = document.querySelectorAll('.modal-overlay');
+  const moreProjects = document.getElementById('more-projects');
+  const showMoreBtn = document.getElementById('show-more-btn');
   const chevronSVG = '<svg width="20" height="20"><use href="#icon-chevron-down"/></svg>';
 
-  // Scroll reveal
-  const reveals = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
   }, { threshold: 0.12 });
-  reveals.forEach(el => io.observe(el));
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-  // Nav shrink on scroll using IntersectionObserver (no scroll event)
   const nav = document.querySelector('nav');
-  const navObserver = new IntersectionObserver(entries => {
+  new IntersectionObserver(entries => {
     nav.classList.toggle('scrolled', !entries[0].isIntersecting);
-  }, { threshold: 0 });
-  navObserver.observe(document.querySelector('#hero'));
+  }, { threshold: 0 }).observe(document.querySelector('#hero'));
 
-  // Modal open/close
   function openModal(id) {
     const el = document.getElementById(id);
-    if (el) {
-      el.classList.add('open');
-      document.body.style.overflow = 'hidden';
-      const video = el.querySelector('video');
-      if (video && video.preload === 'none') {
-        video.preload = 'metadata';
-        video.load();
-      }
+    if (!el) return;
+    el.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    const video = el.querySelector('video');
+    if (video && video.preload === 'none') {
+      video.preload = 'metadata';
+      video.load();
     }
   }
+
   function closeModal(id) {
     const el = document.getElementById(id);
-    if (el) {
-      el.classList.remove('open');
-      el.querySelectorAll('video').forEach(v => { v.pause(); v.preload = 'none'; });
-      document.body.style.overflow = '';
-    }
+    if (!el) return;
+    el.classList.remove('open');
+    el.querySelectorAll('video').forEach(v => { v.pause(); v.preload = 'none'; });
+    document.body.style.overflow = '';
   }
 
-  // Open modals on card/skill click
   document.querySelectorAll('[data-modal]').forEach(el => {
-    el.addEventListener('click', e => {
-      e.preventDefault();
-      openModal('modal-' + el.dataset.modal);
-    });
+    el.addEventListener('click', e => { e.preventDefault(); openModal('modal-' + el.dataset.modal); });
   });
 
-  // Close modal on overlay click
   allModals.forEach(overlay => {
-    overlay.addEventListener('click', e => {
-      if (e.target === overlay) closeModal(overlay.id);
-    });
-  });
-
-  // Close modal on Escape
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') {
-      document.querySelectorAll('.modal-overlay.open').forEach(m => closeModal(m.id));
-    }
-  });
-
-  // Wire up modal close buttons
-  allModals.forEach(overlay => {
+    overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(overlay.id); });
     overlay.querySelector('.modal-close').addEventListener('click', () => closeModal(overlay.id));
   });
 
-  // Show more / show less
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') document.querySelectorAll('.modal-overlay.open').forEach(m => closeModal(m.id));
+  });
+
   function showMoreProjects() {
-    const wrap = document.getElementById('more-projects');
-    const btn = document.getElementById('show-more-btn');
-    wrap.querySelectorAll('.card.hidden').forEach(card => card.classList.remove('hidden'));
-    btn.classList.add('active');
-    btn.innerHTML = chevronSVG + ' Show Less';
-    btn.onclick = hideMoreProjects;
-    setTimeout(() => {
-      wrap.querySelectorAll('.reveal:not(.visible)').forEach(el => io.observe(el));
-    }, 50);
+    moreProjects.querySelectorAll('.card.hidden').forEach(c => c.classList.remove('hidden'));
+    showMoreBtn.classList.add('active');
+    showMoreBtn.innerHTML = chevronSVG + ' Show Less';
+    showMoreBtn.onclick = hideMoreProjects;
+    setTimeout(() => moreProjects.querySelectorAll('.reveal:not(.visible)').forEach(el => io.observe(el)), 50);
   }
 
   function hideMoreProjects() {
-    const wrap = document.getElementById('more-projects');
-    const btn = document.getElementById('show-more-btn');
-    wrap.querySelectorAll('.card').forEach(card => card.classList.add('hidden'));
-    btn.classList.remove('active');
-    btn.innerHTML = chevronSVG + ' Show More';
-    btn.onclick = showMoreProjects;
+    moreProjects.querySelectorAll('.card').forEach(c => c.classList.add('hidden'));
+    showMoreBtn.classList.remove('active');
+    showMoreBtn.innerHTML = chevronSVG + ' Show More';
+    showMoreBtn.onclick = showMoreProjects;
   }
 
-  document.getElementById('show-more-btn').addEventListener('click', showMoreProjects);
+  showMoreBtn.addEventListener('click', showMoreProjects);
 
-  // Mobile menu
-  function toggleMobileMenu() {
-    mobileMenu.classList.toggle('open');
-    hamburger.classList.toggle('active');
-  }
+  hamburger.addEventListener('click', () => { mobileMenu.classList.toggle('open'); hamburger.classList.toggle('active'); });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { mobileMenu.classList.remove('open'); hamburger.classList.remove('active'); }));
 
-  function closeMobileMenu() {
-    mobileMenu.classList.remove('open');
-    hamburger.classList.remove('active');
-  }
-
-  hamburger.addEventListener('click', toggleMobileMenu);
-  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobileMenu));
-
-  // Click-outside listener for mobile menu
   document.addEventListener('click', e => {
     if (mobileMenu.classList.contains('open') && !mobileMenu.contains(e.target) && !hamburger.contains(e.target)) {
-      closeMobileMenu();
+      mobileMenu.classList.remove('open'); hamburger.classList.remove('active');
     }
   });
 
