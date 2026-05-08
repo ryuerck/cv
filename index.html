@@ -57,9 +57,11 @@
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
       padding: 24px 48px;
-      background: linear-gradient(to bottom, rgba(10,10,12,0.95), transparent);
-      backdrop-filter: blur(12px);
+      background: rgba(10,10,12,0.95);
+      backdrop-filter: blur(6px);
+      transition: padding 0.3s ease, background 0.3s ease;
     }
+    nav.scrolled { padding: 14px 48px; background: rgba(10,10,12,0.98); }
     .nav-logo {
       font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase;
       font-family: var(--sans); color: var(--accent); text-decoration: none;
@@ -472,7 +474,8 @@
 
     /* ── Responsive ────────────────────────────────── */
     @media (max-width: 900px) {
-      nav { padding: 16px 24px; }
+      nav { padding: 14px 24px; }
+      nav.scrolled { padding: 10px 24px; }
       .nav-links { gap: 20px; }
       .nav-links a { font-size: 11px; }
       section { padding: 80px 24px; }
@@ -519,13 +522,13 @@
     .modal-overlay {
       position: fixed; inset: 0; z-index: 1000;
       background: rgba(5,5,8,0.85);
-      backdrop-filter: blur(14px);
+      backdrop-filter: blur(8px);
       display: flex; align-items: center; justify-content: center;
       padding: 24px;
-      opacity: 0; pointer-events: none;
-      transition: opacity 0.3s ease;
+      opacity: 0; visibility: hidden; pointer-events: none;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
     }
-    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal-overlay.open { opacity: 1; visibility: visible; pointer-events: all; }
 
     .modal {
       background: var(--surface);
@@ -735,7 +738,7 @@
 
     <div class="card reveal" data-modal="proj-nilo">
       <div class="card-thumb">
-        <img class="card-thumb-img" src="public/Nilo Open Beta.png" alt="Nilo Open Beta" />
+        <img class="card-thumb-img" src="public/Nilo Open Beta.png" alt="Nilo Open Beta" loading="lazy" width="800" height="500" />
         <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
         <div class="card-label">Go-To-Market</div>
       </div>
@@ -749,7 +752,7 @@
 
     <div class="card reveal reveal-delay-1" data-modal="proj-platform">
       <div class="card-thumb">
-        <img class="card-thumb-img" src="public/Nintendo Switch x Rec Room.png" alt="Nintendo Switch Launch" />
+        <img class="card-thumb-img" src="public/Nintendo Switch x Rec Room.png" alt="Nintendo Switch Launch" loading="lazy" width="800" height="500" />
         <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
         <div class="card-label">Platform Launch</div>
       </div>
@@ -763,7 +766,7 @@
 
     <div class="card reveal reveal-delay-2" data-modal="proj-social">
       <div class="card-thumb">
-        <img class="card-thumb-img" src="public/Rec Room Social Content.png" alt="Social Content" />
+        <img class="card-thumb-img" src="public/Rec Room Social Content.png" alt="Social Content" loading="lazy" width="800" height="500" />
         <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
         <div class="card-label">Social Growth</div>
       </div>
@@ -777,7 +780,7 @@
 
     <div class="card reveal" data-modal="proj-rec-con">
       <div class="card-thumb">
-        <img class="card-thumb-img" src="public/RecCon Event Rec Room.png" alt="Rec Con" />
+        <img class="card-thumb-img" src="public/RecCon Event Rec Room.png" alt="Rec Con" loading="lazy" width="800" height="500" />
         <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
         <div class="card-label">Community Event</div>
       </div>
@@ -791,7 +794,7 @@
 
     <div class="card reveal reveal-delay-1" data-modal="proj-nba">
       <div class="card-thumb">
-        <img class="card-thumb-img" src="public/NFL x Rec Room.webp" alt="NFL x Rec Room" />
+        <img class="card-thumb-img" src="public/NFL x Rec Room.webp" alt="NFL x Rec Room" loading="lazy" width="800" height="500" />
         <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
         <div class="card-label">Brand Partnership</div>
       </div>
@@ -805,7 +808,7 @@
 
     <div class="card reveal reveal-delay-2" data-modal="proj-midnight">
       <div class="card-thumb">
-        <img class="card-thumb-img" src="public/Make it to Midnight Rec Room Original.jpg" alt="Make It To Midnight" />
+        <img class="card-thumb-img" src="public/Make it to Midnight Rec Room Original.jpg" alt="Make It To Midnight" loading="lazy" width="800" height="500" />
         <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
         <div class="card-label">Go-To-Market</div>
       </div>
@@ -821,7 +824,7 @@
 
       <div class="card hidden reveal" data-modal="proj-destiny">
         <div class="card-thumb">
-          <img class="card-thumb-img" src="public/Destiny 2 x Rec Room.jpg" alt="Destiny 2 x Rec Room" />
+          <img class="card-thumb-img" src="public/Destiny 2 x Rec Room.jpg" alt="Destiny 2 x Rec Room" loading="lazy" width="800" height="500" />
           <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
           <div class="card-label">Brand Partnership</div>
         </div>
@@ -835,7 +838,7 @@
 
       <div class="card hidden reveal" data-modal="proj-android">
         <div class="card-thumb">
-          <img class="card-thumb-img" src="public/Android x Rec Room.jpg" alt="Android x Rec Room" />
+          <img class="card-thumb-img" src="public/Android x Rec Room.jpg" alt="Android x Rec Room" loading="lazy" width="800" height="500" />
           <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
           <div class="card-label">Platform Launch</div>
         </div>
@@ -849,7 +852,7 @@
 
       <div class="card hidden reveal reveal-delay-2" data-modal="proj-heman">
         <div class="card-thumb">
-          <img class="card-thumb-img" src="public/He Man x Rec Room.jpg" alt="He-Man x Rec Room" />
+          <img class="card-thumb-img" src="public/He Man x Rec Room.jpg" alt="He-Man x Rec Room" loading="lazy" width="800" height="500" />
           <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
           <div class="card-label">Brand Partnership</div>
         </div>
@@ -863,7 +866,7 @@
 
       <div class="card hidden reveal" data-modal="proj-monster-high">
         <div class="card-thumb">
-          <img class="card-thumb-img" src="public/Monster High x Rec Room.jpg" alt="Monster High x Rec Room" />
+          <img class="card-thumb-img" src="public/Monster High x Rec Room.jpg" alt="Monster High x Rec Room" loading="lazy" width="800" height="500" />
           <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
           <div class="card-label">Brand Partnership</div>
         </div>
@@ -877,7 +880,7 @@
 
       <div class="card hidden reveal reveal-delay-1" data-modal="proj-tmnt">
         <div class="card-thumb">
-          <img class="card-thumb-img" src="public/TMNT x Rec Room.jpg" alt="TMNT x Rec Room" />
+          <img class="card-thumb-img" src="public/TMNT x Rec Room.jpg" alt="TMNT x Rec Room" loading="lazy" width="800" height="500" />
           <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
           <div class="card-label">Brand Partnership</div>
         </div>
@@ -891,7 +894,7 @@
 
       <div class="card hidden reveal reveal-delay-2" data-modal="proj-winter">
         <div class="card-thumb">
-          <img class="card-thumb-img" src="public/Winter Wonderland Event Rec Room.webp" alt="Winter Wonderland" />
+          <img class="card-thumb-img" src="public/Winter Wonderland Event Rec Room.webp" alt="Winter Wonderland" loading="lazy" width="800" height="500" />
           <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
           <div class="card-label">Community Event</div>
         </div>
@@ -905,7 +908,7 @@
 
       <div class="card hidden reveal reveal-delay-1" data-modal="proj-showdown">
         <div class="card-thumb">
-          <img class="card-thumb-img" src="public/Showdown Rec Room Original.jpg" alt="Showdown" />
+          <img class="card-thumb-img" src="public/Showdown Rec Room Original.jpg" alt="Showdown" loading="lazy" width="800" height="500" />
           <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
           <div class="card-label">Go-To-Market</div>
         </div>
@@ -919,7 +922,7 @@
 
       <div class="card hidden reveal reveal-delay-2" data-modal="proj-rally">
         <div class="card-thumb">
-          <img class="card-thumb-img" src="public/Rec Rally Rec Room Original.jpg" alt="Rec Rally" />
+          <img class="card-thumb-img" src="public/Rec Rally Rec Room Original.jpg" alt="Rec Rally" loading="lazy" width="800" height="500" />
           <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
           <div class="card-label">Go-To-Market</div>
         </div>
@@ -933,7 +936,7 @@
 
       <div class="card hidden reveal" data-modal="proj-run-the-block">
         <div class="card-thumb">
-          <img class="card-thumb-img" src="public/Run the Block Rec Room Original.jpg" alt="Run The Block" />
+          <img class="card-thumb-img" src="public/Run the Block Rec Room Original.jpg" alt="Run The Block" loading="lazy" width="800" height="500" />
           <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
           <div class="card-label">Go-To-Market</div>
         </div>
@@ -1652,11 +1655,22 @@
   }, { threshold: 0.12 });
   reveals.forEach(el => io.observe(el));
 
-  // Nav shrink on scroll
+  // Nav shrink on scroll using IntersectionObserver (no scroll event)
   const nav = document.querySelector('nav');
-  window.addEventListener('scroll', () => {
-    nav.style.padding = window.scrollY > 60 ? '14px 48px' : '24px 48px';
-  });
+  const navObserver = new IntersectionObserver(entries => {
+    nav.classList.toggle('scrolled', !entries[0].isIntersecting);
+  }, { threshold: 0 });
+  navObserver.observe(document.querySelector('#hero'));
+
+  // Pause scrollPulse animation when hero is off-screen
+  const scrollLine = document.querySelector('.scroll-line');
+  const heroObserver = new IntersectionObserver(entries => {
+    entries[0].isIntersecting
+      ? scrollLine.style.animationPlayState = 'running'
+      : scrollLine.style.animationPlayState = 'paused';
+  }, { threshold: 0 });
+  heroObserver.observe(document.querySelector('#hero'));
+  if (scrollLine) scrollLine.style.animationPlayState = 'paused';
 
   // Modal open/close
   function openModal(id) {
@@ -1728,9 +1742,6 @@
     const btn = document.querySelector('.hamburger');
     menu.classList.toggle('open');
     btn.classList.toggle('active');
-    if (menu.classList.contains('open')) {
-      document.addEventListener('click', closeMobileMenuOutside);
-    }
   }
 
   function closeMobileMenu() {
@@ -1738,16 +1749,16 @@
     const btn = document.querySelector('.hamburger');
     menu.classList.remove('open');
     btn.classList.remove('active');
-    document.removeEventListener('click', closeMobileMenuOutside);
   }
 
-  function closeMobileMenuOutside(e) {
+  // Single persistent click-outside listener for mobile menu
+  document.addEventListener('click', e => {
     const menu = document.getElementById('mobileMenu');
     const btn = document.querySelector('.hamburger');
-    if (!menu.contains(e.target) && !btn.contains(e.target)) {
+    if (menu.classList.contains('open') && !menu.contains(e.target) && !btn.contains(e.target)) {
       closeMobileMenu();
     }
-  }
+  });
 
 </script>
 </body>
