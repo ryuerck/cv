@@ -256,8 +256,9 @@
       position: absolute; top: 16px; left: 16px;
       font-family: var(--sans); font-size: 10px; letter-spacing: 0.1em;
       text-transform: uppercase; padding: 4px 10px;
-      background: rgba(0,0,0,0.6); color: var(--accent);
-      border: 1px solid rgba(74,124,247,0.25);
+      background: rgba(0,0,0,0.8); color: var(--accent);
+      border: 1px solid rgba(74,124,247,0.4);
+      font-weight: 600;
     }
 
     .card-body { padding: 24px; }
@@ -352,11 +353,15 @@
       font-family: var(--sans); font-size: 12px; color: var(--accent);
       margin-bottom: 14px; letter-spacing: 0.05em;
     }
-    .timeline-desc {
-      font-size: 14px; line-height: 1.7; color: var(--muted);
+    .timeline-bullets {
+      margin: 0; padding-left: 18px;
       max-width: 560px;
     }
-    .timeline-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 14px; }
+    .timeline-bullets li {
+      font-size: 14px; line-height: 1.7; color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .timeline-bullets li::marker { color: var(--accent); }
 
     /* ── Contact ───────────────────────────────────── */
     #contact {
@@ -444,6 +449,7 @@
       footer { flex-direction: column; gap: 16px; text-align: center; }
       #hero { flex-direction: column; gap: 32px; align-items: center; }
       .hero-photo-link .hero-photo { width: 220px; height: 220px; }
+      .modal-stats { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 600px) {
       .nav-links { display: none; }
@@ -523,8 +529,9 @@
     .modal-label {
       font-family: var(--sans); font-size: 10px; letter-spacing: 0.1em;
       text-transform: uppercase; padding: 4px 10px;
-      background: rgba(74,124,247,0.12); color: var(--accent);
-      border: 1px solid rgba(74,124,247,0.25);
+      background: rgba(74,124,247,0.35); color: var(--text);
+      border: 1px solid rgba(74,124,247,0.5);
+      font-weight: 600;
     }
     .modal-title {
       font-size: clamp(22px, 3vw, 32px); font-weight: 700;
@@ -536,12 +543,12 @@
       margin-bottom: 24px;
     }
     .modal-stats {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      display: grid; grid-template-columns: repeat(4, 1fr);
       gap: 12px; margin-bottom: 28px;
     }
     .modal-stat {
       background: var(--surface2); border: 1px solid var(--border);
-      padding: 16px;
+      padding: 16px; border-radius: 6px; text-align: center;
     }
     .modal-stat-val {
       font-size: 22px; font-weight: 700; color: var(--accent);
@@ -622,7 +629,7 @@
   <div class="hero-text">
     <div class="hero-eyebrow">Product Marketing &amp; Community Ops</div>
     <h1>Ryu Erck</h1>
-    <p class="hero-desc">I live and breathe gaming — blending storytelling and strategy to build communities that don't just play, they stay. Marketing is my game, and engagement is my high score.</p>
+    <p class="hero-desc">I live and breathe gaming — blending storytelling and strategy to build communities that don't just play, they stay.</p>
     <div class="hero-ctas">
       <a href="#projects" class="btn-primary">View Work</a>
       <a href="#contact" class="btn-ghost">Get In Touch →</a>
@@ -657,14 +664,56 @@
       </div>
     </div>
 
-    <div class="card reveal reveal-delay-1" data-modal="proj-originals">
+    <div class="card reveal reveal-delay-1" data-modal="proj-showdown">
       <div class="card-thumb">
-        <img class="card-thumb-img" src="public/Showdown Rec Room Original.jpg" alt="Rec Room Originals" />
+        <img class="card-thumb-img" src="public/Showdown Rec Room Original.jpg" alt="Showdown" />
         <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
         <div class="card-label">Go-To-Market</div>
       </div>
       <div class="card-body">
-        <div class="card-title">Rec Room Originals</div>
+        <div class="card-title">Showdown Game Launch</div>
+        <div class="card-footer" style="justify-content:flex-end;">
+          <span class="card-open-hint">Open ↗</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card reveal reveal-delay-2" data-modal="proj-midnight">
+      <div class="card-thumb">
+        <img class="card-thumb-img" src="public/Make it to Midnight Rec Room Original.jpg" alt="Make It To Midnight" />
+        <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
+        <div class="card-label">Go-To-Market</div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Make It To Midnight Game Launch</div>
+        <div class="card-footer" style="justify-content:flex-end;">
+          <span class="card-open-hint">Open ↗</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card reveal" data-modal="proj-rally">
+      <div class="card-thumb">
+        <img class="card-thumb-img" src="public/Rec Rally Rec Room Original.jpg" alt="Rec Rally" />
+        <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
+        <div class="card-label">Go-To-Market</div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Rec Rally Game Launch</div>
+        <div class="card-footer" style="justify-content:flex-end;">
+          <span class="card-open-hint">Open ↗</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card reveal reveal-delay-1" data-modal="proj-run-the-block">
+      <div class="card-thumb">
+        <img class="card-thumb-img" src="public/Run the Block Rec Room Original.jpg" alt="Run The Block" />
+        <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
+        <div class="card-label">Go-To-Market</div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Run The Block Game Launch</div>
         <div class="card-footer" style="justify-content:flex-end;">
           <span class="card-open-hint">Open ↗</span>
         </div>
@@ -873,13 +922,11 @@
       <div class="timeline-content">
         <div class="timeline-role">Product Marketing Lead</div>
         <div class="timeline-company">Nilo</div>
-        <p class="timeline-desc">Took Nilo from zero to 20K+ users in 6 months with a team of 3 and no ad spend. Built end-to-end systems covering product education, moderation, live-ops, referrals, and GTM execution. Produced marketing materials driving 3.1M views and 9.5K organic users during closed beta. Prototyped marketing systems using AI-assisted development workflows.</p>
-        <div class="timeline-tags">
-          <span class="tag">GTM</span>
-          <span class="tag">Live-Ops</span>
-          <span class="tag">AI Tools</span>
-          <span class="tag">Community</span>
-        </div>
+        <ul class="timeline-bullets">
+          <li>Created end-to-end systems spanning product education, technical support, moderation, events, live-ops, referrals, and go-to-market execution</li>
+          <li>Produced social marketing materials driving 3,100,000 views and 9,500 organic users during a closed beta</li>
+          <li>Prototyped technical implementations of marketing systems using AI-assisted development workflows</li>
+        </ul>
       </div>
     </div>
 
@@ -887,15 +934,14 @@
       <div class="timeline-date">2021 — 2025</div>
       <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-bar"></div></div>
       <div class="timeline-content">
-        <div class="timeline-role">Product Marketing Manager</div>
+        <div class="timeline-role">Product Marketing Lead</div>
         <div class="timeline-company">Rec Room</div>
-        <p class="timeline-desc">Directed go-to-market for major product updates and platform launches (Xbox, iOS, Android, Nintendo Switch), driving 150K+ new users through campaigns. Partnered with C-suite, engineering, and design on brand strategy and OKRs — contributing to +16% CCU. Led and mentored a team of 9 marketing specialists. Oversaw brand partnerships with NBA, NFL, Mattel, Puma, TMNT, and more.</p>
-        <div class="timeline-tags">
-          <span class="tag">GTM</span>
-          <span class="tag">Brand Partnerships</span>
-          <span class="tag">Team Leadership</span>
-          <span class="tag">Positioning</span>
-        </div>
+        <ul class="timeline-bullets">
+          <li>Directed Go-To-Market strategies for major product updates and platform launches for millions of users, driving adoption of over 150,000 new users through campaigns</li>
+          <li>Partnered cross-functionally with C-suite leaders, engineering, and design to deliver marketing assets aligned with brand strategy and quarterly OKRs</li>
+          <li>Led and mentored a team of 9 marketing specialists</li>
+          <li>Leveraged player insights and community feedback to refine messaging, positioning, and audience personas</li>
+        </ul>
       </div>
     </div>
 
@@ -905,31 +951,88 @@
       <div class="timeline-content">
         <div class="timeline-role">Social Media Manager</div>
         <div class="timeline-company">Rec Room</div>
-        <p class="timeline-desc">Grew TikTok to 1M and YouTube to 300K followers with multi-million monthly views. Launched in-game and social-driven events contributing to 22%+ revenue growth. Hired, managed, and mentored a team of content creators.</p>
-        <div class="timeline-tags">
-          <span class="tag">TikTok</span>
-          <span class="tag">YouTube</span>
-          <span class="tag">Content</span>
-          <span class="tag">Events</span>
-        </div>
+        <ul class="timeline-bullets">
+          <li>Grew TikTok to over 1,000,000 and YouTube to 300,000 followers with multi-million views per month</li>
+          <li>Launched in-game and social-driven events that contributed to 22%+ in revenue growth</li>
+          <li>Hired, managed, and mentored a team of 4 content creators</li>
+        </ul>
       </div>
     </div>
 
-    <div class="timeline-item reveal reveal-delay-3">
+    <div class="timeline-item reveal">
       <div class="timeline-date">2019 — 2021</div>
       <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-bar"></div></div>
       <div class="timeline-content">
         <div class="timeline-role">Community Support Specialist</div>
         <div class="timeline-company">Rec Room</div>
-        <p class="timeline-desc">Started as a player, joined the team, and created Rec Con — an online convention bringing 120K+ players together. Communicated player feedback to improve features, provided support across platforms, and built self-service resources including FAQs and knowledge base articles.</p>
-        <div class="timeline-tags">
-          <span class="tag">Community</span>
-          <span class="tag">Support</span>
-          <span class="tag">Events</span>
-        </div>
+        <ul class="timeline-bullets">
+          <li>Acted as the voice of the user, translating community feedback into insights for product decisions</li>
+          <li>Provided responsive technical support to players across multiple gaming platforms and channels</li>
+          <li>Created self-service resources, created FAQs, knowledge base articles, guides</li>
+        </ul>
       </div>
     </div>
 
+    <div class="timeline-item reveal reveal-delay-1">
+      <div class="timeline-date">2019 — 2021</div>
+      <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-bar"></div></div>
+      <div class="timeline-content">
+        <div class="timeline-role">Business Analyst</div>
+        <div class="timeline-company">Colorado Department of Revenue</div>
+        <ul class="timeline-bullets">
+          <li>Executed on project management plans, cross-functional coordination, resource allocation, performance monitoring, optimizing operational efficiency</li>
+          <li>Created training materials for Department of Revenue employees and taxpayers</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item reveal reveal-delay-2">
+      <div class="timeline-date">2018 — 2019</div>
+      <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-bar"></div></div>
+      <div class="timeline-content">
+        <div class="timeline-role">Tax Examiner II</div>
+        <div class="timeline-company">Colorado Department of Revenue</div>
+        <ul class="timeline-bullets">
+          <li>Researched and provided information related to Colorado State statues, letter rulings, policies, and regulations to taxpayers and tax examiners</li>
+          <li>Reviewed refunds and returns for accuracy on Individual, Fiduciary, Partnership and Corporate Income taxes, Sales and Use taxes, Severance taxes, Withholding taxes, and Excise taxes in the Gentax system</li>
+          <li>Developed improved tax forms to correct previous form versions based on statute</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-date">2017 — 2018</div>
+      <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-bar"></div></div>
+      <div class="timeline-content">
+        <div class="timeline-role">Tax Examiner</div>
+        <div class="timeline-company">Colorado Department of Revenue</div>
+      </div>
+    </div>
+
+    <div class="timeline-item reveal reveal-delay-1">
+      <div class="timeline-date">2015 — 2017</div>
+      <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-bar"></div></div>
+      <div class="timeline-content">
+        <div class="timeline-role">Store Administrator</div>
+        <div class="timeline-company">Safeway</div>
+      </div>
+    </div>
+
+    <div class="timeline-item reveal reveal-delay-2">
+      <div class="timeline-date">2014 — 2015</div>
+      <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-bar"></div></div>
+      <div class="timeline-content">
+        <div class="timeline-role">Customer Service Manager</div>
+        <div class="timeline-company">Safeway</div>
+      </div>
+    </div>
+
+  </div>
+  <div style="text-align:center; margin-top:48px;" class="reveal">
+    <a href="public/RyuErckResume.pdf" download class="btn-primary">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:8px; vertical-align: -2px;"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download Resume
+    </a>
   </div>
 </section>
 
@@ -973,16 +1076,11 @@
       </video>
     </div>
     <div class="modal-body">
-      <div class="modal-meta">
-        <span class="modal-label">Community Event</span>
-        <span class="modal-label">Rec Room</span>
-      </div>
       <h3 class="modal-title">Rec Con — Online Gaming Convention</h3>
       <p class="modal-desc">Created and led Rec Con from scratch — an online convention that brought together 120K+ players to celebrate Rec Room's milestones. Coordinated programming, brand partners, creator appearances, and live-ops across multiple days. Managed cross-functional teams to deliver a seamless experience spanning in-game events, social campaigns, and community engagement.</p>
       <div class="modal-stats">
         <div class="modal-stat"><div class="modal-stat-val">120K+</div><div class="modal-stat-label">Attendees</div></div>
         <div class="modal-stat"><div class="modal-stat-val">Multi-day</div><div class="modal-stat-label">Event Duration</div></div>
-        <div class="modal-stat"><div class="modal-stat-val">10+</div><div class="modal-stat-label">Partner Brands</div></div>
       </div>
     </div>
   </div>
@@ -998,14 +1096,9 @@
       </video>
     </div>
     <div class="modal-body">
-      <div class="modal-meta">
-        <span class="modal-label">Go-To-Market</span>
-        <span class="modal-label">Nilo</span>
-      </div>
       <h3 class="modal-title">Nilo Open Beta Launch</h3>
-      <p class="modal-desc">Joined Nilo at ground zero and built demand from nothing. In 6 months with a team of 3, drove 20K+ users without any ad spend. Created end-to-end systems spanning product education, technical support, moderation, events, live-ops, referrals, and full go-to-market execution. Produced marketing materials that generated 3.1M views and 9.5K organic users during closed beta. Prototyped technical implementations of marketing systems using AI-assisted development workflows.</p>
+      <p class="modal-desc">Created end-to-end systems spanning product education, technical support, moderation, events, live-ops, referrals, and full go-to-market execution. The open beta launch was extremely successful thanks to consistent content marketing prior to release, driving 9.5K organic users.</p>
       <div class="modal-stats">
-        <div class="modal-stat"><div class="modal-stat-val">20K+</div><div class="modal-stat-label">Users (6 months)</div></div>
         <div class="modal-stat"><div class="modal-stat-val">3.1M</div><div class="modal-stat-label">Views</div></div>
         <div class="modal-stat"><div class="modal-stat-val">9.5K</div><div class="modal-stat-label">Organic Users</div></div>
         <div class="modal-stat"><div class="modal-stat-val">$0</div><div class="modal-stat-label">Ad Spend</div></div>
@@ -1024,10 +1117,6 @@
       </video>
     </div>
     <div class="modal-body">
-      <div class="modal-meta">
-        <span class="modal-label">Brand Partnership</span>
-        <span class="modal-label">Rec Room</span>
-      </div>
       <h3 class="modal-title">NBA &amp; NFL x Rec Room</h3>
       <p class="modal-desc">Led go-to-market for major brand partnerships with NBA, NFL, Mattel, Puma, TMNT, Tokyo Machine, and more — bridging gaming culture with mainstream IP activations. Coordinated with brand teams, internal stakeholders, and community creators to deliver in-game experiences that felt authentic and drove meaningful engagement. These partnerships established Rec Room as a premier platform for brand activations in the social gaming space.</p>
       <div class="modal-stats">
@@ -1048,10 +1137,6 @@
       </video>
     </div>
     <div class="modal-body">
-      <div class="modal-meta">
-        <span class="modal-label">Social Growth</span>
-        <span class="modal-label">Rec Room</span>
-      </div>
       <h3 class="modal-title">Social Content Creation</h3>
       <p class="modal-desc">Grew Rec Room's TikTok to 1 million followers and YouTube to 300K with multi-million views per month. Developed content strategies, launched in-game and social-driven events that contributed to 22%+ in revenue growth. Hired, managed, and mentored a team of content creators to sustain and scale output across platforms.</p>
       <div class="modal-stats">
@@ -1074,10 +1159,6 @@
       </video>
     </div>
     <div class="modal-body">
-      <div class="modal-meta">
-        <span class="modal-label">Platform Launch</span>
-        <span class="modal-label">Rec Room</span>
-      </div>
       <h3 class="modal-title">Xbox, iOS, Android &amp; Nintendo Switch</h3>
       <p class="modal-desc">Directed go-to-market for Rec Room's launches across Xbox, iOS, Android, and Nintendo Switch — driving adoption of 150K+ new users through integrated campaigns. Partnered cross-functionally with engineering, design, and C-suite leaders to align marketing assets with brand strategy and quarterly OKRs. Delivered on KPIs that attributed to +16% CCU growth.</p>
       <div class="modal-stats">
@@ -1089,24 +1170,84 @@
   </div>
 </div>
 
-<!-- Project: Originals -->
-<div class="modal-overlay" id="modal-proj-originals">
+<!-- Project: Showdown -->
+<div class="modal-overlay" id="modal-proj-showdown">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal('modal-proj-originals')">&times;</button>
+    <button class="modal-close" onclick="closeModal('modal-proj-showdown')">&times;</button>
     <div class="modal-video">
-      <video controls preload="metadata">
-        <source src="public/My Little Monsters Rec Room Original.mp4" type="video/mp4">
+      <video controls preload="metadata" poster="public/Showdown Rec Room Original.jpg">
+        <source src="public/Showdown Rec Room Original.webm" type="video/webm">
       </video>
     </div>
     <div class="modal-body">
-      <div class="modal-meta">
-        <span class="modal-label">Original Title</span>
-        <span class="modal-label">Rec Room</span>
-      </div>
-      <h3 class="modal-title">Rec Room Originals — Showdown, Make It To Midnight &amp; More</h3>
-      <p class="modal-desc">Shaped the identity and launch strategy for Rec Room Original titles including Showdown, Make It To Midnight, My Little Monster, and Run The Block. Developed comprehensive launch plans spanning in-game events, social campaigns, creator programs, and community engagement. Coordinated with development teams, marketing, and partnerships to ensure each title had a strong market entry and sustained player engagement. Featured here is My Little Monsters, one of the flagship Rec Room Originals titles.</p>
+      <h3 class="modal-title">Showdown Game Launch</h3>
+      <p class="modal-desc">Shaped the identity and go to market launch strategy for Showdown, one of Rec Room's flagship Original titles built with new UGC tools. Developed comprehensive launch plans spanning in-game events, social campaigns, and community engagement.</p>
       <div class="modal-stats">
-        <div class="modal-stat"><div class="modal-stat-val">4+</div><div class="modal-stat-label">Original Titles</div></div>
+        <div class="modal-stat"><div class="modal-stat-val">9M</div><div class="modal-stat-label">Plays</div></div>
+        <div class="modal-stat"><div class="modal-stat-val">200K</div><div class="modal-stat-label">Views</div></div>
+        <div class="modal-stat"><div class="modal-stat-val">Multi-channel</div><div class="modal-stat-label">Launch Strategy</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Project: Make It To Midnight -->
+<div class="modal-overlay" id="modal-proj-midnight">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-proj-midnight')">&times;</button>
+    <div class="modal-video">
+      <video controls preload="metadata">
+        <source src="public/Make it to Midnight Rec Room Original.webm" type="video/webm">
+      </video>
+    </div>
+    <div class="modal-body">
+      <h3 class="modal-title">Make It To Midnight Game Launch</h3>
+      <p class="modal-desc">Led the go to market launch strategy for Make it to Midnight, one of Rec Room's flagship Original titles. Developed multi-week ARG launch plans spanning in-game events, social campaigns, and community engagement based on in-game lore.</p>
+      <div class="modal-stats">
+        <div class="modal-stat"><div class="modal-stat-val">17M</div><div class="modal-stat-label">Plays</div></div>
+        <div class="modal-stat"><div class="modal-stat-val">400K</div><div class="modal-stat-label">Views</div></div>
+        <div class="modal-stat"><div class="modal-stat-val">Multi-channel</div><div class="modal-stat-label">Launch Strategy</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Project: Rec Rally -->
+<div class="modal-overlay" id="modal-proj-rally">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-proj-rally')">&times;</button>
+    <div class="modal-video">
+      <video controls preload="metadata" poster="public/Rec Rally Rec Room Original.jpg">
+        <source src="public/Rec Rally Rec Room Original.webm" type="video/webm">
+      </video>
+    </div>
+    <div class="modal-body">
+      <h3 class="modal-title">Rec Rally Game Launch</h3>
+      <p class="modal-desc">Led the go to market launch strategy for Rec Rally, one of Rec Room's flagship Original titles. Created launch plans spanning in-game events, trailer and social content, and community engagement.</p>
+      <div class="modal-stats">
+        <div class="modal-stat"><div class="modal-stat-val">16M</div><div class="modal-stat-label">Plays</div></div>
+        <div class="modal-stat"><div class="modal-stat-val">300K</div><div class="modal-stat-label">Views</div></div>
+        <div class="modal-stat"><div class="modal-stat-val">Multi-channel</div><div class="modal-stat-label">Launch Strategy</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Project: Run The Block -->
+<div class="modal-overlay" id="modal-proj-run-the-block">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-proj-run-the-block')">&times;</button>
+    <div class="modal-video">
+      <video controls preload="metadata" poster="public/Run the Block Rec Room Original.jpg">
+        <source src="public/Run the Block Rec Room Original.webm" type="video/webm">
+      </video>
+    </div>
+    <div class="modal-body">
+      <h3 class="modal-title">Run The Block Game Launch</h3>
+      <p class="modal-desc">Led the go to market launch strategy for Run the Block, one of Rec Room's flagship Original titles made for new UGC tooling updates. Created launch plans spanning in-game events, social content, creator events and tutorials, and community engagement.</p>
+      <div class="modal-stats">
+        <div class="modal-stat"><div class="modal-stat-val">3M</div><div class="modal-stat-label">Plays</div></div>
+        <div class="modal-stat"><div class="modal-stat-val">100K</div><div class="modal-stat-label">Views</div></div>
         <div class="modal-stat"><div class="modal-stat-val">Multi-channel</div><div class="modal-stat-label">Launch Strategy</div></div>
       </div>
     </div>
@@ -1123,10 +1264,6 @@
       </video>
     </div>
     <div class="modal-body">
-      <div class="modal-meta">
-        <span class="modal-label">Platform Launch</span>
-        <span class="modal-label">Rec Room</span>
-      </div>
       <h3 class="modal-title">Android x Rec Room</h3>
       <p class="modal-desc">Led go-to-market for Rec Room's Android launch, expanding the platform's reach to billions of mobile users worldwide. Coordinated cross-functional teams across engineering, marketing, and community to deliver a seamless launch experience.</p>
       <div class="modal-stats">
@@ -1147,10 +1284,6 @@
       </video>
     </div>
     <div class="modal-body">
-      <div class="modal-meta">
-        <span class="modal-label">Brand Partnership</span>
-        <span class="modal-label">Rec Room</span>
-      </div>
       <h3 class="modal-title">Destiny 2 x Rec Room</h3>
       <p class="modal-desc">Partnered with Bungie to bring Destiny 2 into Rec Room, creating an immersive crossover experience that bridged two passionate gaming communities.</p>
       <div class="modal-stats">
@@ -1171,10 +1304,6 @@
       </video>
     </div>
     <div class="modal-body">
-      <div class="modal-meta">
-        <span class="modal-label">Brand Partnership</span>
-        <span class="modal-label">Rec Room</span>
-      </div>
       <h3 class="modal-title">He-Man x Rec Room</h3>
       <p class="modal-desc">Brought the classic He-Man IP into Rec Room through a brand partnership activation, creating nostalgic experiences for players and introducing the franchise to a new generation.</p>
       <div class="modal-stats">
@@ -1195,10 +1324,6 @@
       </video>
     </div>
     <div class="modal-body">
-      <div class="modal-meta">
-        <span class="modal-label">Brand Partnership</span>
-        <span class="modal-label">Rec Room</span>
-      </div>
       <h3 class="modal-title">Monster High x Rec Room</h3>
       <p class="modal-desc">Partnered with Mattel to bring Monster High into Rec Room, creating an immersive branded experience that resonaged with the franchise's young audience and drove significant engagement.</p>
       <div class="modal-stats">
@@ -1219,10 +1344,6 @@
       </video>
     </div>
     <div class="modal-body">
-      <div class="modal-meta">
-        <span class="modal-label">Brand Partnership</span>
-        <span class="modal-label">Rec Room</span>
-      </div>
       <h3 class="modal-title">TMNT x Rec Room</h3>
       <p class="modal-desc">Brought Teenage Mutant Ninja Turtles into Rec Room through a major brand partnership with Nickelodeon, creating an interactive experience that appealed to both nostalgic fans and new players.</p>
       <div class="modal-stats">
@@ -1243,10 +1364,6 @@
       </video>
     </div>
     <div class="modal-body">
-      <div class="modal-meta">
-        <span class="modal-label">Live Event</span>
-        <span class="modal-label">Rec Room</span>
-      </div>
       <h3 class="modal-title">Winter Wonderland Event</h3>
       <p class="modal-desc">Designed and executed Rec Room's Winter Wonderland seasonal event, creating festive in-game experiences, limited-time content, and community programming that drove holiday engagement.</p>
       <div class="modal-stats">
