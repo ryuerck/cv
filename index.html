@@ -6,7 +6,7 @@
   <title>Ryu Erck — Product Marketing & Community</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -24,6 +24,9 @@
 
     html {
       scroll-behavior: smooth;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
     }
 
     body {
@@ -50,6 +53,7 @@
       pointer-events: none;
       z-index: 9997;
       opacity: 0.4;
+      will-change: auto;
     }
 
     /* ── Nav ───────────────────────────────────────── */
@@ -94,7 +98,6 @@
       display: none; position: absolute; top: calc(100% + 12px); right: 0; z-index: 150;
       background: rgba(12,12,18,0.98);
       border: 1px solid var(--border); border-radius: 12px;
-      backdrop-filter: blur(20px);
       flex-direction: column; padding: 12px 0;
       min-width: 200px;
       opacity: 0; transform: translateY(-8px); transition: all 0.25s ease;
@@ -209,7 +212,7 @@
 
     .hero-num {
       position: absolute; right: -10px; top: 50%;
-      transform: translateY(-50%);
+      transform: translateY(-50%) translateZ(0);
       font-size: clamp(180px, 25vw, 320px);
       font-weight: 800; letter-spacing: -0.05em;
       color: transparent;
@@ -686,6 +689,15 @@
 </head>
 <body>
 
+<!-- SVG Sprite -->
+<svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+  <symbol id="icon-play" viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21" fill="#fff"/></symbol>
+  <symbol id="icon-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></symbol>
+  <symbol id="icon-email" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></symbol>
+  <symbol id="icon-linkedin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></symbol>
+  <symbol id="icon-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></symbol>
+</svg>
+
 <!-- Nav -->
 <nav>
   <a href="#hero" class="nav-logo">Ryu Erck</a>
@@ -722,7 +734,7 @@
     </div>
   </div>
   <a href="https://www.linkedin.com/in/ryuerck/" target="_blank" class="hero-photo-link">
-    <img class="hero-photo" src="public/RyuErck.webp" alt="Ryu Erck" />
+    <img class="hero-photo" src="public/RyuErck.webp" alt="Ryu Erck" width="360" height="360" fetchpriority="high" />
   </a>
 </section>
 
@@ -739,7 +751,7 @@
     <div class="card reveal" data-modal="proj-nilo">
       <div class="card-thumb">
         <img class="card-thumb-img" src="public/Nilo Open Beta.png" alt="Nilo Open Beta" loading="lazy" width="800" height="500" />
-        <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
+        <div class="card-play-btn"><svg><use href="#icon-play"/></svg></div>
         <div class="card-label">Go-To-Market</div>
       </div>
       <div class="card-body">
@@ -753,7 +765,7 @@
     <div class="card reveal reveal-delay-1" data-modal="proj-platform">
       <div class="card-thumb">
         <img class="card-thumb-img" src="public/Nintendo Switch x Rec Room.png" alt="Nintendo Switch Launch" loading="lazy" width="800" height="500" />
-        <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
+        <div class="card-play-btn"><svg><use href="#icon-play"/></svg></div>
         <div class="card-label">Platform Launch</div>
       </div>
       <div class="card-body">
@@ -767,7 +779,7 @@
     <div class="card reveal reveal-delay-2" data-modal="proj-social">
       <div class="card-thumb">
         <img class="card-thumb-img" src="public/Rec Room Social Content.png" alt="Social Content" loading="lazy" width="800" height="500" />
-        <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
+        <div class="card-play-btn"><svg><use href="#icon-play"/></svg></div>
         <div class="card-label">Social Growth</div>
       </div>
       <div class="card-body">
@@ -781,7 +793,7 @@
     <div class="card reveal" data-modal="proj-rec-con">
       <div class="card-thumb">
         <img class="card-thumb-img" src="public/RecCon Event Rec Room.png" alt="Rec Con" loading="lazy" width="800" height="500" />
-        <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
+        <div class="card-play-btn"><svg><use href="#icon-play"/></svg></div>
         <div class="card-label">Community Event</div>
       </div>
       <div class="card-body">
@@ -795,7 +807,7 @@
     <div class="card reveal reveal-delay-1" data-modal="proj-nba">
       <div class="card-thumb">
         <img class="card-thumb-img" src="public/NFL x Rec Room.webp" alt="NFL x Rec Room" loading="lazy" width="800" height="500" />
-        <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
+        <div class="card-play-btn"><svg><use href="#icon-play"/></svg></div>
         <div class="card-label">Brand Partnership</div>
       </div>
       <div class="card-body">
@@ -809,7 +821,7 @@
     <div class="card reveal reveal-delay-2" data-modal="proj-midnight">
       <div class="card-thumb">
         <img class="card-thumb-img" src="public/Make it to Midnight Rec Room Original.jpg" alt="Make It To Midnight" loading="lazy" width="800" height="500" />
-        <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
+        <div class="card-play-btn"><svg><use href="#icon-play"/></svg></div>
         <div class="card-label">Go-To-Market</div>
       </div>
       <div class="card-body">
@@ -825,7 +837,7 @@
       <div class="card hidden reveal" data-modal="proj-destiny">
         <div class="card-thumb">
           <img class="card-thumb-img" src="public/Destiny 2 x Rec Room.jpg" alt="Destiny 2 x Rec Room" loading="lazy" width="800" height="500" />
-          <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
+          <div class="card-play-btn"><svg><use href="#icon-play"/></svg></div>
           <div class="card-label">Brand Partnership</div>
         </div>
         <div class="card-body">
@@ -839,7 +851,7 @@
       <div class="card hidden reveal" data-modal="proj-android">
         <div class="card-thumb">
           <img class="card-thumb-img" src="public/Android x Rec Room.jpg" alt="Android x Rec Room" loading="lazy" width="800" height="500" />
-          <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
+          <div class="card-play-btn"><svg><use href="#icon-play"/></svg></div>
           <div class="card-label">Platform Launch</div>
         </div>
         <div class="card-body">
@@ -853,7 +865,7 @@
       <div class="card hidden reveal reveal-delay-2" data-modal="proj-heman">
         <div class="card-thumb">
           <img class="card-thumb-img" src="public/He Man x Rec Room.jpg" alt="He-Man x Rec Room" loading="lazy" width="800" height="500" />
-          <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
+          <div class="card-play-btn"><svg><use href="#icon-play"/></svg></div>
           <div class="card-label">Brand Partnership</div>
         </div>
         <div class="card-body">
@@ -867,7 +879,7 @@
       <div class="card hidden reveal" data-modal="proj-monster-high">
         <div class="card-thumb">
           <img class="card-thumb-img" src="public/Monster High x Rec Room.jpg" alt="Monster High x Rec Room" loading="lazy" width="800" height="500" />
-          <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
+          <div class="card-play-btn"><svg><use href="#icon-play"/></svg></div>
           <div class="card-label">Brand Partnership</div>
         </div>
         <div class="card-body">
@@ -881,7 +893,7 @@
       <div class="card hidden reveal reveal-delay-1" data-modal="proj-tmnt">
         <div class="card-thumb">
           <img class="card-thumb-img" src="public/TMNT x Rec Room.jpg" alt="TMNT x Rec Room" loading="lazy" width="800" height="500" />
-          <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
+          <div class="card-play-btn"><svg><use href="#icon-play"/></svg></div>
           <div class="card-label">Brand Partnership</div>
         </div>
         <div class="card-body">
@@ -895,7 +907,7 @@
       <div class="card hidden reveal reveal-delay-2" data-modal="proj-winter">
         <div class="card-thumb">
           <img class="card-thumb-img" src="public/Winter Wonderland Event Rec Room.webp" alt="Winter Wonderland" loading="lazy" width="800" height="500" />
-          <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
+          <div class="card-play-btn"><svg><use href="#icon-play"/></svg></div>
           <div class="card-label">Community Event</div>
         </div>
         <div class="card-body">
@@ -909,7 +921,7 @@
       <div class="card hidden reveal reveal-delay-1" data-modal="proj-showdown">
         <div class="card-thumb">
           <img class="card-thumb-img" src="public/Showdown Rec Room Original.jpg" alt="Showdown" loading="lazy" width="800" height="500" />
-          <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
+          <div class="card-play-btn"><svg><use href="#icon-play"/></svg></div>
           <div class="card-label">Go-To-Market</div>
         </div>
         <div class="card-body">
@@ -923,7 +935,7 @@
       <div class="card hidden reveal reveal-delay-2" data-modal="proj-rally">
         <div class="card-thumb">
           <img class="card-thumb-img" src="public/Rec Rally Rec Room Original.jpg" alt="Rec Rally" loading="lazy" width="800" height="500" />
-          <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
+          <div class="card-play-btn"><svg><use href="#icon-play"/></svg></div>
           <div class="card-label">Go-To-Market</div>
         </div>
         <div class="card-body">
@@ -937,7 +949,7 @@
       <div class="card hidden reveal" data-modal="proj-run-the-block">
         <div class="card-thumb">
           <img class="card-thumb-img" src="public/Run the Block Rec Room Original.jpg" alt="Run The Block" loading="lazy" width="800" height="500" />
-          <div class="card-play-btn"><svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg></div>
+          <div class="card-play-btn"><svg><use href="#icon-play"/></svg></div>
           <div class="card-label">Go-To-Market</div>
         </div>
         <div class="card-body">
@@ -952,7 +964,7 @@
 
     <div style="text-align:center; grid-column: 1 / -1; margin-top:8px;" class="reveal">
       <button id="show-more-btn" class="show-more-btn" onclick="showMoreProjects()">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        <svg width="20" height="20"><use href="#icon-chevron-down"/></svg>
         Show More
       </button>
     </div>
@@ -1127,7 +1139,7 @@
   </div>
   <div style="text-align:center; margin-top:48px;" class="reveal">
     <a href="public/RyuErckResume.pdf" download class="btn-primary">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:8px; vertical-align: -2px;"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      <svg width="14" height="14" style="margin-right:8px; vertical-align: -2px;"><use href="#icon-download"/></svg>
       Download Resume
     </a>
   </div>
@@ -1139,12 +1151,12 @@
     <div class="contact-pre reveal">Let's work together</div>
     <h2 class="contact-title reveal">Say <em>hi!</em></h2>
     <div class="contact-links reveal">
-      <a href="mailto:ryuerck@gmail.com" class="contact-link primary">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        ryuerck@gmail.com
+      <a href="mailto:ryuerck@gmail.com" class="contact-link primary" style="color:#fff;">
+        <svg width="14" height="14"><use href="#icon-email"/></svg>
+        Email
       </a>
       <a href="https://www.linkedin.com/in/ryuerck" target="_blank" class="contact-link">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        <svg width="14" height="14"><use href="#icon-linkedin"/></svg>
         LinkedIn
       </a>
     </div>
@@ -1168,7 +1180,7 @@
   <div class="modal">
     <button class="modal-close" onclick="closeModal('modal-proj-rec-con')">&times;</button>
     <div class="modal-video">
-      <video controls preload="metadata" poster="public/RecCon Event Rec Room.png">
+      <video controls preload="none" poster="public/RecCon Event Rec Room.png">
         <source src="public/RecCon Event Rec Room.mp4" type="video/mp4">
       </video>
     </div>
@@ -1188,7 +1200,7 @@
   <div class="modal">
     <button class="modal-close" onclick="closeModal('modal-proj-nilo')">&times;</button>
     <div class="modal-video">
-      <video controls preload="metadata" poster="public/Nilo Open Beta.png">
+      <video controls preload="none" poster="public/Nilo Open Beta.png">
         <source src="public/Nilo Open Beta.webm" type="video/webm">
       </video>
     </div>
@@ -1209,7 +1221,7 @@
   <div class="modal">
     <button class="modal-close" onclick="closeModal('modal-proj-nba')">&times;</button>
     <div class="modal-video">
-      <video controls preload="metadata" poster="public/NFL x Rec Room.webp">
+      <video controls preload="none" poster="public/NFL x Rec Room.webp">
         <source src="public/NFL x Rec Room.mp4" type="video/mp4">
       </video>
     </div>
@@ -1229,7 +1241,7 @@
   <div class="modal">
     <button class="modal-close" onclick="closeModal('modal-proj-social')">&times;</button>
     <div class="modal-video">
-      <video controls preload="metadata" poster="public/Rec Room Social Content.png">
+      <video controls preload="none" poster="public/Rec Room Social Content.png">
         <source src="public/Rec Room Social Content.webm" type="video/webm">
       </video>
     </div>
@@ -1250,7 +1262,7 @@
   <div class="modal">
     <button class="modal-close" onclick="closeModal('modal-proj-platform')">&times;</button>
     <div class="modal-video">
-      <video controls preload="metadata" poster="public/Nintendo Switch x Rec Room.png">
+      <video controls preload="none" poster="public/Nintendo Switch x Rec Room.png">
         <source src="public/Nintendo Switch x Rec Room.mp4" type="video/mp4">
       </video>
     </div>
@@ -1271,7 +1283,7 @@
   <div class="modal">
     <button class="modal-close" onclick="closeModal('modal-proj-showdown')">&times;</button>
     <div class="modal-video">
-      <video controls preload="metadata" poster="public/Showdown Rec Room Original.jpg">
+      <video controls preload="none" poster="public/Showdown Rec Room Original.jpg">
         <source src="public/Showdown Rec Room Original.webm" type="video/webm">
       </video>
     </div>
@@ -1293,7 +1305,7 @@
   <div class="modal">
     <button class="modal-close" onclick="closeModal('modal-proj-midnight')">&times;</button>
     <div class="modal-video">
-      <video controls preload="metadata">
+      <video controls preload="none">
         <source src="public/Make it to Midnight Rec Room Original.webm" type="video/webm">
       </video>
     </div>
@@ -1314,7 +1326,7 @@
   <div class="modal">
     <button class="modal-close" onclick="closeModal('modal-proj-rally')">&times;</button>
     <div class="modal-video">
-      <video controls preload="metadata" poster="public/Rec Rally Rec Room Original.jpg">
+      <video controls preload="none" poster="public/Rec Rally Rec Room Original.jpg">
         <source src="public/Rec Rally Rec Room Original.webm" type="video/webm">
       </video>
     </div>
@@ -1335,7 +1347,7 @@
   <div class="modal">
     <button class="modal-close" onclick="closeModal('modal-proj-run-the-block')">&times;</button>
     <div class="modal-video">
-      <video controls preload="metadata" poster="public/Run the Block Rec Room Original.jpg">
+      <video controls preload="none" poster="public/Run the Block Rec Room Original.jpg">
         <source src="public/Run the Block Rec Room Original.webm" type="video/webm">
       </video>
     </div>
@@ -1356,7 +1368,7 @@
   <div class="modal">
     <button class="modal-close" onclick="closeModal('modal-proj-android')">&times;</button>
     <div class="modal-video">
-      <video controls preload="metadata" poster="public/Android x Rec Room.jpg">
+      <video controls preload="none" poster="public/Android x Rec Room.jpg">
         <source src="public/Android x Rec Room.mp4" type="video/mp4">
       </video>
     </div>
@@ -1376,7 +1388,7 @@
   <div class="modal">
     <button class="modal-close" onclick="closeModal('modal-proj-destiny')">&times;</button>
     <div class="modal-video">
-      <video controls preload="metadata" poster="public/Destiny 2 x Rec Room.jpg">
+      <video controls preload="none" poster="public/Destiny 2 x Rec Room.jpg">
         <source src="public/Destiny 2 x Rec Room.mp4" type="video/mp4">
       </video>
     </div>
@@ -1396,7 +1408,7 @@
   <div class="modal">
     <button class="modal-close" onclick="closeModal('modal-proj-heman')">&times;</button>
     <div class="modal-video">
-      <video controls preload="metadata" poster="public/He Man x Rec Room.jpg">
+      <video controls preload="none" poster="public/He Man x Rec Room.jpg">
         <source src="public/He-Man x Rec Room.mp4" type="video/mp4">
       </video>
     </div>
@@ -1416,7 +1428,7 @@
   <div class="modal">
     <button class="modal-close" onclick="closeModal('modal-proj-monster-high')">&times;</button>
     <div class="modal-video">
-      <video controls preload="metadata" poster="public/Monster High x Rec Room.jpg">
+      <video controls preload="none" poster="public/Monster High x Rec Room.jpg">
         <source src="public/Monster High x Rec Room.mp4" type="video/mp4">
       </video>
     </div>
@@ -1436,7 +1448,7 @@
   <div class="modal">
     <button class="modal-close" onclick="closeModal('modal-proj-tmnt')">&times;</button>
     <div class="modal-video">
-      <video controls preload="metadata" poster="public/TMNT x Rec Room.jpg">
+      <video controls preload="none" poster="public/TMNT x Rec Room.jpg">
         <source src="public/TMNT x Rec Room.mp4" type="video/mp4">
       </video>
     </div>
@@ -1456,7 +1468,7 @@
   <div class="modal">
     <button class="modal-close" onclick="closeModal('modal-proj-winter')">&times;</button>
     <div class="modal-video">
-      <video controls preload="metadata" poster="public/Winter Wonderland Event Rec Room.webp">
+      <video controls preload="none" poster="public/Winter Wonderland Event Rec Room.webp">
         <source src="public/Winter Wonderland Event Rec Room.mp4" type="video/mp4">
       </video>
     </div>
@@ -1675,13 +1687,21 @@
   // Modal open/close
   function openModal(id) {
     const el = document.getElementById(id);
-    if (el) { el.classList.add('open'); document.body.style.overflow = 'hidden'; }
+    if (el) {
+      el.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      const video = el.querySelector('video');
+      if (video && video.preload === 'none') {
+        video.preload = 'metadata';
+        video.load();
+      }
+    }
   }
   function closeModal(id) {
     const el = document.getElementById(id);
     if (el) {
       el.classList.remove('open');
-      el.querySelectorAll('video').forEach(v => v.pause());
+      el.querySelectorAll('video').forEach(v => { v.pause(); v.preload = 'none'; });
       document.body.style.overflow = '';
     }
   }
@@ -1721,7 +1741,7 @@
     const btn = document.getElementById('show-more-btn');
     wrap.querySelectorAll('.card.hidden').forEach(card => card.classList.remove('hidden'));
     btn.classList.add('active');
-    btn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transform:rotate(180deg)"><polyline points="6 9 12 15 18 9"/></svg> Show Less';
+    btn.innerHTML = '<svg width="20" height="20" style="transform:rotate(180deg)"><use href="#icon-chevron-down"/></svg> Show Less';
     btn.onclick = hideMoreProjects;
     setTimeout(() => {
       wrap.querySelectorAll('.reveal:not(.visible)').forEach(el => io.observe(el));
@@ -1733,7 +1753,7 @@
     const btn = document.getElementById('show-more-btn');
     wrap.querySelectorAll('.card').forEach(card => card.classList.add('hidden'));
     btn.classList.remove('active');
-    btn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg> Show More';
+    btn.innerHTML = '<svg width="20" height="20"><use href="#icon-chevron-down"/></svg> Show More';
     btn.onclick = showMoreProjects;
   }
 
