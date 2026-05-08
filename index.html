@@ -66,7 +66,7 @@
     nav.scrolled { padding: 14px 48px; background: rgba(10,10,12,0.98); }
     .nav-logo {
       font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase;
-      font-family: var(--sans); color: var(--accent); text-decoration: none;
+      color: var(--accent); text-decoration: none;
     }
     .nav-links { display: flex; gap: 36px; list-style: none; }
     .nav-links a {
@@ -83,7 +83,7 @@
     }
     .hamburger span {
       display: block; width: 22px; height: 2px;
-      background: var(--text); transition: all 0.3s;
+      background: var(--text); transition: transform 0.3s, opacity 0.3s;
     }
     .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
     .hamburger.active span:nth-child(2) { opacity: 0; }
@@ -97,15 +97,15 @@
       border: 1px solid var(--border); border-radius: 12px;
       flex-direction: column; padding: 12px 0;
       min-width: 200px;
-      opacity: 0; transform: translateY(-8px); transition: all 0.25s ease;
+      opacity: 0; transform: translateY(-8px); transition: opacity 0.25s ease, transform 0.25s ease;
       box-shadow: 0 8px 32px rgba(0,0,0,0.5);
     }
     .mobile-menu.open { display: flex; opacity: 1; transform: translateY(0); }
     .mobile-menu a {
-      font-family: var(--sans); font-size: 14px; font-weight: 500;
+      font-size: 14px; font-weight: 500;
       letter-spacing: 0.05em; text-transform: uppercase;
       color: var(--muted); text-decoration: none;
-      padding: 12px 24px; transition: all 0.2s;
+      padding: 12px 24px; transition: color 0.2s, background 0.2s;
     }
     .mobile-menu a:hover { color: var(--accent); background: rgba(74,124,247,0.08); }
 
@@ -116,7 +116,7 @@
     #hero {
       min-height: 100vh;
       display: flex; flex-direction: row; align-items: center; justify-content: space-between;
-      padding-top: 160px; padding-bottom: 80px; gap: 64px;
+      padding: 160px 48px 80px; gap: 64px;
       position: relative;
     }
     .hero-text { flex: 1; }
@@ -124,11 +124,6 @@
       text-decoration: none;
       flex-shrink: 0;
       opacity: 0; animation: fadeUp 0.9s 0.5s ease forwards;
-    }
-    .hero-photo-link .hero-photo {
-      display: block;
-      cursor: pointer;
-      transition: border-color 0.3s, box-shadow 0.3s;
     }
     .hero-photo-link:hover .hero-photo {
       border-color: var(--accent);
@@ -139,6 +134,8 @@
       border-radius: 50%;
       object-fit: cover;
       border: 3px solid var(--border);
+      display: block; cursor: pointer;
+      transition: border-color 0.3s, box-shadow 0.3s;
     }
     .hero-eyebrow {
       font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
@@ -161,7 +158,7 @@
     h1 em {
       font-style: normal;
       color: transparent;
-      -webkit-text-stroke: 1px rgba(255,255,255,0.25);
+      text-stroke: 1px rgba(255,255,255,0.25);
     }
     .hero-desc {
       max-width: 480px;
@@ -176,7 +173,7 @@
     }
     .btn-primary {
       background: var(--accent); color: #fff;
-      font-family: var(--sans); font-size: 12px; letter-spacing: 0.1em;
+      font-size: 12px; letter-spacing: 0.1em;
       text-transform: uppercase; font-weight: 500;
       padding: 14px 28px; text-decoration: none;
       transition: opacity 0.2s, transform 0.2s;
@@ -184,7 +181,7 @@
     }
     .btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
     .btn-ghost {
-      font-family: var(--sans); font-size: 12px; letter-spacing: 0.1em;
+      font-size: 12px; letter-spacing: 0.1em;
       text-transform: uppercase; color: var(--muted);
       text-decoration: none; padding: 14px 0;
       border-bottom: 1px solid var(--border);
@@ -198,7 +195,7 @@
       margin-bottom: 64px;
     }
     .section-tag {
-      font-family: var(--sans); font-size: 11px; letter-spacing: 0.12em;
+      font-size: 11px; letter-spacing: 0.12em;
       text-transform: uppercase; color: var(--accent);
     }
     .section-line {
@@ -264,7 +261,7 @@
     }
     .card-label {
       position: absolute; top: 16px; left: 16px;
-      font-family: var(--sans); font-size: 10px; letter-spacing: 0.1em;
+      font-size: 10px; letter-spacing: 0.1em;
       text-transform: uppercase; padding: 4px 10px;
       background: rgba(0,0,0,0.8); color: var(--accent);
       border: 1px solid rgba(74,124,247,0.4);
@@ -296,7 +293,7 @@
     }
     .skill-group:hover { border-color: rgba(74,124,247,0.4); transform: translateY(-3px); }
     .skill-group-title {
-      font-family: var(--sans); font-size: 11px; letter-spacing: 0.2em;
+      font-size: 11px; letter-spacing: 0.2em;
       text-transform: uppercase; color: var(--accent);
       margin-bottom: 20px;
       display: flex; align-items: center; gap: 10px;
@@ -315,7 +312,7 @@
     }
     .timeline-item:last-child { padding-bottom: 0; }
     .timeline-date {
-      font-family: var(--sans); font-size: 12px; color: var(--muted);
+      font-size: 12px; color: var(--muted);
       text-align: right; padding-top: 4px; letter-spacing: 0.05em;
     }
     .timeline-line {
@@ -339,7 +336,7 @@
       margin-bottom: 4px;
     }
     .timeline-company {
-      font-family: var(--sans); font-size: 12px; color: var(--accent);
+      font-size: 12px; color: var(--accent);
       margin-bottom: 14px; letter-spacing: 0.05em;
     }
     .timeline-bullets {
@@ -363,7 +360,7 @@
     }
     .contact-inner { max-width: 640px; margin: 0 auto; }
     .contact-pre {
-      font-family: var(--sans); font-size: 12px; color: var(--accent);
+      font-size: 12px; color: var(--accent);
       letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 20px;
     }
     .contact-title {
@@ -378,10 +375,10 @@
       display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
     }
     .contact-link {
-      font-family: var(--sans); font-size: 12px; letter-spacing: 0.1em;
+      font-size: 12px; letter-spacing: 0.1em;
       text-transform: uppercase; padding: 14px 28px;
       border: 1px solid var(--border); color: var(--text);
-      text-decoration: none; transition: all 0.2s;
+      text-decoration: none; transition: background 0.2s, color 0.2s, border-color 0.2s;
       display: flex; align-items: center; gap: 8px;
     }
     .contact-link:hover {
@@ -400,11 +397,11 @@
       border-top: 1px solid var(--border);
     }
     .footer-copy {
-      font-family: var(--sans); font-size: 11px; color: var(--muted);
+      font-size: 11px; color: var(--muted);
       letter-spacing: 0.08em;
     }
     .footer-right {
-      font-family: var(--sans); font-size: 11px; color: var(--muted);
+      font-size: 11px; color: var(--muted);
       display: flex; gap: 24px;
     }
     .footer-right a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
@@ -439,7 +436,7 @@
       .timeline-line { display: none; }
       footer { flex-direction: column; gap: 16px; text-align: center; }
       #hero { flex-direction: column; gap: 32px; align-items: center; }
-      .hero-photo-link .hero-photo { width: 220px; height: 220px; }
+      .hero-photo { width: 220px; height: 220px; }
       .modal-stats { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 600px) {
@@ -501,7 +498,7 @@
       color: var(--muted); font-size: 18px; line-height: 1;
       display: flex; align-items: center; justify-content: center;
       cursor: pointer; z-index: 10;
-      transition: all 0.2s;
+      transition: border-color 0.2s, color 0.2s;
     }
     .modal-close:hover { border-color: var(--accent); color: var(--accent); }
 
@@ -544,7 +541,7 @@
       letter-spacing: -0.02em; margin-bottom: 4px;
     }
     .modal-stat-label {
-      font-family: var(--sans); font-size: 10px; letter-spacing: 0.12em;
+      font-size: 10px; letter-spacing: 0.12em;
       text-transform: uppercase; color: var(--muted);
     }
 
@@ -554,7 +551,7 @@
     }
     .modal-skill-section { margin-bottom: 28px; }
     .modal-skill-section-title {
-      font-family: var(--sans); font-size: 10px; letter-spacing: 0.12em;
+      font-size: 10px; letter-spacing: 0.12em;
       text-transform: uppercase; color: var(--muted);
       margin-bottom: 14px;
       display: flex; align-items: center; gap: 10px;
@@ -564,7 +561,7 @@
     }
     .modal-pills { display: flex; flex-wrap: wrap; gap: 8px; }
     .modal-pill {
-      font-family: var(--sans); font-size: 12px; letter-spacing: 0.04em;
+      font-size: 12px; letter-spacing: 0.04em;
       color: var(--text); padding: 7px 16px;
       border: 1px solid var(--border); background: var(--surface2);
     }
@@ -575,14 +572,14 @@
 
     /* Card open hint */
     .card-open-hint {
-      font-family: var(--sans); font-size: 10px; letter-spacing: 0.12em;
+      font-size: 10px; letter-spacing: 0.12em;
       text-transform: uppercase; color: var(--accent); opacity: 0;
       display: flex; align-items: center; gap: 5px;
       transition: opacity 0.2s;
     }
     .card:hover .card-open-hint { opacity: 1; }
     .skill-group-open-hint {
-      font-family: var(--sans); font-size: 10px; letter-spacing: 0.12em;
+      font-size: 10px; letter-spacing: 0.12em;
       text-transform: uppercase; color: var(--accent); opacity: 0;
       margin-top: 16px;
       transition: opacity 0.2s;
@@ -593,12 +590,12 @@
     .more-projects-wrap .card.hidden { display: none; }
 
     .show-more-btn {
-      font-family: var(--sans); font-size: 12px; letter-spacing: 0.1em;
+      font-size: 12px; letter-spacing: 0.1em;
       text-transform: uppercase; padding: 14px 32px;
       background: var(--accent); color: #fff;
       border: none; cursor: pointer;
       display: flex; align-items: center; gap: 8px;
-      transition: all 0.2s; margin: 0 auto;
+      transition: opacity 0.2s; margin: 0 auto;
     }
     .show-more-btn:hover { opacity: 0.85; }
     .show-more-btn.active {
@@ -640,15 +637,15 @@
     <li><a href="#contact">Contact</a></li>
   </ul>
   <div class="nav-menu-wrap">
-    <button class="hamburger" aria-label="Menu" onclick="toggleMobileMenu()">
+    <button class="hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
     <div class="mobile-menu" id="mobileMenu">
-      <a href="#hero" onclick="closeMobileMenu()">About</a>
-      <a href="#projects" onclick="closeMobileMenu()">Work</a>
-      <a href="#skills" onclick="closeMobileMenu()">Skills</a>
-      <a href="#experience" onclick="closeMobileMenu()">Experience</a>
-      <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+      <a href="#hero">About</a>
+      <a href="#projects">Work</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
     </div>
   </div>
 </nav>
@@ -894,7 +891,7 @@
     </div>
 
     <div class="show-more-wrap reveal">
-      <button id="show-more-btn" class="show-more-btn" onclick="showMoreProjects()">
+      <button id="show-more-btn" class="show-more-btn">
         <svg width="20" height="20"><use href="#icon-chevron-down"/></svg>
         Show More
       </button>
@@ -1109,7 +1106,7 @@
 <!-- Project: Rec Con -->
 <div class="modal-overlay" id="modal-proj-rec-con">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal('modal-proj-rec-con')">&times;</button>
+    <button class="modal-close">&times;</button>
     <div class="modal-video">
       <video controls preload="none" poster="public/RecCon Event Rec Room.png">
         <source src="public/RecCon Event Rec Room.mp4" type="video/mp4">
@@ -1129,7 +1126,7 @@
 <!-- Project: Nilo -->
 <div class="modal-overlay" id="modal-proj-nilo">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal('modal-proj-nilo')">&times;</button>
+    <button class="modal-close">&times;</button>
     <div class="modal-video">
       <video controls preload="none" poster="public/Nilo Open Beta.png">
         <source src="public/Nilo Open Beta.webm" type="video/webm">
@@ -1150,7 +1147,7 @@
 <!-- Project: NBA/NFL -->
 <div class="modal-overlay" id="modal-proj-nba">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal('modal-proj-nba')">&times;</button>
+    <button class="modal-close">&times;</button>
     <div class="modal-video">
       <video controls preload="none" poster="public/NFL x Rec Room.webp">
         <source src="public/NFL x Rec Room.mp4" type="video/mp4">
@@ -1170,7 +1167,7 @@
 <!-- Project: Social Growth -->
 <div class="modal-overlay" id="modal-proj-social">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal('modal-proj-social')">&times;</button>
+    <button class="modal-close">&times;</button>
     <div class="modal-video">
       <video controls preload="none" poster="public/Rec Room Social Content.png">
         <source src="public/Rec Room Social Content.webm" type="video/webm">
@@ -1191,7 +1188,7 @@
 <!-- Project: Platform Launch -->
 <div class="modal-overlay" id="modal-proj-platform">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal('modal-proj-platform')">&times;</button>
+    <button class="modal-close">&times;</button>
     <div class="modal-video">
       <video controls preload="none" poster="public/Nintendo Switch x Rec Room.png">
         <source src="public/Nintendo Switch x Rec Room.mp4" type="video/mp4">
@@ -1212,7 +1209,7 @@
 <!-- Project: Showdown -->
 <div class="modal-overlay" id="modal-proj-showdown">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal('modal-proj-showdown')">&times;</button>
+    <button class="modal-close">&times;</button>
     <div class="modal-video">
       <video controls preload="none" poster="public/Showdown Rec Room Original.jpg">
         <source src="public/Showdown Rec Room Original.webm" type="video/webm">
@@ -1234,7 +1231,7 @@
 <!-- Project: Make It To Midnight -->
 <div class="modal-overlay" id="modal-proj-midnight">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal('modal-proj-midnight')">&times;</button>
+    <button class="modal-close">&times;</button>
     <div class="modal-video">
       <video controls preload="none">
         <source src="public/Make it to Midnight Rec Room Original.webm" type="video/webm">
@@ -1255,7 +1252,7 @@
 <!-- Project: Rec Rally -->
 <div class="modal-overlay" id="modal-proj-rally">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal('modal-proj-rally')">&times;</button>
+    <button class="modal-close">&times;</button>
     <div class="modal-video">
       <video controls preload="none" poster="public/Rec Rally Rec Room Original.jpg">
         <source src="public/Rec Rally Rec Room Original.webm" type="video/webm">
@@ -1276,7 +1273,7 @@
 <!-- Project: Run The Block -->
 <div class="modal-overlay" id="modal-proj-run-the-block">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal('modal-proj-run-the-block')">&times;</button>
+    <button class="modal-close">&times;</button>
     <div class="modal-video">
       <video controls preload="none" poster="public/Run the Block Rec Room Original.jpg">
         <source src="public/Run the Block Rec Room Original.webm" type="video/webm">
@@ -1297,7 +1294,7 @@
 <!-- Project: Android x Rec Room -->
 <div class="modal-overlay" id="modal-proj-android">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal('modal-proj-android')">&times;</button>
+    <button class="modal-close">&times;</button>
     <div class="modal-video">
       <video controls preload="none" poster="public/Android x Rec Room.jpg">
         <source src="public/Android x Rec Room.mp4" type="video/mp4">
@@ -1317,7 +1314,7 @@
 <!-- Project: Destiny 2 x Rec Room -->
 <div class="modal-overlay" id="modal-proj-destiny">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal('modal-proj-destiny')">&times;</button>
+    <button class="modal-close">&times;</button>
     <div class="modal-video">
       <video controls preload="none" poster="public/Destiny 2 x Rec Room.jpg">
         <source src="public/Destiny 2 x Rec Room.mp4" type="video/mp4">
@@ -1337,7 +1334,7 @@
 <!-- Project: He-Man x Rec Room -->
 <div class="modal-overlay" id="modal-proj-heman">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal('modal-proj-heman')">&times;</button>
+    <button class="modal-close">&times;</button>
     <div class="modal-video">
       <video controls preload="none" poster="public/He Man x Rec Room.jpg">
         <source src="public/He-Man x Rec Room.mp4" type="video/mp4">
@@ -1357,7 +1354,7 @@
 <!-- Project: Monster High x Rec Room -->
 <div class="modal-overlay" id="modal-proj-monster-high">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal('modal-proj-monster-high')">&times;</button>
+    <button class="modal-close">&times;</button>
     <div class="modal-video">
       <video controls preload="none" poster="public/Monster High x Rec Room.jpg">
         <source src="public/Monster High x Rec Room.mp4" type="video/mp4">
@@ -1377,7 +1374,7 @@
 <!-- Project: TMNT x Rec Room -->
 <div class="modal-overlay" id="modal-proj-tmnt">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal('modal-proj-tmnt')">&times;</button>
+    <button class="modal-close">&times;</button>
     <div class="modal-video">
       <video controls preload="none" poster="public/TMNT x Rec Room.jpg">
         <source src="public/TMNT x Rec Room.mp4" type="video/mp4">
@@ -1397,7 +1394,7 @@
 <!-- Project: Winter Wonderland Event -->
 <div class="modal-overlay" id="modal-proj-winter">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal('modal-proj-winter')">&times;</button>
+    <button class="modal-close">&times;</button>
     <div class="modal-video">
       <video controls preload="none" poster="public/Winter Wonderland Event Rec Room.webp">
         <source src="public/Winter Wonderland Event Rec Room.mp4" type="video/mp4">
@@ -1417,7 +1414,7 @@
 <!-- Skill Modal: AI Tools -->
 <div class="modal-overlay" id="modal-skill-ai">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal('modal-skill-ai')">&times;</button>
+    <button class="modal-close">&times;</button>
     <div class="modal-skill-header">
       <h3 class="modal-title">AI Tools</h3>
       <p class="modal-desc-block">Leveraging cutting-edge AI platforms to accelerate marketing workflows, prototype technical systems, generate content, and automate community operations at scale.</p>
@@ -1446,7 +1443,7 @@
 <!-- Skill Modal: Product Marketing -->
 <div class="modal-overlay" id="modal-skill-pmm">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal('modal-skill-pmm')">&times;</button>
+    <button class="modal-close">&times;</button>
     <div class="modal-skill-header">
       <h3 class="modal-title">Product Marketing</h3>
       <p class="modal-desc-block">End-to-end product marketing from strategy to execution. Building go-to-market plans, crafting positioning, and driving measurable growth through data-informed campaigns.</p>
@@ -1476,7 +1473,7 @@
 <!-- Skill Modal: Community Ops -->
 <div class="modal-overlay" id="modal-skill-community">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal('modal-skill-community')">&times;</button>
+    <button class="modal-close">&times;</button>
     <div class="modal-skill-header">
       <h3 class="modal-title">Community Ops</h3>
       <p class="modal-desc-block">Building and nurturing engaged communities through strategic programming, responsive support, and live events — turning players into advocates.</p>
@@ -1505,7 +1502,7 @@
 <!-- Skill Modal: Content Creation -->
 <div class="modal-overlay" id="modal-skill-content">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal('modal-skill-content')">&times;</button>
+    <button class="modal-close">&times;</button>
     <div class="modal-skill-header">
       <h3 class="modal-title">Content Creation</h3>
       <p class="modal-desc-block">Crafting compelling content across social platforms and creative mediums — from video editing to 3D design to social media strategy.</p>
@@ -1535,7 +1532,7 @@
 <!-- Skill Modal: Project Management -->
 <div class="modal-overlay" id="modal-skill-pm">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal('modal-skill-pm')">&times;</button>
+    <button class="modal-close">&times;</button>
     <div class="modal-skill-header">
       <h3 class="modal-title">Project Management</h3>
       <p class="modal-desc-block">Coordinating cross-functional teams, managing roadmaps, and aligning stakeholders to deliver marketing and product initiatives on time.</p>
@@ -1565,7 +1562,7 @@
 <!-- Skill Modal: Data Analytics -->
 <div class="modal-overlay" id="modal-skill-data">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal('modal-skill-data')">&times;</button>
+    <button class="modal-close">&times;</button>
     <div class="modal-skill-header">
       <h3 class="modal-title">Data Analytics</h3>
       <p class="modal-desc-block">Tracking performance, analyzing user behavior, and making data-driven decisions to optimize marketing campaigns and community engagement.</p>
@@ -1591,6 +1588,12 @@
 </div>
 
 <script>
+  // Cached DOM references
+  const mobileMenu = document.getElementById('mobileMenu');
+  const hamburger = document.querySelector('.hamburger');
+  const allModals = document.querySelectorAll('.modal-overlay');
+  const chevronSVG = '<svg width="20" height="20"><use href="#icon-chevron-down"/></svg>';
+
   // Scroll reveal
   const reveals = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver(entries => {
@@ -1631,38 +1634,36 @@
   document.querySelectorAll('[data-modal]').forEach(el => {
     el.addEventListener('click', e => {
       e.preventDefault();
-      const id = 'modal-' + el.dataset.modal;
-      openModal(id);
+      openModal('modal-' + el.dataset.modal);
     });
   });
 
-  // Close modal on overlay click (outside modal content)
-  document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  // Close modal on overlay click
+  allModals.forEach(overlay => {
     overlay.addEventListener('click', e => {
-      if (e.target === overlay) {
-        overlay.classList.remove('open');
-        overlay.querySelectorAll('video').forEach(v => v.pause());
-        document.body.style.overflow = '';
-      }
+      if (e.target === overlay) closeModal(overlay.id);
     });
   });
 
+  // Close modal on Escape
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') {
-      document.querySelectorAll('.modal-overlay.open').forEach(m => {
-        m.classList.remove('open');
-        m.querySelectorAll('video').forEach(v => v.pause());
-        document.body.style.overflow = '';
-      });
+      document.querySelectorAll('.modal-overlay.open').forEach(m => closeModal(m.id));
     }
   });
 
+  // Wire up modal close buttons
+  allModals.forEach(overlay => {
+    overlay.querySelector('.modal-close').addEventListener('click', () => closeModal(overlay.id));
+  });
+
+  // Show more / show less
   function showMoreProjects() {
     const wrap = document.getElementById('more-projects');
     const btn = document.getElementById('show-more-btn');
     wrap.querySelectorAll('.card.hidden').forEach(card => card.classList.remove('hidden'));
     btn.classList.add('active');
-    btn.innerHTML = '<svg width="20" height="20"><use href="#icon-chevron-down"/></svg> Show Less';
+    btn.innerHTML = chevronSVG + ' Show Less';
     btn.onclick = hideMoreProjects;
     setTimeout(() => {
       wrap.querySelectorAll('.reveal:not(.visible)').forEach(el => io.observe(el));
@@ -1674,29 +1675,29 @@
     const btn = document.getElementById('show-more-btn');
     wrap.querySelectorAll('.card').forEach(card => card.classList.add('hidden'));
     btn.classList.remove('active');
-    btn.innerHTML = '<svg width="20" height="20"><use href="#icon-chevron-down"/></svg> Show More';
+    btn.innerHTML = chevronSVG + ' Show More';
     btn.onclick = showMoreProjects;
   }
 
+  document.getElementById('show-more-btn').addEventListener('click', showMoreProjects);
+
+  // Mobile menu
   function toggleMobileMenu() {
-    const menu = document.getElementById('mobileMenu');
-    const btn = document.querySelector('.hamburger');
-    menu.classList.toggle('open');
-    btn.classList.toggle('active');
+    mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('active');
   }
 
   function closeMobileMenu() {
-    const menu = document.getElementById('mobileMenu');
-    const btn = document.querySelector('.hamburger');
-    menu.classList.remove('open');
-    btn.classList.remove('active');
+    mobileMenu.classList.remove('open');
+    hamburger.classList.remove('active');
   }
 
-  // Single persistent click-outside listener for mobile menu
+  hamburger.addEventListener('click', toggleMobileMenu);
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobileMenu));
+
+  // Click-outside listener for mobile menu
   document.addEventListener('click', e => {
-    const menu = document.getElementById('mobileMenu');
-    const btn = document.querySelector('.hamburger');
-    if (menu.classList.contains('open') && !menu.contains(e.target) && !btn.contains(e.target)) {
+    if (mobileMenu.classList.contains('open') && !mobileMenu.contains(e.target) && !hamburger.contains(e.target)) {
       closeMobileMenu();
     }
   });
