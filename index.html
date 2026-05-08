@@ -73,13 +73,25 @@
       position: relative;
     }
     .hero-text { flex: 1; }
+    .hero-photo-link {
+      text-decoration: none;
+      flex-shrink: 0;
+      opacity: 0; animation: fadeUp 0.9s 0.5s ease forwards;
+    }
+    .hero-photo-link .hero-photo {
+      display: block;
+      cursor: pointer;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .hero-photo-link:hover .hero-photo {
+      border-color: var(--accent);
+      box-shadow: 0 0 30px rgba(74,124,247,0.25);
+    }
     .hero-photo {
       width: 360px; height: 360px;
       border-radius: 50%;
       object-fit: cover;
       border: 3px solid var(--border);
-      flex-shrink: 0;
-      opacity: 0; animation: fadeUp 0.9s 0.5s ease forwards;
     }
     .hero-eyebrow {
       font-family: var(--sans);       font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
@@ -422,8 +434,8 @@
       .timeline-date { text-align: left; }
       .timeline-line { display: none; }
       footer { flex-direction: column; gap: 16px; text-align: center; }
-      #hero { flex-direction: column; gap: 32px; }
-      .hero-photo { width: 220px; height: 220px; }
+      #hero { flex-direction: column; gap: 32px; align-items: center; }
+      .hero-photo-link .hero-photo { width: 220px; height: 220px; }
     }
     @media (max-width: 600px) {
       .nav-links { display: none; }
@@ -592,7 +604,9 @@
       <a href="#contact" class="btn-ghost">Get In Touch →</a>
     </div>
   </div>
-  <img class="hero-photo" src="public/RyuErck.webp" alt="Ryu Erck" />
+  <a href="https://www.linkedin.com/in/ryuerck/" target="_blank" class="hero-photo-link">
+    <img class="hero-photo" src="public/RyuErck.webp" alt="Ryu Erck" />
+  </a>
 </section>
 
 <!-- Projects -->
