@@ -265,6 +265,34 @@
       border: 1px solid rgba(74,124,247,0.4);
       font-weight: 600;
     }
+    .card-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4px; margin-top: 8px;
+    }
+    .card-stat-pill {
+      font-size: 9px; font-weight: 700; white-space: nowrap;
+      padding: 4px 8px; border-radius: 0;
+      background: var(--surface2);
+      color: var(--accent);
+      border: 1px solid var(--border);
+      display: flex; flex-direction: row; align-items: center; gap: 3px; justify-content: center;
+    }
+    .card-stat-pill > span { white-space: nowrap; }
+    .card-stat-label {
+      font-size: 8px; font-weight: 500; color: #888;
+    }
+    .card-open-hint {
+      position: absolute; top: 16px; right: 16px;
+      font-size: 10px; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 4px 10px;
+      background: rgba(0,0,0,0.8); color: var(--accent);
+      border: 1px solid rgba(74,124,247,0.4);
+      font-weight: 600;
+      opacity: 0; transition: opacity 0.2s;
+      pointer-events: none;
+    }
+    .card:hover .card-open-hint { opacity: 1; }
 
     .card-body { padding: 24px; }
     .card-title {
@@ -285,19 +313,22 @@
     .skill-group {
       background: var(--surface);
       border: 1px solid var(--border);
-      padding: 28px;
+      padding: 16px 20px;
       transition: border-color 0.3s, transform 0.2s;
       cursor: pointer;
+      position: relative;
     }
     .skill-group:hover { border-color: rgba(74,124,247,0.4); transform: translateY(-3px); }
     .skill-group-title {
       font-size: 11px; letter-spacing: 0.2em;
       text-transform: uppercase; color: var(--accent);
-      margin-bottom: 20px;
       display: flex; align-items: center; gap: 10px;
     }
-    .skill-group-title::after {
-      content: ''; flex: 1; height: 1px; background: var(--border);
+    .skill-group-emoji {
+      font-size: 32px; line-height: 1;
+      position: absolute; right: 20px; top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
     }
 
     /* ── Experience ────────────────────────────────── */
@@ -560,18 +591,13 @@
       margin-bottom: 24px;
     }
 
-    /* Card open hint */
-    .card-open-hint {
-      font-size: 10px; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--accent); opacity: 0;
-      display: flex; align-items: center; gap: 5px;
-      transition: opacity 0.2s;
-    }
-    .card:hover .card-open-hint { opacity: 1; }
     .skill-group-open-hint {
-      font-size: 10px; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--accent); opacity: 0;
-      margin-top: 16px;
+      font-size: 10px; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 4px 10px;
+      background: rgba(0,0,0,0.8); color: var(--accent);
+      border: 1px solid rgba(74,124,247,0.4);
+      font-weight: 600; opacity: 0;
+      display: inline-block; margin-top: 24px;
       transition: opacity 0.2s;
     }
     .skill-group:hover .skill-group-open-hint { opacity: 1; }
@@ -902,31 +928,37 @@
 
     <div class="skill-group reveal" data-modal="skill-ai">
       <div class="skill-group-title">AI Tools</div>
+      <div class="skill-group-emoji">🤖</div>
       <div class="skill-group-open-hint">Open ↗</div>
     </div>
 
     <div class="skill-group reveal reveal-delay-1" data-modal="skill-pmm">
       <div class="skill-group-title">Product Marketing</div>
+      <div class="skill-group-emoji">📢</div>
       <div class="skill-group-open-hint">Open ↗</div>
     </div>
 
     <div class="skill-group reveal reveal-delay-2" data-modal="skill-community">
       <div class="skill-group-title">Community Ops</div>
+      <div class="skill-group-emoji">🤝</div>
       <div class="skill-group-open-hint">Open ↗</div>
     </div>
 
     <div class="skill-group reveal" data-modal="skill-content">
       <div class="skill-group-title">Content Creation</div>
+      <div class="skill-group-emoji">🎬</div>
       <div class="skill-group-open-hint">Open ↗</div>
     </div>
 
     <div class="skill-group reveal reveal-delay-1" data-modal="skill-pm">
       <div class="skill-group-title">Project Management</div>
+      <div class="skill-group-emoji">📘</div>
       <div class="skill-group-open-hint">Open ↗</div>
     </div>
 
     <div class="skill-group reveal reveal-delay-2" data-modal="skill-data">
       <div class="skill-group-title">Data Analytics</div>
+      <div class="skill-group-emoji">📈</div>
       <div class="skill-group-open-hint">Open ↗</div>
     </div>
 
@@ -1689,6 +1721,46 @@
   document.addEventListener('click', e => {
     if (mobileMenu.classList.contains('open') && !mobileMenu.contains(e.target) && !hamburger.contains(e.target)) {
       mobileMenu.classList.remove('open'); hamburger.classList.remove('active');
+    }
+  });
+
+  // Copy modal stats to card thumbnails
+  document.querySelectorAll('.projects-grid > .card[data-modal]').forEach(function(card) {
+    var modalId = 'modal-' + card.getAttribute('data-modal');
+    var modal = document.getElementById(modalId);
+    if (!modal) return;
+    var statEls = modal.querySelectorAll('.modal-stat');
+    if (!statEls.length) return;
+    var container = document.createElement('div');
+    container.className = 'card-stats';
+    statEls.forEach(function(s) {
+      var val = s.querySelector('.modal-stat-val');
+      var label = s.querySelector('.modal-stat-label');
+      if (!val) return;
+      var pill = document.createElement('span');
+      pill.className = 'card-stat-pill';
+      var valSpan = document.createElement('span');
+      valSpan.textContent = val.textContent;
+      pill.appendChild(valSpan);
+      if (label) {
+        var labelSpan = document.createElement('span');
+        labelSpan.className = 'card-stat-label';
+        labelSpan.textContent = label.textContent;
+        pill.appendChild(labelSpan);
+      }
+      container.appendChild(pill);
+    });
+    var title = card.querySelector('.card-title');
+    if (title) {
+      title.parentNode.insertBefore(container, title.nextSibling);
+    }
+    var footer = card.querySelector('.card-footer');
+    if (footer) {
+      var hint = document.createElement('span');
+      hint.className = 'card-open-hint';
+      hint.textContent = 'Open ↗';
+      card.querySelector('.card-thumb').appendChild(hint);
+      footer.remove();
     }
   });
 
