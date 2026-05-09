@@ -47,10 +47,11 @@
     body::before {
       content: '';
       position: fixed; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      background-repeat: repeat; background-size: 200px 200px;
       pointer-events: none;
       z-index: 9997;
-      opacity: 0.4;
+      opacity: 0.5;
     }
 
     /* ── Nav ───────────────────────────────────────── */
@@ -109,13 +110,19 @@
     .mobile-menu a:hover { color: var(--accent); background: rgba(74,124,247,0.08); }
 
     /* ── Sections ──────────────────────────────────── */
-    section { padding: 120px 48px; max-width: 1200px; margin: 0 auto; }
+    section { padding: 0; width: 100%; }
+    .section-inner { padding: 120px 48px; max-width: 1200px; margin: 0 auto; }
+    #hero { background: linear-gradient(135deg, #4a7cf7 0%, #080810 100%); }
+    #skills { background: linear-gradient(135deg, #4a7cf7 0%, #080810 100%); }
 
     /* ── Hero ──────────────────────────────────────── */
     #hero {
       min-height: 100vh;
+      display: flex; align-items: center;
+    }
+    #hero .section-inner {
       display: flex; flex-direction: row; align-items: center; justify-content: space-between;
-      padding: 160px 48px 80px; gap: 64px;
+      gap: 64px; width: 100%;
     }
     .hero-text { flex: 1; }
     .hero-photo-link {
@@ -181,11 +188,23 @@
     .btn-ghost {
       font-size: 12px; letter-spacing: 0.1em;
       text-transform: uppercase; color: var(--muted);
-      text-decoration: none; padding: 14px 0;
+      text-decoration: none; padding: 18px 0;
       border-bottom: 1px solid var(--border);
       transition: color 0.2s, border-color 0.2s;
     }
     .btn-ghost:hover { color: var(--text); border-color: var(--text); }
+
+    #hero .hero-eyebrow,
+    #hero .hero-desc { color: #fff; }
+    #hero .hero-eyebrow::before { background: #fff; }
+    #hero .btn-ghost { color: #fff; border-color: #fff; }
+    #hero .btn-ghost:hover { color: #fff; border-color: #fff; }
+
+    #skills .section-tag,
+    #skills .skill-group-title { color: #fff; }
+    #skills .section-line { background: rgba(255,255,255,0.15); }
+    #skills .skill-group-open-hint { border-color: rgba(255,255,255,0.3); }
+    #skills .section-title em { color: #fff; }
 
     /* ── Section headers ───────────────────────────── */
     .section-header {
@@ -209,7 +228,7 @@
     }
 
     /* ── Projects ──────────────────────────────────── */
-    #projects { padding-top: 80px; }
+    #projects { padding-top: 80px; content-visibility: auto; contain-intrinsic-size: 800px; }
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -222,6 +241,7 @@
       position: relative;
       transition: border-color 0.3s, transform 0.3s;
       cursor: pointer;
+      will-change: transform;
     }
     .card:hover { border-color: rgba(74,124,247,0.4); transform: translateY(-4px); }
 
@@ -282,17 +302,21 @@
     .card-stat-label {
       font-size: 8px; font-weight: 500; color: #888;
     }
-    .card-open-hint {
-      position: absolute; top: 16px; right: 16px;
+    .card-open-hint,
+    .skill-group-open-hint {
       font-size: 10px; letter-spacing: 0.1em;
       text-transform: uppercase; padding: 4px 10px;
       background: rgba(0,0,0,0.8); color: var(--accent);
       border: 1px solid rgba(74,124,247,0.4);
       font-weight: 600;
       opacity: 0; transition: opacity 0.2s;
+    }
+    .card-open-hint {
+      position: absolute; top: 16px; right: 16px;
       pointer-events: none;
     }
-    .card:hover .card-open-hint { opacity: 1; }
+    .card:hover .card-open-hint,
+    .skill-group:hover .skill-group-open-hint { opacity: 1; }
 
     .card-body { padding: 24px; }
     .card-title {
@@ -305,6 +329,7 @@
     .card-footer-end { justify-content: flex-end; }
 
     /* ── Skills ────────────────────────────────────── */
+    #skills { content-visibility: auto; contain-intrinsic-size: 700px; }
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -317,6 +342,7 @@
       transition: border-color 0.3s, transform 0.2s;
       cursor: pointer;
       position: relative;
+      will-change: transform;
     }
     .skill-group:hover { border-color: rgba(74,124,247,0.4); transform: translateY(-3px); }
     .skill-group-title {
@@ -332,12 +358,22 @@
     }
 
     /* ── Experience ────────────────────────────────── */
+    #experience { content-visibility: auto; contain-intrinsic-size: 700px; }
     .timeline { display: flex; flex-direction: column; gap: 0; }
     .timeline-item {
       display: grid; grid-template-columns: 200px 1px 1fr;
       gap: 0 32px;
       padding-bottom: 56px;
+      padding-left: 12px; padding-right: 12px;
+      margin-left: -12px; margin-right: -12px;
     }
+    .timeline-bullets {
+      transition: background 0.3s;
+      border-radius: 6px;
+      padding: 4px 8px;
+      margin: 0 -8px;
+    }
+    .timeline-bullets:hover { background: rgba(0,0,0,0.3); }
     .timeline-item:last-child { padding-bottom: 0; }
     .timeline-date {
       font-size: 12px; color: var(--muted);
@@ -384,6 +420,7 @@
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
       max-width: 100%;
+      content-visibility: auto; contain-intrinsic-size: 500px;
     }
     .contact-inner { max-width: 640px; margin: 0 auto; }
     .contact-pre {
@@ -450,8 +487,9 @@
       nav.scrolled { padding: 10px 24px; }
       .nav-links { gap: 20px; }
       .nav-links a { font-size: 11px; }
-      section { padding: 80px 24px; }
-      #hero { padding: 160px 24px 80px; flex-direction: column; gap: 32px; align-items: center; }
+      .section-inner { padding: 80px 24px; }
+      #hero { flex-direction: column; gap: 32px; }
+      #hero .section-inner { flex-direction: column; gap: 32px; }
       .projects-grid { grid-template-columns: repeat(2, 1fr); }
       .timeline-item { grid-template-columns: 1fr; gap: 8px; }
       .timeline-date { text-align: left; }
@@ -473,7 +511,7 @@
       .card-body { padding: 16px; }
       .card-title { font-size: 15px; }
       .section-title { font-size: 26px; margin-bottom: 12px; }
-      section { padding: 60px 18px; }
+      .section-inner { padding: 60px 18px; }
       .modal { max-width: 100%; margin: 12px; }
       .modal-body { padding: 20px; }
       .modal-stats { grid-template-columns: 1fr 1fr; }
@@ -592,11 +630,6 @@
     }
 
     .skill-group-open-hint {
-      font-size: 10px; letter-spacing: 0.1em;
-      text-transform: uppercase; padding: 4px 10px;
-      background: rgba(0,0,0,0.8); color: var(--accent);
-      border: 1px solid rgba(74,124,247,0.4);
-      font-weight: 600; opacity: 0;
       display: inline-block; margin-top: 24px;
       transition: opacity 0.2s;
     }
@@ -624,7 +657,7 @@
 
     /* Utility */
     .show-more-wrap { text-align: center; grid-column: 1 / -1; margin-top: 8px; }
-    .resume-wrap { text-align: center; margin-top: 48px; }
+    .resume-wrap { text-align: center; margin-top: 48px; padding-bottom: 48px; }
     .icon-sm { margin-right: 8px; vertical-align: -2px; }
     .mb-sm { margin-bottom: 40px; }
     .mb-md { margin-bottom: 48px; }
@@ -668,29 +701,32 @@
 
 <!-- Hero -->
 <section id="hero">
-  <div class="hero-text">
-    <div class="hero-eyebrow">Product Marketing &amp; Community Ops</div>
-    <h1>Ryu Erck</h1>
-    <p class="hero-desc">I live and breathe gaming — blending storytelling and strategy to build communities that don't just play, they stay.</p>
-    <div class="hero-ctas">
-      <a href="#projects" class="btn-primary">View Work</a>
-      <a href="#contact" class="btn-ghost">Get In Touch →</a>
+  <div class="section-inner">
+    <div class="hero-text">
+      <div class="hero-eyebrow">Product Marketing &amp; Community Ops</div>
+      <h1>Ryu Erck</h1>
+      <p class="hero-desc">I live and breathe gaming — blending storytelling and strategy to build communities that don't just play, they stay.</p>
+      <div class="hero-ctas">
+        <a href="#projects" class="btn-primary">View Work</a>
+        <a href="#contact" class="btn-ghost">Contact →</a>
+      </div>
     </div>
+    <a href="https://www.linkedin.com/in/ryuerck/" target="_blank" class="hero-photo-link">
+      <img class="hero-photo" src="public/RyuErck.webp" alt="Ryu Erck" width="360" height="360" fetchpriority="high" />
+    </a>
   </div>
-  <a href="https://www.linkedin.com/in/ryuerck/" target="_blank" class="hero-photo-link">
-    <img class="hero-photo" src="public/RyuErck.webp" alt="Ryu Erck" width="360" height="360" fetchpriority="high" />
-  </a>
 </section>
 
 <!-- Projects -->
 <section id="projects">
-  <div class="section-header reveal">
-    <span class="section-tag">Work</span>
-    <div class="section-line"></div>
-  </div>
-  <h2 class="section-title reveal mb-sm">Selected <em>Projects</em></h2>
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="section-tag">Work</span>
+      <div class="section-line"></div>
+    </div>
+    <h2 class="section-title reveal mb-sm">Selected <em>Projects</em></h2>
 
-  <div class="projects-grid">
+    <div class="projects-grid">
 
     <div class="card reveal" data-modal="proj-nilo">
       <div class="card-thumb">
@@ -909,71 +945,75 @@
     <div class="show-more-wrap reveal">
       <button id="show-more-btn" class="show-more-btn">
         <svg width="20" height="20"><use href="#icon-chevron-down"/></svg>
-        Show More
+        Other Projects
       </button>
     </div>
 
   </div>
+</div>
 </section>
 
 <!-- Skills -->
 <section id="skills">
-  <div class="section-header reveal">
-    <span class="section-tag">Skills</span>
-    <div class="section-line"></div>
-  </div>
-  <h2 class="section-title reveal mb-md">My <em>Toolkits</em></h2>
-
-  <div class="skills-grid">
-
-    <div class="skill-group reveal" data-modal="skill-ai">
-      <div class="skill-group-title">AI Tools</div>
-      <div class="skill-group-emoji">🤖</div>
-      <div class="skill-group-open-hint">Open ↗</div>
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="section-tag">Skills</span>
+      <div class="section-line"></div>
     </div>
+    <h2 class="section-title reveal mb-sm">My <em>Toolkits</em></h2>
 
-    <div class="skill-group reveal reveal-delay-1" data-modal="skill-pmm">
-      <div class="skill-group-title">Product Marketing</div>
-      <div class="skill-group-emoji">📢</div>
-      <div class="skill-group-open-hint">Open ↗</div>
+    <div class="skills-grid">
+
+      <div class="skill-group reveal" data-modal="skill-ai">
+        <div class="skill-group-title">AI Tools</div>
+        <div class="skill-group-emoji">🤖</div>
+        <div class="skill-group-open-hint">Open ↗</div>
+      </div>
+
+      <div class="skill-group reveal reveal-delay-1" data-modal="skill-pmm">
+        <div class="skill-group-title">Product Marketing</div>
+        <div class="skill-group-emoji">📢</div>
+        <div class="skill-group-open-hint">Open ↗</div>
+      </div>
+
+      <div class="skill-group reveal reveal-delay-2" data-modal="skill-community">
+        <div class="skill-group-title">Community Ops</div>
+        <div class="skill-group-emoji">🤝</div>
+        <div class="skill-group-open-hint">Open ↗</div>
+      </div>
+
+      <div class="skill-group reveal" data-modal="skill-content">
+        <div class="skill-group-title">Content Creation</div>
+        <div class="skill-group-emoji">🎬</div>
+        <div class="skill-group-open-hint">Open ↗</div>
+      </div>
+
+      <div class="skill-group reveal reveal-delay-1" data-modal="skill-pm">
+        <div class="skill-group-title">Project Management</div>
+        <div class="skill-group-emoji">📘</div>
+        <div class="skill-group-open-hint">Open ↗</div>
+      </div>
+
+      <div class="skill-group reveal reveal-delay-2" data-modal="skill-data">
+        <div class="skill-group-title">Data Analytics</div>
+        <div class="skill-group-emoji">📈</div>
+        <div class="skill-group-open-hint">Open ↗</div>
+      </div>
+
     </div>
-
-    <div class="skill-group reveal reveal-delay-2" data-modal="skill-community">
-      <div class="skill-group-title">Community Ops</div>
-      <div class="skill-group-emoji">🤝</div>
-      <div class="skill-group-open-hint">Open ↗</div>
-    </div>
-
-    <div class="skill-group reveal" data-modal="skill-content">
-      <div class="skill-group-title">Content Creation</div>
-      <div class="skill-group-emoji">🎬</div>
-      <div class="skill-group-open-hint">Open ↗</div>
-    </div>
-
-    <div class="skill-group reveal reveal-delay-1" data-modal="skill-pm">
-      <div class="skill-group-title">Project Management</div>
-      <div class="skill-group-emoji">📘</div>
-      <div class="skill-group-open-hint">Open ↗</div>
-    </div>
-
-    <div class="skill-group reveal reveal-delay-2" data-modal="skill-data">
-      <div class="skill-group-title">Data Analytics</div>
-      <div class="skill-group-emoji">📈</div>
-      <div class="skill-group-open-hint">Open ↗</div>
-    </div>
-
   </div>
 </section>
 
 <!-- Experience -->
 <section id="experience">
-  <div class="section-header reveal">
-    <span class="section-tag">Experience</span>
-    <div class="section-line"></div>
-  </div>
-  <h2 class="section-title reveal mb-lg">Where I've <em>Been</em></h2>
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="section-tag">Experience</span>
+      <div class="section-line"></div>
+    </div>
+    <h2 class="section-title reveal mb-lg">Where I've <em>Been</em></h2>
 
-  <div class="timeline">
+    <div class="timeline">
 
     <div class="timeline-item reveal">
       <div class="timeline-date">2025 — Present</div>
@@ -1045,44 +1085,17 @@
       </div>
     </div>
 
-    <div class="timeline-item reveal reveal-delay-2">
-      <div class="timeline-date">2018 — 2019</div>
+    <div class="timeline-item reveal">
+      <div class="timeline-date">2017 — 2019</div>
       <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-bar"></div></div>
       <div class="timeline-content">
-        <div class="timeline-role">Tax Examiner II</div>
+        <div class="timeline-role">Tax Examiner</div>
         <div class="timeline-company">Colorado Department of Revenue</div>
         <ul class="timeline-bullets">
           <li>Researched and provided information related to Colorado State statues, letter rulings, policies, and regulations to taxpayers and tax examiners</li>
           <li>Reviewed refunds and returns for accuracy on Individual, Fiduciary, Partnership and Corporate Income taxes, Sales and Use taxes, Severance taxes, Withholding taxes, and Excise taxes in the Gentax system</li>
           <li>Developed improved tax forms to correct previous form versions based on statute</li>
         </ul>
-      </div>
-    </div>
-
-    <div class="timeline-item reveal">
-      <div class="timeline-date">2017 — 2018</div>
-      <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-bar"></div></div>
-      <div class="timeline-content">
-        <div class="timeline-role">Tax Examiner</div>
-        <div class="timeline-company">Colorado Department of Revenue</div>
-      </div>
-    </div>
-
-    <div class="timeline-item reveal reveal-delay-1">
-      <div class="timeline-date">2015 — 2017</div>
-      <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-bar"></div></div>
-      <div class="timeline-content">
-        <div class="timeline-role">Store Administrator</div>
-        <div class="timeline-company">Safeway</div>
-      </div>
-    </div>
-
-    <div class="timeline-item reveal">
-      <div class="timeline-date">2014 — 2015</div>
-      <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-bar"></div></div>
-      <div class="timeline-content">
-        <div class="timeline-role">Customer Service Manager</div>
-        <div class="timeline-company">Safeway</div>
       </div>
     </div>
 
@@ -1106,27 +1119,30 @@
 
   </div>
   <div class="resume-wrap reveal">
-    <a href="resume.html?print=1" class="btn-primary">
+    <a href="public/RyuErckResume.pdf" target="_blank" class="btn-primary">
       <svg width="14" height="14" class="icon-sm"><use href="#icon-download"/></svg>
-      Generate Resume
+      Download Resume
     </a>
   </div>
+</div>
 </section>
 
 <!-- Contact -->
 <section id="contact">
-  <div class="contact-inner">
-    <div class="contact-pre reveal">Let's work together</div>
-    <h2 class="contact-title reveal">Say <em>hi!</em></h2>
-    <div class="contact-links reveal">
-      <a href="mailto:ryuerck@gmail.com" class="contact-link primary">
-        <svg width="14" height="14"><use href="#icon-email"/></svg>
-        Email
-      </a>
-      <a href="https://www.linkedin.com/in/ryuerck" target="_blank" class="contact-link">
-        <svg width="14" height="14"><use href="#icon-linkedin"/></svg>
-        LinkedIn
-      </a>
+  <div class="section-inner">
+    <div class="contact-inner">
+      <div class="contact-pre reveal">Let's work together</div>
+      <h2 class="contact-title reveal">Say <em>hi!</em></h2>
+      <div class="contact-links reveal">
+        <a href="mailto:ryuerck@gmail.com" class="contact-link primary">
+          <svg width="14" height="14"><use href="#icon-email"/></svg>
+          Email
+        </a>
+        <a href="https://www.linkedin.com/in/ryuerck" target="_blank" class="contact-link">
+          <svg width="14" height="14"><use href="#icon-linkedin"/></svg>
+          LinkedIn
+        </a>
+      </div>
     </div>
   </div>
 </section>
@@ -1702,13 +1718,12 @@
     showMoreBtn.innerHTML = chevronSVG + ' Show Less';
     showMoreBtn.removeEventListener('click', showMoreProjects);
     showMoreBtn.addEventListener('click', hideMoreProjects);
-    setTimeout(() => moreProjects.querySelectorAll('.reveal:not(.visible)').forEach(el => io.observe(el)), 50);
   }
 
   function hideMoreProjects() {
     moreProjects.querySelectorAll('.card').forEach(c => c.classList.add('hidden'));
     showMoreBtn.classList.remove('active');
-    showMoreBtn.innerHTML = chevronSVG + ' Show More';
+    showMoreBtn.innerHTML = chevronSVG + ' Other Projects';
     showMoreBtn.removeEventListener('click', hideMoreProjects);
     showMoreBtn.addEventListener('click', showMoreProjects);
   }
