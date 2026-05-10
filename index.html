@@ -16,6 +16,7 @@
       --surface2:  #17171d;
       --border:    rgba(255,255,255,0.07);
       --accent:    #4a7cf7;
+      --accent-border: var(--accent-border);
       --text:      #e8e8f0;
       --muted:     #6b6b80;
       --sans:      'Baloo 2', sans-serif;
@@ -111,9 +112,9 @@
 
     /* ── Sections ──────────────────────────────────── */
     section { padding: 0; width: 100%; }
-    .section-inner { padding: 120px 48px; max-width: 1200px; margin: 0 auto; }
-    #hero { background: linear-gradient(135deg, #4a7cf7 0%, #080810 100%); }
-    #skills { background: linear-gradient(135deg, #4a7cf7 0%, #080810 100%); }
+    .section-inner { padding: 120px 48px; max-width: min(1400px, 88vw); margin: 0 auto; }
+    #hero { background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(135deg, #4a7cf7 0%, #080810 100%); background-size: 8px 8px, cover; }
+    #skills { background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(135deg, #4a7cf7 0%, #080810 100%); background-size: 8px 8px, cover; }
 
     /* ── Hero ──────────────────────────────────────── */
     #hero {
@@ -127,7 +128,8 @@
     .hero-text { flex: 1; }
     .hero-photo-link {
       text-decoration: none;
-      flex-shrink: 0;
+      flex-shrink: 0; align-self: center;
+      display: flex; align-items: center;
       opacity: 0; animation: fadeUp 0.9s 0.5s ease forwards;
     }
     .hero-photo-link:hover .hero-photo {
@@ -135,7 +137,7 @@
       box-shadow: 0 0 30px rgba(74,124,247,0.25);
     }
     .hero-photo {
-      width: 360px; height: 360px;
+      width: min(360px, 22vw); height: min(360px, 22vw);
       border-radius: 50%;
       object-fit: cover;
       border: 3px solid var(--border);
@@ -153,7 +155,7 @@
       content: ''; display: block; width: 32px; height: 1px; background: var(--accent);
     }
     h1 {
-      font-size: clamp(52px, 9vw, 110px);
+      font-size: clamp(52px, 9vw, 140px);
       font-weight: 800;
       line-height: 1.05;
       letter-spacing: -0.03em;
@@ -176,19 +178,21 @@
       display: flex; gap: 16px; align-items: center;
       opacity: 0; animation: fadeUp 0.9s 0.55s ease forwards;
     }
+    .btn-primary, .btn-ghost, .contact-link {
+      font-size: 12px; letter-spacing: 0.1em;
+      text-transform: uppercase; text-decoration: none;
+    }
     .btn-primary {
       background: var(--accent); color: #fff;
-      font-size: 12px; letter-spacing: 0.1em;
-      text-transform: uppercase; font-weight: 500;
-      padding: 14px 28px; text-decoration: none;
+      font-weight: 500;
+      padding: 14px 28px;
       transition: opacity 0.2s, transform 0.2s;
       display: inline-block;
     }
     .btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
     .btn-ghost {
-      font-size: 12px; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--muted);
-      text-decoration: none; padding: 18px 0;
+      color: var(--muted);
+      padding: 18px 0;
       border-bottom: 1px solid var(--border);
       transition: color 0.2s, border-color 0.2s;
     }
@@ -242,8 +246,9 @@
       transition: border-color 0.3s, transform 0.3s;
       cursor: pointer;
       will-change: transform;
+      contain: layout style paint;
     }
-    .card:hover { border-color: rgba(74,124,247,0.4); transform: translateY(-4px); }
+    .card:hover { border-color: var(--accent-border); transform: translateY(-4px); }
 
     .card-thumb {
       width: 100%; aspect-ratio: 16/10;
@@ -256,6 +261,7 @@
       object-fit: cover;
       border-radius: 4px;
       transition: transform 0.6s cubic-bezier(0.23,1,0.32,1);
+      will-change: transform;
     }
     .card:hover .card-thumb-img { transform: scale(1.03); }
     .card-play-btn {
@@ -282,7 +288,7 @@
       font-size: 10px; letter-spacing: 0.1em;
       text-transform: uppercase; padding: 4px 10px;
       background: rgba(0,0,0,0.8); color: var(--accent);
-      border: 1px solid rgba(74,124,247,0.4);
+      border: 1px solid var(--accent-border);
       font-weight: 600;
     }
     .card-stats {
@@ -307,7 +313,7 @@
       font-size: 10px; letter-spacing: 0.1em;
       text-transform: uppercase; padding: 4px 10px;
       background: rgba(0,0,0,0.8); color: var(--accent);
-      border: 1px solid rgba(74,124,247,0.4);
+      border: 1px solid var(--accent-border);
       font-weight: 600;
       opacity: 0; transition: opacity 0.2s;
     }
@@ -332,7 +338,7 @@
     #skills { content-visibility: auto; contain-intrinsic-size: 700px; }
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 16px;
     }
     .skill-group {
@@ -344,7 +350,7 @@
       position: relative;
       will-change: transform;
     }
-    .skill-group:hover { border-color: rgba(74,124,247,0.4); transform: translateY(-3px); }
+    .skill-group:hover { border-color: var(--accent-border); transform: translateY(-3px); }
     .skill-group-title {
       font-size: 11px; letter-spacing: 0.2em;
       text-transform: uppercase; color: var(--accent);
@@ -436,10 +442,9 @@
       display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
     }
     .contact-link {
-      font-size: 12px; letter-spacing: 0.1em;
-      text-transform: uppercase; padding: 14px 28px;
+      padding: 14px 28px;
       border: 1px solid var(--border); color: var(--text);
-      text-decoration: none; transition: background 0.2s, color 0.2s, border-color 0.2s;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
       display: flex; align-items: center; gap: 8px;
     }
     .contact-link:hover {
@@ -482,6 +487,18 @@
     .reveal-delay-2 { transition-delay: 0.2s; }
 
     /* ── Responsive ────────────────────────────────── */
+    @media (min-width: 1800px) {
+      .section-inner { padding: 140px 64px; }
+      .hero-ctas { gap: 24px; }
+      .projects-grid { gap: 24px; }
+      .skills-grid { gap: 24px; }
+      .card-body { padding: 28px; }
+      .card-title { font-size: 20px; }
+      .hero-desc { font-size: 18px; max-width: 560px; }
+      .timeline-item { gap: 0 48px; }
+      .timeline-role { font-size: 22px; }
+      .section-header { margin-bottom: 80px; }
+    }
     @media (max-width: 900px) {
       nav { padding: 14px 24px; }
       nav.scrolled { padding: 10px 24px; }
@@ -491,6 +508,7 @@
       #hero { flex-direction: column; gap: 32px; }
       #hero .section-inner { flex-direction: column; gap: 32px; }
       .projects-grid { grid-template-columns: repeat(2, 1fr); }
+      .skills-grid { grid-template-columns: repeat(2, 1fr); }
       .timeline-item { grid-template-columns: 1fr; gap: 8px; }
       .timeline-date { text-align: left; }
       .timeline-line { display: none; }
@@ -503,6 +521,7 @@
       .nav-links { display: none; }
       .hamburger { display: flex; }
       .projects-grid { grid-template-columns: 1fr; gap: 16px; }
+      .skills-grid { grid-template-columns: 1fr; }
       h1 { font-size: 40px; margin-bottom: 20px; }
       .hero-photo { width: 180px; height: 180px; }
       .hero-desc { font-size: 14px; }
@@ -512,6 +531,7 @@
       .card-title { font-size: 15px; }
       .section-title { font-size: 26px; margin-bottom: 12px; }
       .section-inner { padding: 60px 18px; }
+      .hero-eyebrow { margin-top: 32px; }
       .modal { max-width: 100%; margin: 12px; }
       .modal-body { padding: 20px; }
       .modal-stats { grid-template-columns: 1fr 1fr; }
@@ -522,6 +542,7 @@
       footer { padding: 20px 18px; }
       .contact-links { flex-direction: column; align-items: center; gap: 14px; }
       .timeline-content { font-size: 14px; }
+      .card-open-hint, .skill-group-open-hint { opacity: 1; }
     }
 
     /* ── Modal overlay ─────────────────────────────── */
@@ -529,10 +550,12 @@
       position: fixed; inset: 0; z-index: 1000;
       background: rgba(5,5,8,0.85);
       backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       display: flex; align-items: center; justify-content: center;
       padding: 24px;
       opacity: 0; visibility: hidden; pointer-events: none;
-      transition: opacity 0.3s ease, visibility 0.3s ease;
+      transition: opacity 0.3s ease;
+      will-change: opacity;
     }
     .modal-overlay.open { opacity: 1; visibility: visible; pointer-events: all; }
 
@@ -660,7 +683,6 @@
     .resume-wrap { text-align: center; margin-top: 48px; padding-bottom: 48px; }
     .icon-sm { margin-right: 8px; vertical-align: -2px; }
     .mb-sm { margin-bottom: 40px; }
-    .mb-md { margin-bottom: 48px; }
     .mb-lg { margin-bottom: 64px; }
   </style>
 </head>
@@ -1663,6 +1685,7 @@
 
 <script>
   const mobileMenu = document.getElementById('mobileMenu');
+  const mobileLinks = mobileMenu.querySelectorAll('a');
   const hamburger = document.querySelector('.hamburger');
   const allModals = document.querySelectorAll('.modal-overlay');
   const moreProjects = document.getElementById('more-projects');
@@ -1677,7 +1700,7 @@
   const nav = document.querySelector('nav');
   new IntersectionObserver(entries => {
     nav.classList.toggle('scrolled', !entries[0].isIntersecting);
-  }, { threshold: 0 }).observe(document.querySelector('#hero'));
+  }, { threshold: 0   }).observe(document.querySelector('#hero'));
 
   function openModal(id) {
     const el = document.getElementById(id);
@@ -1712,26 +1735,20 @@
     if (e.key === 'Escape') document.querySelectorAll('.modal-overlay.open').forEach(m => closeModal(m.id));
   });
 
-  function showMoreProjects() {
-    moreProjects.querySelectorAll('.card.hidden').forEach(c => c.classList.remove('hidden'));
-    showMoreBtn.classList.add('active');
-    showMoreBtn.innerHTML = chevronSVG + ' Show Less';
-    showMoreBtn.removeEventListener('click', showMoreProjects);
-    showMoreBtn.addEventListener('click', hideMoreProjects);
+  let projectsOpen = false;
+
+  function toggleProjects() {
+    projectsOpen = !projectsOpen;
+    moreProjects.querySelectorAll('.card' + (projectsOpen ? '.hidden' : '')).forEach(c => c.classList.toggle('hidden', !projectsOpen));
+    showMoreBtn.classList.toggle('active', projectsOpen);
+    showMoreBtn.innerHTML = chevronSVG + (projectsOpen ? ' Show Less' : ' Other Projects');
+    if (projectsOpen) setTimeout(() => moreProjects.querySelectorAll('.reveal:not(.visible)').forEach(el => io.observe(el)), 50);
   }
 
-  function hideMoreProjects() {
-    moreProjects.querySelectorAll('.card').forEach(c => c.classList.add('hidden'));
-    showMoreBtn.classList.remove('active');
-    showMoreBtn.innerHTML = chevronSVG + ' Other Projects';
-    showMoreBtn.removeEventListener('click', hideMoreProjects);
-    showMoreBtn.addEventListener('click', showMoreProjects);
-  }
-
-  showMoreBtn.addEventListener('click', showMoreProjects);
+  showMoreBtn.addEventListener('click', toggleProjects);
 
   hamburger.addEventListener('click', () => { mobileMenu.classList.toggle('open'); hamburger.classList.toggle('active'); });
-  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { mobileMenu.classList.remove('open'); hamburger.classList.remove('active'); }));
+  mobileLinks.forEach(a => a.addEventListener('click', () => { mobileMenu.classList.remove('open'); hamburger.classList.remove('active'); }));
 
   document.addEventListener('click', e => {
     if (mobileMenu.classList.contains('open') && !mobileMenu.contains(e.target) && !hamburger.contains(e.target)) {
@@ -1739,39 +1756,35 @@
     }
   });
 
-  // Copy modal stats to card thumbnails
-  document.querySelectorAll('.projects-grid > .card[data-modal]').forEach(function(card) {
-    var modalId = 'modal-' + card.getAttribute('data-modal');
-    var modal = document.getElementById(modalId);
+  document.querySelectorAll('.projects-grid > .card[data-modal]').forEach(card => {
+    const modal = document.getElementById('modal-' + card.dataset.modal);
     if (!modal) return;
-    var statEls = modal.querySelectorAll('.modal-stat');
+    const statEls = modal.querySelectorAll('.modal-stat');
     if (!statEls.length) return;
-    var container = document.createElement('div');
+    const container = document.createElement('div');
     container.className = 'card-stats';
-    statEls.forEach(function(s) {
-      var val = s.querySelector('.modal-stat-val');
-      var label = s.querySelector('.modal-stat-label');
+    statEls.forEach(s => {
+      const val = s.querySelector('.modal-stat-val');
+      const label = s.querySelector('.modal-stat-label');
       if (!val) return;
-      var pill = document.createElement('span');
+      const pill = document.createElement('span');
       pill.className = 'card-stat-pill';
-      var valSpan = document.createElement('span');
+      const valSpan = document.createElement('span');
       valSpan.textContent = val.textContent;
       pill.appendChild(valSpan);
       if (label) {
-        var labelSpan = document.createElement('span');
+        const labelSpan = document.createElement('span');
         labelSpan.className = 'card-stat-label';
         labelSpan.textContent = label.textContent;
         pill.appendChild(labelSpan);
       }
       container.appendChild(pill);
     });
-    var title = card.querySelector('.card-title');
-    if (title) {
-      title.parentNode.insertBefore(container, title.nextSibling);
-    }
-    var footer = card.querySelector('.card-footer');
+    const title = card.querySelector('.card-title');
+    if (title) title.parentNode.insertBefore(container, title.nextSibling);
+    const footer = card.querySelector('.card-footer');
     if (footer) {
-      var hint = document.createElement('span');
+      const hint = document.createElement('span');
       hint.className = 'card-open-hint';
       hint.textContent = 'Open ↗';
       card.querySelector('.card-thumb').appendChild(hint);
