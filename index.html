@@ -670,7 +670,8 @@
     .skill-group:hover .skill-group-open-hint { opacity: 1; }
 
     .more-projects-wrap { display: contents; }
-    .more-projects-wrap .card.hidden { display: none; }
+    .more-projects-wrap .card.hidden,
+    .more-projects-wrap .timeline-item.hidden { display: none; }
 
     .show-more-btn {
       font-size: 12px; letter-spacing: 0.1em;
@@ -1118,7 +1119,9 @@
       </div>
     </div>
 
-    <div class="timeline-item reveal">
+    <div id="more-experience" class="more-projects-wrap">
+
+    <div class="timeline-item reveal hidden">
       <div class="timeline-date">2017 — 2019</div>
       <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-bar"></div></div>
       <div class="timeline-content">
@@ -1132,7 +1135,7 @@
       </div>
     </div>
 
-    <div class="timeline-item reveal reveal-delay-2">
+    <div class="timeline-item reveal reveal-delay-2 hidden">
       <div class="timeline-date">2010 — 2014</div>
       <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-bar"></div></div>
       <div class="timeline-content">
@@ -1141,7 +1144,7 @@
       </div>
     </div>
 
-    <div class="timeline-item reveal">
+    <div class="timeline-item reveal hidden">
       <div class="timeline-date">2007 — 2010</div>
       <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-bar"></div></div>
       <div class="timeline-content">
@@ -1150,9 +1153,16 @@
       </div>
     </div>
 
+    </div>
+
   </div>
-  <div class="resume-wrap reveal">
-    <a href="public/RyuErckResume.pdf" target="_blank" class="btn-primary">
+
+  <div class="show-more-wrap reveal">
+    <button id="show-more-experience-btn" class="show-more-btn">
+      <svg width="20" height="20"><use href="#icon-chevron-down"/></svg>
+      More Experience
+    </button>
+    <a id="show-less-resume-link" href="resume.html?print=1" target="_blank" class="btn-primary" style="display:none">
       <svg width="14" height="14" class="icon-sm"><use href="#icon-download"/></svg>
       Download Resume
     </a>
@@ -1757,6 +1767,22 @@
   }
 
   showMoreBtn.addEventListener('click', toggleProjects);
+
+  const moreExperience = document.getElementById('more-experience');
+  const showMoreExpBtn = document.getElementById('show-more-experience-btn');
+  const showLessResumeLink = document.getElementById('show-less-resume-link');
+  let expOpen = false;
+
+  function toggleExperience() {
+    expOpen = !expOpen;
+    moreExperience.querySelectorAll('.timeline-item' + (expOpen ? '.hidden' : '')).forEach(c => c.classList.toggle('hidden', !expOpen));
+    showMoreExpBtn.style.display = expOpen ? 'none' : '';
+    showLessResumeLink.style.display = expOpen ? '' : 'none';
+    if (expOpen) setTimeout(() => moreExperience.querySelectorAll('.reveal:not(.visible)').forEach(el => io.observe(el)), 50);
+  }
+
+  showMoreExpBtn.addEventListener('click', toggleExperience);
+
 
   hamburger.addEventListener('click', () => { mobileMenu.classList.toggle('open'); hamburger.classList.toggle('active'); });
   mobileLinks.forEach(a => a.addEventListener('click', () => { mobileMenu.classList.remove('open'); hamburger.classList.remove('active'); }));
