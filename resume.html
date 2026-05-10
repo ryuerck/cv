@@ -99,6 +99,8 @@
   <div class="skills-grid" id="r-skills"></div>
 </div>
 
+<p style="font-size: 8pt; color: #888; text-align: center; margin-top: 18px;">This resume was generated from the content on https://ryuerck.github.io/cv , go there to see any updated information.</p>
+
 <script>
 function loadResume() {
   fetch('index.html')
@@ -117,7 +119,7 @@ function build(html) {
 
   data.name = between(html, '<h1>', '</h1>') || 'Ryu Erck';
   data.tagline = extractAttr(html, 'div', 'class', 'hero-eyebrow');
-  data.summary = extractAttr(html, 'p', 'class', 'hero-desc');
+  data.summary = extractAttr(html, 'p', 'class', 'hero-desc').replace(/&#x2728;|✨/g, '').trim();
 
   var emailMatch = html.match(/href="(mailto:[^"]+)"/);
   data.email = emailMatch ? emailMatch[1].replace('mailto:', '') : '';

@@ -60,11 +60,10 @@
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
       padding: 24px 48px;
-      background: rgba(10,10,12,0.95);
-      backdrop-filter: blur(6px);
+      background: #0a0a0c;
       transition: padding 0.3s ease, background 0.3s ease;
     }
-    nav.scrolled { padding: 14px 48px; background: rgba(10,10,12,0.98); }
+    nav.scrolled { padding: 14px 48px; background: #0a0a0c; }
     .nav-logo {
       font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase;
       color: var(--accent); text-decoration: none;
@@ -209,6 +208,8 @@
     #skills .section-line { background: rgba(255,255,255,0.15); }
     #skills .skill-group-open-hint { border-color: rgba(255,255,255,0.3); }
     #skills .section-title em { color: #fff; }
+    #experience .section-title, #experience .section-title em,
+    #projects .section-title, #projects .section-title em { color: #fff; }
 
     /* ── Section headers ───────────────────────────── */
     .section-header {
@@ -365,7 +366,8 @@
 
     /* ── Experience ────────────────────────────────── */
     #experience { content-visibility: auto; contain-intrinsic-size: 700px; }
-    .timeline { display: flex; flex-direction: column; gap: 0; }
+
+    .timeline { display: flex; flex-direction: column; gap: 0; margin-left: clamp(24px, 4vw, 64px); }
     .timeline-item {
       display: grid; grid-template-columns: 200px 1px 1fr;
       gap: 0 32px;
@@ -435,9 +437,9 @@
     }
     .contact-title {
       font-size: clamp(36px, 6vw, 72px); font-weight: 800;
-      letter-spacing: -0.03em; line-height: 1; margin-bottom: 24px;
+      letter-spacing: -0.03em; line-height: 1; margin-bottom: 24px; color: #fff;
     }
-    .contact-title em { font-style: normal; color: var(--muted); }
+    .contact-title em { font-style: normal; color: #fff; }
     .contact-links {
       display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
     }
@@ -489,15 +491,24 @@
     /* ── Responsive ────────────────────────────────── */
     @media (min-width: 1800px) {
       .section-inner { padding: 140px 64px; }
+      .hero-eyebrow { font-size: 13px; }
+      h1 { font-size: clamp(52px, 9vw, 150px); }
+      .hero-desc { font-size: 18px; max-width: 560px; }
+      .hero-photo { width: min(420px, 22vw); height: min(420px, 22vw); }
       .hero-ctas { gap: 24px; }
+      .btn-primary, .btn-ghost, .contact-link { font-size: 13px; }
+      .section-title { font-size: clamp(32px, 5vw, 60px); }
+      .section-header { margin-bottom: 80px; }
       .projects-grid { gap: 24px; }
-      .skills-grid { gap: 24px; }
       .card-body { padding: 28px; }
       .card-title { font-size: 20px; }
-      .hero-desc { font-size: 18px; max-width: 560px; }
+      .card-thumb-img { border-radius: 6px; }
+      .skills-grid { gap: 24px; }
+      .skill-group-title { font-size: 12px; }
       .timeline-item { gap: 0 48px; }
       .timeline-role { font-size: 22px; }
-      .section-header { margin-bottom: 80px; }
+      .modal-title { font-size: clamp(22px, 3vw, 36px); }
+      .contact-title { font-size: clamp(36px, 6vw, 84px); }
     }
     @media (max-width: 900px) {
       nav { padding: 14px 24px; }
@@ -727,7 +738,7 @@
     <div class="hero-text">
       <div class="hero-eyebrow">Product Marketing &amp; Community Ops</div>
       <h1>Ryu Erck</h1>
-      <p class="hero-desc">I live and breathe gaming — blending storytelling and strategy to build communities that don't just play, they stay.</p>
+      <p class="hero-desc">I master what's needed to get things done, blending storytelling and strategy to build community and sell products. &#x2728;</p>
       <div class="hero-ctas">
         <a href="#projects" class="btn-primary">View Work</a>
         <a href="#contact" class="btn-ghost">Contact →</a>
